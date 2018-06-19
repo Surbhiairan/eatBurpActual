@@ -17,6 +17,7 @@ export default class Home extends Component {
                 <DishList
                     dishes = {this.props.dishes}
                     onDishSelect = {this.dishSelectHandler}
+                    
                 />
             </View>
         );
