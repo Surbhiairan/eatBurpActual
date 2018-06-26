@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, Button } from 'react-native';
 
-import startHomeScreen from '../MainTabs/startHomeScreen';
-
+import startHomeScreen from '../MainScreen/startHomeScreen';
 class AuthScreen extends Component {
     loginHandler = () => {
         startHomeScreen();
