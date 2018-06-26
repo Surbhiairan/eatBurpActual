@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 
-const dishCard = () => (
+const dishCard = (props) => (
     <View style={styles.dishCard}>
         <Text>{props.dishName}</Text>
     </View>
