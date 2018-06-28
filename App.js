@@ -1,51 +1,45 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- * @flow
- */
+import { Navigation } from 'react-native-navigation';
 
-import React, { Component } from 'react';
-import {
-  Platform,
-  StyleSheet,
-  Text,
-  View,
-  FlatList
-} from 'react-native';
+import AuthScreen from './app/screens/Auth/Auth';
+import Home from './app/screens/Home/Home.screen';
+import DishDetail from './app/screens/DishDetail/DishDetail.screen';
+import SideDrawer from './app/screens/SideDrawer/SideDrawer';
 
-const instructions = Platform.select({
-  ios: 'Press Cmd+R to reload,\n' +
-    'Cmd+D or shake for dev menu',
-  android: 'Double tap R on your keyboard to reload,\n' +
-    'Shake or press menu button for dev menu',
-});
+import { Provider } from 'react-redux';
+import store from './app/store/store';
+// Register Screens
+Navigation.registerComponent(
+  "AuthScreen", 
+  () => AuthScreen, 
+  store, 
+  Provider
+); //you have to register a component before you can load it through react native navigation
 
-type Props = {};
-export default class App extends Component<Props> {
-  render() {
-    return (
-      <View>
-      <View>
-        <Text>City Special</Text> 
-        {/* create a list of clickable components */}
-        <FlatList
-          
-        />
-      </View>
-      <View>
-        <Text>Most Recommended Dishes</Text>
-      </View>
-      </View>
-    );
+Navigation.registerComponent(
+  "HomeScreen", 
+  () => Home, 
+  store, 
+  Provider
+);
+
+Navigation.registerComponent(
+  "DishDetailScreen", 
+  () => DishDetail, 
+  store, 
+  Provider
+);
+
+Navigation.registerComponent(
+  "SideDrawer",
+  () => SideDrawer,
+  store,
+  Provider
+);
+
+// Start App
+export default () => Navigation.startSingleScreenApp({
+  screen: {
+    screen: "AuthScreen",
+    title: "Login"
   }
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#ffffff',
-  },
-  
 });
