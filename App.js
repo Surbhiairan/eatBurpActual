@@ -39,11 +39,13 @@ Navigation.registerComponent(
 
 Navigation.registerComponent(
   "SideDrawer",
-  () => SideDrawer
+  () => SideDrawer,
+  store,
+  Provider
 );
 
 // Start App
-Navigation.startSingleScreenApp({
+export default () => Navigation.startSingleScreenApp({
   screen: {
     screen: "AuthScreen",
     title: "Login"

@@ -1,4 +1,5 @@
 import { API_ROOT } from '../../api-config';
+import {authGetToken} from './auth.action';
 
 export const FETCH_ALL_DISHES = 'FETCH_ALL_DISHES';
 export const FETCH_ALL_DISHES_SUCCESS = 'FETCH_ALL_DISHES_SUCCESS';
@@ -67,13 +68,25 @@ export function recommendDishDispatch(dish_mapping_id,user_id) {
 
 
 export function fetchTopDishes() {
-    
-        return (dispatch) => {
+        return dispatch => {
             dispatch(getTopDishes());
-            return(fetch(`${API_ROOT}/getTopDishes`))
+            //return(
+            dispatch(authGetToken())
+            .then(token => {
+                return fetch(`${API_ROOT}/getTopDishes`, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'x-access-token': token
+                    }
+                })
+            })
+            .catch(() => {
+                alert("No token found");
+            })
+           // )
             .then(res => res.json())
             .then(json => {
-    
                 dispatch(fetchTopDishesSuccess(json));
                 console.log(json,"jsonnnnnnnnnnnnnn");
                 return json;
