@@ -18,6 +18,7 @@ const dishList = (props) => {
                 imageUrls = {dish.item.imageUrls}
                 average_rating = {dish.item.average_rating}               
                 onDishCardPressed={() => props.onDishCardPressed(dish)}
+                onRecommendButtonPressed={() => props.onRecommendButtonPressed(dish)}
             />
         )}
     />

@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, Image, Button } from 'react-native';
 
 const dishCard = (props) => (
     <TouchableOpacity onPress={props.onDishCardPressed}>
@@ -9,6 +9,10 @@ const dishCard = (props) => (
       <Text style={{color: '#000'}}>{props.recommendation}</Text>
       <Text style={{color: '#000'}}>{props.average_rating}</Text>
       <Image source ={{ uri: props.imageUrls[0]}} style ={{width: 200, height: 200}}/>
+      <Button 
+        onPress={props.onRecommendButtonPressed}
+        title="Recommend"
+      />
     </View>
   </TouchableOpacity>
 );
@@ -16,9 +20,10 @@ const dishCard = (props) => (
 const styles = StyleSheet.create({
     dishCard: {
         flex: 1,
-        backgroundColor: '#fdfefe',
+        backgroundColor: '#fff',
         borderRadius: 10,
-        
+        borderColor:'#fff',
+        borderWidth:2,
         paddingLeft: 5,
         paddingRight: 5,
         paddingBottom: 5,

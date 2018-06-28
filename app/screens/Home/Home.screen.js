@@ -8,10 +8,11 @@ import {
 } from 'react-native';
 
 import DishList from '../../components/DishList/DishList';
+import SearchBar from '../../components/SearchBar/SearchBar';
 import dishes from '../../data/data';
 import { connect } from 'react-redux';
 import { fetchTopDishes } from '../../actions/dish.action';
-
+import { recommendDishDispatch } from '../../actions/dish.action';;
 
 class Home extends Component {
   constructor(props) {
@@ -48,12 +49,39 @@ class Home extends Component {
           }
       });
   }
-    
+
+  recommendButtonPressHandler = dish => {
+      console.log("recommend", dish);
+    //dispatch action to increase recommendation count, pass dish_restaurant_mapping id
+    let data = new FormData();
+    data.append('dish_mapping_id', dish.item._id);
+    data.append('user_id', "5ae843a585d440c948e257da")
+    this.props.dispatch(recommendDishDispatch(dish.item._id,"5ae843a585d440c948e257da"));    
+  }
+
+  searchBarPressHandler = () =>  {
+    //navigate to search suggestion screen
+    console.log("pressed search bar");
+    this.props.navigator.push({
+        screen: "SearchSuggestionScreen",
+        // title: dish.item.dish_name,
+        // passProps: {
+        //   selectedDish: dish.item
+        // }
+    });
+  }
+
   render() {
     return (
-      <View style={{backgroundColor: '#fff'}}>    
+      <View style={{backgroundColor: '#eaecee'}}>  
+
+        <SearchBar 
+          onSearchBarPressed = {this.searchBarPressHandler} 
+        />
+
         <DishList
           dishes = {this.props.topDishes}
+          onRecommendButtonPressed = {this.recommendButtonPressHandler}
           onDishCardPressed = {this.dishCardPressedHandler}                    
         />
       </View>
@@ -69,4 +97,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps)(Home) ;
+export default connect(mapStateToProps)(Home);

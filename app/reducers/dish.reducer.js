@@ -5,7 +5,9 @@ import {
     FETCH_TOP_DISHES,
     FETCH_TOP_DISHES_SUCCESS,
     FETCH_TOP_DISHES_FAILURE,
-    
+    RECOMMEND_DISH,
+    RECOMMEND_DISH_SUCCESS,
+    RECOMMEND_DISH_FAILURE
 } from '../actions/dish.action';
 
 const initialState = {
@@ -34,7 +36,17 @@ const reducer = (state = initialState, action) => {
     case FETCH_ALL_DISHES_FAILURE:// return error and make loading = false
       //error = action.payload || {message: action.payload.message};//2nd one is network or server down errors
       return { ...state, allDishes: [], allDishesError: action.payload.error, allDishesLoading: false};  
-    default:
+    case RECOMMEND_DISH:
+      return { ...state, recommendError: null, recommendLoading: true };
+    case RECOMMEND_DISH_SUCCESS:
+      return { ...state, topDishes: state.topDishes.map(dish => {
+          if( dish._id === action.payload.recommendedDish._id){
+            return action.payload.recommendedDish;
+          }
+          return dish;
+      })};
+    case RECOMMEND_DISH_FAILURE:
+      default:
       return state;
     }
 };
