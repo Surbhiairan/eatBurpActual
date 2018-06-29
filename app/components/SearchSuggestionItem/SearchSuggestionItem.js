@@ -5,6 +5,8 @@ const searchSuggestionItem = (props) => (
     <TouchableOpacity onPress={props.onItemPressed}>
     <View style={styles.dishCard}>
       <Text style={{color: '#000'}}>{props.item_name}</Text>
+      <Text style={{color: '#000'}}>{props.address}</Text>
+
     </View>
   </TouchableOpacity>
 );
