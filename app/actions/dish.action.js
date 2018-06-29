@@ -14,27 +14,33 @@ export const RECOMMEND_DISH_SUCCESS = 'RECOMMEND_DISH_SUCCESS';
 export const RECOMMEND_DISH_FAILURE = 'RECOMMEND_DISH_FAILURE';
 
 
-export function recommendDishDispatch(dish_mapping_id,user_id) {
+export function recommendDishDispatch(dish_mapping_id) {
     
     
         return (dispatch) => {
             dispatch(recommendDish());
-            return(
-                fetch(`${API_ROOT}/addRecommendedDish`, {
-                    method: 'POST',
-                    headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json',
-                    //'x-access-token': token
-                    //'Content-Type': 'multipart/form-data',
-                    },
-                    body: JSON.stringify({
-                        mappingId: dish_mapping_id,
-                        userId: user_id,
-                    }),
-                    }
+            dispatch(authGetToken())
+            .then(token => {
+                return(
+                    fetch(`${API_ROOT}/addRecommendedDish`, {
+                        method: 'POST',
+                        headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json',
+                        'x-access-token': token
+                        //'Content-Type': 'multipart/form-data',
+                        },
+                        body: JSON.stringify({
+                            mappingId: dish_mapping_id,
+                            //userId: user_id,
+                        }),
+                        }
+                    )
                 )
-            )
+            })
+            .catch(() => {
+                alert("No token found");
+            })
             .then(res => res.json())
             .then(json => {
     

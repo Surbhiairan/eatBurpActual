@@ -53,10 +53,7 @@ class Home extends Component {
   recommendButtonPressHandler = dish => {
       console.log("recommend", dish);
     //dispatch action to increase recommendation count, pass dish_restaurant_mapping id
-    let data = new FormData();
-    data.append('dish_mapping_id', dish.item._id);
-    data.append('user_id', "5ae843a585d440c948e257da")
-    this.props.dispatch(recommendDishDispatch(dish.item._id,"5ae843a585d440c948e257da"));    
+    this.props.dispatch(recommendDishDispatch(dish.item._id));    
   }
 
   searchBarPressHandler = () =>  {
