@@ -5,6 +5,7 @@ import Home from './app/screens/Home/Home.screen';
 import DishDetail from './app/screens/DishDetail/DishDetail.screen';
 import SideDrawer from './app/screens/SideDrawer/SideDrawer';
 import SearchSuggestions from './app/screens/SearchSuggestions/SearchSuggestions.screen';
+import UserProfileScreen from './app/screens/UserProfile/UserProfile.screen';
 
 import { Provider } from 'react-redux';
 import store from './app/store/store';
@@ -43,6 +44,13 @@ Navigation.registerComponent(
   store,
   Provider
 );
+
+Navigation.registerComponent(
+  "UserProfileScreen",
+  () => UserProfileScreen,
+  store,
+  Provider
+)
 
 // Start App
 export default () => Navigation.startSingleScreenApp({

@@ -22,8 +22,6 @@ class SearchSuggestions extends Component {
             data: [],
             searchedItems: [], 
             text: '',
-            underlineButton1: true,
-            underlineButton2: false,
             searchedFood: [],
             searchedPlace: [],
             tags: [],
@@ -73,34 +71,11 @@ class SearchSuggestions extends Component {
         }
     }
 
-        // if(this.state.underlineButton1)
-        // {
-        //     var searchedFood = this.state.tags.filter(function(tag) {
-        //         return tag.toLowerCase().indexOf(searchedText.toLowerCase()) > -1;
-        //       });
-        //     this.setState({searchedFood: searchedFood});}
-        // else{
-        //     var searchedPlace = this.props.restaurants.filter(function(place) {
-        //         return place.restaurant_name.toLowerCase().indexOf(searchedText.toLowerCase()) > -1;
-        //       });
-        //       this.setState({searchedPlace: searchedPlace});}
-        // this.setState({text: searchedText});      
-    
-
     searchFilterButtonPressedHandler = (searchFilter) => {
         console.log("searchfilter", searchFilter);
 
         this.setState({searchFilter: searchFilter, listView: false});
     }
-
-    // whatButtonPressedHandler = () => {
-    //     this.setState({underlineButton1: true,underlineButton2: false,})
-    // }
-
-    // whereButtonPressedHandler = () => {
-    //     this.setState({underlineButton1: false,underlineButton2: true,})
-    // }
-
 
     itemPressHandler = (item, type) => {
         console.log("item pressed ", item);
@@ -135,25 +110,21 @@ class SearchSuggestions extends Component {
         }
       return(
        <View>
-        <SearchBar
-          autoFocus={true}
-          onChangeText={this.handleChangeText} />
-                 
-        <View style={{flexDirection: 'row',}}>
-          <Button 
-            onPress = {() => this.searchFilterButtonPressedHandler("food")}
-            title = {"Food"}/>
-          <Button 
-            onPress = {() => this.searchFilterButtonPressedHandler("place")}
-            title = {"Places"}/>
-        </View>
-        {searchList}
-        
+            <SearchBar
+            autoFocus={true}
+            onChangeText={this.handleChangeText} />
+                    
+            <View style={{flexDirection: 'row',}}>
+            <Button 
+                onPress = {() => this.searchFilterButtonPressedHandler("food")}
+                title = {"Food"}/>
+            <Button 
+                onPress = {() => this.searchFilterButtonPressedHandler("place")}
+                title = {"Places"}/>
+            </View>
 
-        {/* <SearchSuggestionList 
-          suggestions = {this.state.underlineButton1? this.state.searchedFood: this.state.searchedPlace}
-          onItemPressed = {this.itemPressHandler}
-          type = {this.state.underlineButton1? "dish": "restaurant"}/>  */}
+                {searchList}
+        
        </View> 
       );
     }
@@ -167,43 +138,45 @@ const mapStateToProps = (state) => ({
     allDishesError: state.dish.allDishesError,
 });
 
-const styles = {
-    container:{
-        flex: 1,
-        backgroundColor: '#fff',
-    },
-    searchBarContainer: {
-        marginTop: 20,
-    },
-    defaultText:{
-        fontSize:15,
-        color:'#7e7e7e',
-        fontFamily: 'open-sans-regular'
-    },
-    textOnSelect:{
-        fontSize:15,
-        borderBottomWidth: 1, 
-        borderBottomColor: '#3d3d3d',
-        color:'#3d3d3d',
-        fontFamily: 'open-sans-semibold',
-    },
-    button: {
-        alignItems: 'center',
-        paddingTop: 8,
-        paddingBottom:1,
-    },
-    listItem: {
-        backgroundColor: '#fff',
-        borderBottomWidth:1,
-        borderBottomColor:'#f7f7f7',
-        justifyContent: 'flex-start',
-        padding: 10,
-    },
-    listItemText: {
-        color: '#283747',
-        fontSize: 15,
-        fontFamily: 'open-sans-light',
+const styles = StyleSheet.create(
+    {
+        container: {
+            flex: 1,
+            backgroundColor: '#fff',
+        },
+        searchBarContainer: {
+            marginTop: 20,
+        },
+        defaultText: {
+            fontSize: 15,
+            color: '#7e7e7e',
+            fontFamily: 'open-sans-regular'
+        },
+        textOnSelect: {
+            fontSize: 15,
+            borderBottomWidth: 1,
+            borderBottomColor: '#3d3d3d',
+            color: '#3d3d3d',
+            fontFamily: 'open-sans-semibold',
+        },
+        button: {
+            alignItems: 'center',
+            paddingTop: 8,
+            paddingBottom: 1,
+        },
+        listItem: {
+            backgroundColor: '#fff',
+            borderBottomWidth: 1,
+            borderBottomColor: '#f7f7f7',
+            justifyContent: 'flex-start',
+            padding: 10,
+        },
+        listItemText: {
+            color: '#283747',
+            fontSize: 15,
+            fontFamily: 'open-sans-light',
+        }
     }
-};
+) 
 
 export default connect(mapStateToProps)(SearchSuggestions) ;
