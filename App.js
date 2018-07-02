@@ -5,6 +5,7 @@ import Home from './app/screens/Home/Home.screen';
 import DishDetail from './app/screens/DishDetail/DishDetail.screen';
 import SideDrawer from './app/screens/SideDrawer/SideDrawer';
 import SearchSuggestions from './app/screens/SearchSuggestions/SearchSuggestions.screen';
+import RestaurantDetail from './app/screens/RestaurantDetail/RestaurantDetail.screen';
 
 import { Provider } from 'react-redux';
 import store from './app/store/store';
@@ -26,6 +27,13 @@ Navigation.registerComponent(
 Navigation.registerComponent(
   "DishDetailScreen", 
   () => DishDetail, 
+  store, 
+  Provider
+);
+
+Navigation.registerComponent(
+  "RestaurantDetailScreen", 
+  () => RestaurantDetail, 
   store, 
   Provider
 );

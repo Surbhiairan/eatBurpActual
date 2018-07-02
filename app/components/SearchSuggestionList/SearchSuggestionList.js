@@ -13,22 +13,19 @@ const searchSuggestionList = (props) => {
     )
     if(props.type === 'place') {
         searchSuggestion = ({item}) => (
-            <SearchSuggestionItem 
-            item_name = {item.restaurant_name}
-            address = {item.address.locality}
-            onItemPressed={() => props.onItemPressed(item, props.type)}
+          <SearchSuggestionItem 
+          item_name = {item.restaurant_name}
+          address = {item.address.locality}
+          onItemPressed={() => props.onItemPressed(item, props.type)}
         />
         )
     }
-    return (
-        
-    <View>
-    <FlatList
-        data = { props.suggestions }
-        renderItem = {this.searchSuggestion}
-        
-    />
-    </View>
+    return (       
+      <View>
+      <FlatList
+          data = { props.suggestions }
+          renderItem = {this.searchSuggestion} />
+      </View>
     );
 };
 

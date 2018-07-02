@@ -6,9 +6,10 @@ const dishCard = (props) => (
     <View style={styles.dishCard}>
       <Text style={{color: '#000'}}>{props.dish_name}</Text>
       <Text style={{color: '#000'}}>{props.restaurant_name}</Text>
-      <Text style={{color: '#000'}}>{props.recommendation}</Text>
+      <Text style={{color: '#000'}}>{props.recommended}</Text>
       <Text style={{color: '#000'}}>{props.average_rating}</Text>
-      <Image source ={{ uri: props.imageUrls[0]}} style ={{width: 200, height: 200}}/>
+      <Text style={{color: '#000'}}>{props.reviews[0].review}</Text>
+      <Image source ={{ uri: props.dish_images[0]}} style ={{width: 200, height: 200}}/>
       <Button 
         onPress={props.onRecommendButtonPressed}
         title="Recommend"
