@@ -6,6 +6,15 @@ import Icon from "react-native-vector-icons/Ionicons";
 import {authLogout} from '../../actions/auth.action';
 
 class SideDrawer extends Component {
+
+  navigateToUserProfile = () => {
+    this.props.navigator.push({
+      screen: "UserProfileScreen",
+      title: "User Profile"
+    });
+    this.props.navigator.toggleDrawer();
+  }
+
   render() {
     return (
       <View
@@ -23,6 +32,17 @@ class SideDrawer extends Component {
               style={styles.drawerItemIcon}
             />
             <Text>Sign Out</Text>
+          </View>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={this.navigateToUserProfile}>
+          <View style={styles.drawerItem}>
+            <Icon
+              name={Platform.OS === "android" ? "md-person" : "ios-person"}
+              size={30}
+              color="#aaa"
+              style={styles.drawerItemIcon}
+            />
+            <Text>User Profile</Text>
           </View>
         </TouchableOpacity>
       </View>
