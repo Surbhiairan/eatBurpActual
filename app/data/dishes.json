@@ -1,0 +1,97 @@
+{"_id":{"$oid":"5af6a339ce31f73679fa88f4"},"dish_name":"Kaccha Coleslaw","search_tag":["kaccha sandwich, sandwich"],"images":"https://images.pexels.com/photos/750073/pexels-photo-750073.jpeg?auto=compress&cs=tinysrgb&h=650&w=940","cuisine":"Indian","meal":"Snacks","type":"Veg"}
+{"_id":{"$oid":"5af6a339ce31f73679fa88f5"},"dish_name":"Upma","search_tag":["upma"],"images":"https://i.ytimg.com/vi/cZrtV2gqNTQ/maxresdefault.jpg","cuisine":"Indian","meal":"Snacks","type":"Veg"}
+{"_id":{"$oid":"5af6a339ce31f73679fa88f6"},"dish_name":"Kaala Chana Chaat","search_tag":["chaat"],"images":"http://www.manjulaskitchen.com/blog/wp-content/uploads/chana_chaat.jpg","cuisine":"Indian","meal":"Snacks","type":"Veg"}
+{"_id":{"$oid":"5af6a339ce31f73679fa88f7"},"dish_name":"Vada Pav","search_tag":["vada pav"],"images":"https://i0.wp.com/mypullzone.9vexd6dl53at.maxcdn-edge.com/wp-content/uploads/2017/02/vada-pav-recipe-step-by-step-instructions.jpg?fit=2235%2C1931","cuisine":"Indian","meal":"Breakfast","type":"Veg"}
+{"_id":{"$oid":"5af6a339ce31f73679fa88f8"},"dish_name":"Sprouts","search_tag":["sprouts"],"images":"https://www.cleaneatingkitchen.com/wp-content/uploads/2012/04/broccoli-sprouts-in-a-bowl.jpg","cuisine":"Indian","meal":"Breakfast","type":"Veg"}
+{"_id":{"$oid":"5af6a339ce31f73679fa88f9"},"dish_name":"Power Poha","search_tag":["poha"],"images":[],"cuisine":"","meal":"", "type":""}
+{"_id":{"$oid":"5af6a339ce31f73679fa88fa"},"dish_name":"Plain Bun Maska","search_tag":["bun maska"],"images":[],"cuisine":"","meal":"", "type":""}
+{"_id":{"$oid":"5af6a339ce31f73679fa88fb"},"dish_name":"Peanut Bun Maska","search_tag":["bun maska"],"images":[],"cuisine":"","meal":"", "type":""}
+{"_id":{"$oid":"5af6a339ce31f73679fa88fc"},"dish_name":"Spinach Corn Cheese","search_tag":["spinach sandwich"],"images":[],"cuisine":"","meal":"", "type":""}
+{"_id":{"$oid":"5af6a339ce31f73679fa88fd"},"dish_name":"Aaloo Tikki Club","search_tag":["aaloo sandwich"],"images":[],"cuisine":"","meal":"", "type":""}
+{"_id":{"$oid":"5af6a339ce31f73679fa88fe"},"dish_name":"Cheese Chutney","search_tag":["cheese chutney sandwich"],"images":[],"cuisine":"","meal":"", "type":""}
+{"_id":{"$oid":"5af6a339ce31f73679fa88ff"},"dish_name":"Open Paneer Loaded","search_tag":["paneer toast"],"images":[],"cuisine":"","meal":"", "type":""}
+{"_id":{"$oid":"5af6a339ce31f73679fa8900"},"dish_name":"Open Cheese Sandwich","search_tag":["cheese toast"],"images":[],"cuisine":"","meal":"", "type":""}
+{"_id":{"$oid":"5af6a339ce31f73679fa8901"},"dish_name":"Plain Garlic Bread","search_tag":["garlic bread"],"images":[],"cuisine":"","meal":"", "type":""}
+{"_id":{"$oid":"5af6a339ce31f73679fa8902"},"dish_name":"Cheese Garlic Bread","search_tag":["cheese garlic bread"],"images":[],"cuisine":"","meal":"", "type":""}
+{"_id":{"$oid":"5af6a339ce31f73679fa8903"},"dish_name":"Sookha Chilli Paneer","search_tag":["dry chilli paneer"],"images":[],"cuisine":"","meal":"", "type":""}
+{"_id":{"$oid":"5af6a339ce31f73679fa8904"},"dish_name":"Crispy Corn","search_tag":["crispy corn"],"images":[],"cuisine":"","meal":"", "type":""}
+{"_id":{"$oid":"5af6a339ce31f73679fa8905"},"dish_name":"Paneer Chutney Wrap","search_tag":["paneer wrap"],"images":[],"cuisine":"","meal":"", "type":""}
+{"_id":{"$oid":"5af6a339ce31f73679fa8906"},"dish_name":"Sabudana Khichdi","search_tag":["sabudana khichdi"],"images":[],"cuisine":"","meal":"", "type":""}
+{"_id":{"$oid":"5af6a339ce31f73679fa8907"},"dish_name":"Kulhad Pav Bhaji","search_tag":["pav bhaji"],"images":[],"cuisine":"","meal":"", "type":""}
+{"_id":{"$oid":"5af6a339ce31f73679fa8908"},"dish_name":"Chhole Kulche","search_tag":["chhole kulche"],"images":[],"cuisine":"","meal":"", "type":""}
+{"_id":{"$oid":"5af6a339ce31f73679fa8909"},"dish_name":"Paneer Bhurji Pav","search_tag":["paneer bhurji"],"images":[],"cuisine":"","meal":"", "type":""}
+{"_id":{"$oid":"5af6a339ce31f73679fa890a"},"dish_name":"Multigrain Roti Bhaji","search_tag":["multigrain roti"],"images":[],"cuisine":"","meal":"", "type":""}
+{"_id":{"$oid":"5af6a339ce31f73679fa890b"},"dish_name":"Pie with Icecream","search_tag":["pie and icecream"],"images":[],"cuisine":"","meal":"", "type":""}
+{"_id":{"$oid":"5af6a339ce31f73679fa890c"},"dish_name":"Chocolate Cake","search_tag":["chocolate cake"],"images":[],"cuisine":"","meal":"", "type":""}
+{"_id":{"$oid":"5af6a339ce31f73679fa890d"},"dish_name":"Tea Cake","search_tag":["tea cake"],"images":[],"cuisine":"","meal":"", "type":""}
+{"_id":{"$oid":"5af6a339ce31f73679fa890e"},"dish_name":"Basic Cake","search_tag":["basic cake"],"images":[],"cuisine":"","meal":"", "type":""}
+{"_id":{"$oid":"5af6a339ce31f73679fa890f"},"dish_name":"Tea Pie","search_tag":["tea pie"],"images":[],"cuisine":"","meal":"", "type":""}
+{"_id":{"$oid":"5af6a339ce31f73679fa8910"},"dish_name":"Basic Pie","search_tag":["basic pie"],"images":[],"cuisine":"","meal":"", "type":""}
+{"_id":{"$oid":"5af6a339ce31f73679fa8911"},"dish_name":"Banana Muffin","search_tag":["banan muffin"],"images":[],"cuisine":"","meal":"", "type":""}
+{"_id":{"$oid":"5af6a339ce31f73679fa8912"},"dish_name":"Plain/Palak/Masala Poori/Aaloo Bhaji/Chhole","search_tag":["meal, thaali"],"images":[],"cuisine":"","meal":"", "type":""}
+{"_id":{"$oid":"5af6a339ce31f73679fa8913"},"dish_name":"Paneer Pudina","search_tag":["paneer paratha"],"images":[],"cuisine":"","meal":"", "type":""}
+{"_id":{"$oid":"5af6a339ce31f73679fa8914"},"dish_name":"Palak Stuffed","search_tag":["palak paratha"],"images":[],"cuisine":"","meal":"", "type":""}
+{"_id":{"$oid":"5af6a339ce31f73679fa8915"},"dish_name":"Aaloo Stuffed","search_tag":["aaloo paratha"],"images":[],"cuisine":"","meal":"", "type":""}
+{"_id":{"$oid":"5af6a339ce31f73679fa8916"},"dish_name":"Mac n Cheese","search_tag":["mac n cheese"],"images":[],"cuisine":"","meal":"", "type":""}
+{"_id":{"$oid":"5af6a339ce31f73679fa8917"},"dish_name":"Nachos -Cheese Marke","search_tag":["cheese nachos"],"images":[],"cuisine":"","meal":"", "type":""}
+{"_id":{"$oid":"5af6a339ce31f73679fa8918"},"dish_name":"Pasta- Pesto","search_tag":["pesto pasta"],"images":[],"cuisine":"","meal":"", "type":""}
+{"_id":{"$oid":"5af6a339ce31f73679fa8919"},"dish_name":"Pasta- White","search_tag":["white pasta"],"images":[],"cuisine":"","meal":"", "type":""}
+{"_id":{"$oid":"5af6a339ce31f73679fa891a"},"dish_name":"Pesto Mayo Fries","search_tag":["pesto fries"],"images":[],"cuisine":"","meal":"", "type":""}
+{"_id":{"$oid":"5af6a339ce31f73679fa891b"},"dish_name":"Just Mayo","search_tag":["mayo fries"],"images":[],"cuisine":"","meal":"", "type":""}
+{"_id":{"$oid":"5af6a339ce31f73679fa891c"},"dish_name":"Salty Classic","search_tag":["salty fries"],"images":[],"cuisine":"","meal":"", "type":""}
+{"_id":{"$oid":"5af6a339ce31f73679fa891d"},"dish_name":"Punjabi Tadka Maggi","search_tag":["tadka maggi"],"images":[],"cuisine":"","meal":"", "type":""}
+{"_id":{"$oid":"5af6a339ce31f73679fa891e"},"dish_name":"Veggie Maggi","search_tag":["veg maggi"],"images":[],"cuisine":"","meal":"", "type":""}
+{"_id":{"$oid":"5af6a339ce31f73679fa891f"},"dish_name":"Mango Cake","search_tag":["mango cake"],"images":[],"cuisine":"","meal":"", "type":""}
+{"_id":{"$oid":"5af6a339ce31f73679fa8920"},"dish_name":"Chocolate Pie","search_tag":["chocolate pie"],"images":[],"cuisine":"","meal":"", "type":""}
+{"_id":{"$oid":"5af6a339ce31f73679fa8921"},"dish_name":"Mango Pie","search_tag":["mango pie"],"images":[],"cuisine":"","meal":"", "type":""}
+{"_id":{"$oid":"5af6a339ce31f73679fa8922"},"dish_name":"Paneer Rice","search_tag":["paneer rice"],"images":[],"cuisine":"","meal":"", "type":""}
+{"_id":{"$oid":"5af6a339ce31f73679fa8923"},"dish_name":"Fried Rice","search_tag":["fried rice"],"images":[],"cuisine":"","meal":"", "type":""}
+{"_id":{"$oid":"5af6a339ce31f73679fa8924"},"dish_name":"Butter Wali Khichdi","search_tag":["butter khichdi"],"images":[],"cuisine":"","meal":"", "type":""}
+{"_id":{"$oid":"5af6a339ce31f73679fa8925"},"dish_name":"Chocolate Filter Coffee","search_tag":["chocolate filter coffee"],"images":[],"cuisine":"","meal":"", "type":""}
+{"_id":{"$oid":"5af6a339ce31f73679fa8926"},"dish_name":"Black Filter Coffee","search_tag":["black filter coffee"],"images":[],"cuisine":"","meal":"", "type":""}
+{"_id":{"$oid":"5af6a339ce31f73679fa8927"},"dish_name":"Honey Ginger Lemon Chai","search_tag":["honey ginger lemon tea"],"images":[],"cuisine":"","meal":"", "type":""}
+{"_id":{"$oid":"5af6a339ce31f73679fa8928"},"dish_name":"Hot Chocolate","search_tag":["hot chocolate"],"images":[],"cuisine":"","meal":"", "type":""}
+{"_id":{"$oid":"5af6a339ce31f73679fa8929"},"dish_name":"Kulhad Masala Dudh","search_tag":["masala milk"],"images":[],"cuisine":"","meal":"", "type":""}
+{"_id":{"$oid":"5af6a339ce31f73679fa892a"},"dish_name":"ABC (Apple, Beetroot, Carrot","search_tag":["Apple, beetroot, carrot, juice"],"images":[],"cuisine":"","meal":"", "type":""}
+{"_id":{"$oid":"5af6a339ce31f73679fa892b"},"dish_name":"Miracle Berry","search_tag":["berry juice"],"images":[],"cuisine":"","meal":"", "type":""}
+{"_id":{"$oid":"5af6a339ce31f73679fa892c"},"dish_name":"Pineapple Basil","search_tag":["pineapple juice"],"images":[],"cuisine":"","meal":"", "type":""}
+{"_id":{"$oid":"5af6a339ce31f73679fa892d"},"dish_name":"Anaar Kaali Mirch","search_tag":["pomegranate juice"],"images":[],"cuisine":"","meal":"", "type":""}
+{"_id":{"$oid":"5af6a339ce31f73679fa892e"},"dish_name":"Mausambi Ras","search_tag":["mausambi juice"],"images":[],"cuisine":"","meal":"", "type":""}
+{"_id":{"$oid":"5af6a339ce31f73679fa892f"},"dish_name":"Ketli Chai (serves 4","search_tag":["kettle tea, kettle chai, chai"],"images":[],"cuisine":"","meal":"", "type":""}
+{"_id":{"$oid":"5af6a339ce31f73679fa8930"},"dish_name":"Kadak Chai","search_tag":["kadak chai, tea"],"images":[],"cuisine":"","meal":"", "type":""}
+{"_id":{"$oid":"5af6a339ce31f73679fa8931"},"dish_name":"Acchi wali adrak chai","search_tag":["ginger tea, adrak chai"],"images":[],"cuisine":"","meal":"", "type":""}
+{"_id":{"$oid":"5af6a339ce31f73679fa8932"},"dish_name":"Desi Chocolate","search_tag":["chocolate shake"],"images":[],"cuisine":"","meal":"", "type":""}
+{"_id":{"$oid":"5af6a339ce31f73679fa8933"},"dish_name":"Oreo","search_tag":["oreo shake"],"images":[],"cuisine":"","meal":"", "type":""}
+{"_id":{"$oid":"5af6a339ce31f73679fa8934"},"dish_name":"Deep Mango","search_tag":["mango shake"],"images":[],"cuisine":"","meal":"", "type":""}
+{"_id":{"$oid":"5af6a339ce31f73679fa8935"},"dish_name":"Peanut Protein","search_tag":["protein shake"],"images":[],"cuisine":"","meal":"", "type":""}
+{"_id":{"$oid":"5af6a339ce31f73679fa8936"},"dish_name":"Paan Gulkand","search_tag":["paan shake"],"images":[],"cuisine":"","meal":"", "type":""}
+{"_id":{"$oid":"5af6a339ce31f73679fa8937"},"dish_name":"Cold Coffee","search_tag":["cold coffee"],"images":[],"cuisine":"","meal":"", "type":""}
+{"_id":{"$oid":"5af6a339ce31f73679fa8938"},"dish_name":"Iced Coffee","search_tag":["iced coffee"],"images":[],"cuisine":"","meal":"", "type":""}
+{"_id":{"$oid":"5af6a339ce31f73679fa8939"},"dish_name":"Filter Coffee","search_tag":["filter coffee"],"images":[],"cuisine":"","meal":"", "type":""}
+{"_id":{"$oid":"5af6a339ce31f73679fa893a"},"dish_name":"Green Coffee (Decaffeinated","search_tag":["green coffee"],"images":[],"cuisine":"","meal":"", "type":""}
+{"_id":{"$oid":"5af6a339ce31f73679fa893b"},"dish_name":"Green Chai (lemongrass flavour","search_tag":["green chai"],"images":[],"cuisine":"","meal":"", "type":""}
+{"_id":{"$oid":"5af6a339ce31f73679fa893c"},"dish_name":"Akela Apple","search_tag":["apple shake"],"images":[],"cuisine":"","meal":"", "type":""}
+{"_id":{"$oid":"5af6a339ce31f73679fa893d"},"dish_name":"Banana","search_tag":["banana shake"],"images":[],"cuisine":"","meal":"", "type":""}
+{"_id":{"$oid":"5af6a339ce31f73679fa893e"},"dish_name":"Chocolate Banana","search_tag":["chocolate banana shake"],"images":[],"cuisine":"","meal":"", "type":""}
+{"_id":{"$oid":"5af6a339ce31f73679fa893f"},"dish_name":"Pomegranate","search_tag":["lemonade"],"images":[],"cuisine":"","meal":"", "type":""}
+{"_id":{"$oid":"5af6a339ce31f73679fa8940"},"dish_name":"Mint Ginger","search_tag":["lemonade"],"images":[],"cuisine":"","meal":"", "type":""}
+{"_id":{"$oid":"5af6a339ce31f73679fa8941"},"dish_name":"Pudina aam Panna","search_tag":["aam panna"],"images":[],"cuisine":"","meal":"", "type":""}
+{"_id":{"$oid":"5af6a339ce31f73679fa8942"},"dish_name":"Mango Lassi","search_tag":["mango lassi"],"images":[],"cuisine":"","meal":"", "type":""}
+{"_id":{"$oid":"5af6a339ce31f73679fa8943"},"dish_name":"Matha (Chaanch","search_tag":["chaanch"],"images":[],"cuisine":"","meal":"", "type":""}
+{"_id":{"$oid":"5af6a339ce31f73679fa8944"},"dish_name":"Lemon Iced Chai","search_tag":["ice tea"],"images":[],"cuisine":"","meal":"", "type":""}
+{"_id":{"$oid":"5af87935ce31f73679051e91"},"dish_name":"Classic tomato soup","__v":0,"cuisine":"Indian","meal":"soup","search_tag":["tomato soup"],"type":"veg"}
+{"_id":{"$oid":"5af880a9ce31f73679054ab7"},"dish_name":"Sweet corn soup","__v":0,"cuisine":"Indian","meal":"soup","search_tag":["sweet corn soup"],"type":"veg"}
+{"_id":{"$oid":"5af8849bce31f73679056408"},"dish_name":"Manchow soup","__v":0,"cuisine":"Indian","meal":"soup","search_tag":["manchow soup"],"type":"veg"}
+{"_id":{"$oid":"5af8849dce31f73679056415"},"dish_name":"Vegetable clear soup","__v":0,"cuisine":"Indian","meal":"soup","search_tag":["clear soup"],"type":"veg"}
+{"_id":{"$oid":"5af96436ce31f736790a4c75"},"dish_name":"Lentil and Coriander soup","__v":0,"cuisine":"Indian","meal":"soup","search_tag":["coriander soup, soup"],"type":"veg"}
+{"_id":{"$oid":"5af98616ce31f736790b1a45"},"dish_name":"Minestrone soup","__v":0,"cuisine":"Indian","meal":"soup","search_tag":["soup"],"type":"veg"}
+{"_id":{"$oid":"5af98786ce31f736790b233f"},"dish_name":"Spicy paneer kulcha chesse sandwich","__v":0,"cuisine":"Indian","meal":"snacks","search_tag":["paneer sandwich"," chesse sandwich"],"type":"veg"}
+{"_id":{"$oid":"5af98cb2ce31f736790b438c"},"dish_name":"Veg Cheese Pizza","__v":0,"cuisine":"Italian","meal":"All time","search_tag":["pizza"," chesse pizza"," veg pizza"],"type":"veg"}
+{"_id":{"$oid":"5affed55ce31f73679a43486"},"dish_name":"Ice Lemon Tea","__v":0,"cuisine":"Indian","meal":"beverages","search_tag":["ice tea"," lemon tea"],"type":"veg"}
+{"_id":{"$oid":"5afff093ce31f73679a590ef"},"dish_name":"Iced peach Tea","__v":0,"cuisine":"Indian","meal":"beverages","search_tag":["ice tea"," peach tea"],"type":"veg"}
+{"_id":{"$oid":"5afff170ce31f73679a5992c"},"dish_name":"Egg Banjo","__v":0,"cuisine":"Indian","meal":"snacks","search_tag":["banjo"],"type":"non-veg"}
+{"_id":{"$oid":"5afff636ce31f73679a795ad"},"dish_name":"Egg cheese banjo","__v":0,"cuisine":"Indian","meal":"snacks","search_tag":["banjo"," cheese banjo"],"type":"non-veg"}
+{"_id":{"$oid":"5afff73dce31f73679a83691"},"dish_name":"Veg Hot Dog","__v":0,"cuisine":"Indian","meal":"snacks","search_tag":["hot dog"],"type":"veg"}
+{"_id":{"$oid":"5b016ef760b4261e1badb43f"},"dish_name":"Ginger Tea","search_tag":["ginger tea, adrak chai","tea"],"images":[],"cuisine":"","meal":"", "type":""}
+{"_id":{"$oid":"5b0172e560b4261e1badb593"},"dish_name":"Adrak Tea","search_tag":["ginger tea, adrak chai","tea"],"images":[],"cuisine":"","meal":"", "type":""}
+{"_id":{"$oid":"5b01735660b4261e1badb5d3"},"dish_name":"The Adrak Chai","search_tag":["ginger tea, adrak chai","tea"],"images":[],"cuisine":"","meal":"", "type":""}
