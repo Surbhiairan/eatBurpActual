@@ -3,6 +3,7 @@ package com.eatburpactual;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.reactnative.ivpusic.imagepicker.PickerPackage;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
@@ -25,7 +26,8 @@ public class MainApplication extends NavigationApplication {
   //   @Override
   //   protected List<ReactPackage> getPackages() {
   //     return Arrays.<ReactPackage>asList(
-  //         new MainReactPackage(), 
+  //         new MainReactPackage(),
+  //          new PickerPackage(), 
   //         new VectorIconsPackage()
   //     );
   //   }
@@ -58,7 +60,8 @@ public class MainApplication extends NavigationApplication {
          // No need to add RnnPackage and MainReactPackage
          return Arrays.<ReactPackage>asList(
              // eg. new VectorIconsPackage()
-             new VectorIconsPackage()
+             new VectorIconsPackage(),
+             new PickerPackage()
          );
      }
 

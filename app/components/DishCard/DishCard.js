@@ -1,5 +1,11 @@
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Image, Button } from 'react-native';
+import { 
+  View, 
+  Text, 
+  StyleSheet, 
+  TouchableOpacity, 
+  Image, 
+  Button } from 'react-native';
 
 const dishCard = (props) => (
     <TouchableOpacity onPress={props.onDishCardPressed}>
@@ -13,6 +19,10 @@ const dishCard = (props) => (
       <Button 
         onPress={props.onRecommendButtonPressed}
         title="Recommend"
+      />
+      <Button 
+        onPress={props.onReviewButtonPressed}
+        title="Review"
       />
     </View>
   </TouchableOpacity>

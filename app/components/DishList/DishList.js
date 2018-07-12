@@ -20,6 +20,7 @@ const dishList = (props) => {
                 average_rating = {dish.item.average_rating}               
                 onDishCardPressed={() => props.onDishCardPressed(dish)}
                 onRecommendButtonPressed={() => props.onRecommendButtonPressed(dish)}
+                onReviewButtonPressed={() => props.onReviewButtonPressed(dish)}
             />
         )}
     />

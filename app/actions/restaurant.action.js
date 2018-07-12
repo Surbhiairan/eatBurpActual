@@ -14,9 +14,7 @@ export function fetchTopDishRestaurants(item) {
         dispatch(getTopDishRestaurants());
         return(fetch(`${API_ROOT}/getTopDishRestaurants?tag=`+item))
         .then(res => res.json())
-        .then(json => {
-            //console.log(json,"jsonnnnnnnnnnnnnn=========================================");
-            
+        .then(json => { 
             dispatch(fetchTopDishRestaurantsSuccess(json));
             return json;
         })  
@@ -51,21 +49,11 @@ export function fetchRestaurants() {
         return(fetch(`${API_ROOT}/getRestaurants`))
         .then(res => res.json())
         .then(json => {
-
-            dispatch(fetchRestaurantsSuccess(json.docs));
-            //console.log(json,"jsonnnnnnnnnnnnnn=========================================");
-            return json.docs;
+           dispatch(fetchRestaurantsSuccess(json.docs));
+           return json.docs;
         })  
         .catch(err => dispatch(fetchRestaurantsFailure(err)))
     }
-
-
-    // const request = fetch('http://192.168.43.41:3000/getRestaurants');
-    // console.log("fetching restaurants==============================");
-    // return {
-    //     type: FETCH_RESTAURANTS,
-    //     payload: request 
-    // };
 }
  
 export function getRestaurants() {
