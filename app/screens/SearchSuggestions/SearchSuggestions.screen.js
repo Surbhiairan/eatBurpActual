@@ -30,6 +30,9 @@ class SearchSuggestions extends Component {
 
     componentDidMount() {
       this.props.dispatch(fetchRestaurants());
+      // this.setState({
+      //   tags:["sweet tooth", "dosa"]
+      // });
       this.props.dispatch(fetchAllDishes())
       .then( data => {
         var tags = [];
@@ -48,14 +51,14 @@ class SearchSuggestions extends Component {
 
     handleChangeText = (searchedText) => {
       this.setState({listView: true});
-      console.log('list view-------', this.state.listView);
+      //console.log('list view-------', this.state.listView);
       if(this.state.searchFilter === 'food'){
           
         var searchedFood = this.state.tags.filter(function(tag) {
             return tag.toLowerCase().indexOf(searchedText.toLowerCase()) > -1;
         });
         this.setState({searchedItems: searchedFood});
-        console.log("searchedItems", this.state.searchedItems);          
+        //console.log("searchedItems", this.state.searchedItems);          
       }
       
       if(this.state.searchFilter === 'place'){
@@ -63,7 +66,7 @@ class SearchSuggestions extends Component {
           return place.restaurant_name.toLowerCase().indexOf(searchedText.toLowerCase()) > -1;
         });
         this.setState({searchedItems: searchedPlace});
-        console.log("searchedItems", this.state.searchedItems);                    
+        //console.log("searchedItems", this.state.searchedItems);                    
       }
     }
 
@@ -81,11 +84,12 @@ class SearchSuggestions extends Component {
             }
         });
       }else if( type === 'food'){
+        console.log("item in itemPressHandler",item)
         this.props.navigator.push({
             screen: "SearchResultScreen",
-            title: dish.item.dish_name,
+            //title: item,
             passProps: {
-              selectedDish: dish.item
+              selectedTag: item
             }
         });
       }

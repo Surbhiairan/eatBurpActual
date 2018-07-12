@@ -37,15 +37,16 @@ _handlePressDishCategory = (menu) => {
 
 renderSelectedDishCategoryDishes = (category) => {
   return (
-    <DishCard  
-      dish_name = {category.item.dish_name}
-      restaurant_name = {category.item.restaurant_name}
-      recommended = {category.item.recommended}
-      dish_images = {category.item.dish_images}
-      average_rating = {category.item.average_rating}               
-      onDishCardPressed={() => props.onDishCardPressed(category)}
-      onRecommendButtonPressed={() => props.onRecommendButtonPressed(category)}
-    />
+    <Text>Menu</Text>
+    // <DishCard  
+    //   dish_name = {category.item.dish_name}
+    //   restaurant_name = {category.item.restaurant_name}
+    //   recommended = {category.item.recommended}
+    //   dish_images = {category.item.dish_images}
+    //   average_rating = {category.item.average_rating}               
+    //   onDishCardPressed={() => props.onDishCardPressed(category)}
+    //   onRecommendButtonPressed={() => props.onRecommendButtonPressed(category)}
+    // />
   )
 };
 

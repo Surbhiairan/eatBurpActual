@@ -7,6 +7,8 @@ import SideDrawer from './app/screens/SideDrawer/SideDrawer';
 import SearchSuggestions from './app/screens/SearchSuggestions/SearchSuggestions.screen';
 import UserProfileScreen from './app/screens/UserProfile/UserProfile.screen';
 import RestaurantDetail from './app/screens/RestaurantDetail/RestaurantDetail.screen';
+import ReviewDish from './app/screens/ReviewDish/ReviewDish.screen';
+import SearchResults from './app/screens/SearchResults/SearchResults.screen';
 
 import { Provider } from 'react-redux';
 import store from './app/store/store';
@@ -47,6 +49,13 @@ Navigation.registerComponent(
 );
 
 Navigation.registerComponent(
+  "SearchResultScreen", 
+  () => SearchResults, 
+  store, 
+  Provider
+);
+
+Navigation.registerComponent(
   "SideDrawer",
   () => SideDrawer,
   store,
@@ -58,7 +67,14 @@ Navigation.registerComponent(
   () => UserProfileScreen,
   store,
   Provider
-)
+);
+
+Navigation.registerComponent(
+  "ReviewDishScreen",
+  () => ReviewDish,
+  store,
+  Provider
+);
 
 // Start App
 export default () => Navigation.startSingleScreenApp({

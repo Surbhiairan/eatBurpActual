@@ -13,92 +13,141 @@ export const RECOMMEND_DISH = 'RECOMMEND_DISH';
 export const RECOMMEND_DISH_SUCCESS = 'RECOMMEND_DISH_SUCCESS';
 export const RECOMMEND_DISH_FAILURE = 'RECOMMEND_DISH_FAILURE';
 
+export const FETCH_DISH_SEARCH_RESULTS = 'FETCH_DISH_SEARCH_RESULTS';
+export const FETCH_DISH_SEARCH_RESULTS_SUCCESS = 'FETCH_DISH_SEARCH_RESULTS_SUCCESS';
+export const FETCH_DISH_SEARCH_RESULTS_FAILURE = 'FETCH_DISH_SEARCH_RESULTS_FAILURE';
 
-export function recommendDishDispatch(dish_mapping_id) {
-    
-    
-        return (dispatch) => {
-            dispatch(recommendDish());
-            dispatch(authGetToken())
-            .then(token => {
-                return(
-                    fetch(`${API_ROOT}/addRecommendedDish`, {
-                        method: 'POST',
-                        headers: {
-                        'Accept': 'application/json',
-                        'Content-Type': 'application/json',
-                        'x-access-token': token
-                        //'Content-Type': 'multipart/form-data',
-                        },
-                        body: JSON.stringify({
-                            mappingId: dish_mapping_id,
-                            //userId: user_id,
-                        }),
-                        }
-                    )
-                )
+
+export function fetchDishSearchResults(searchTag) {
+    console.log("inside fetchDishSearchResults")
+    return (dispatch) => {
+        dispatch(getDishSearchResults());
+        dispatch(authGetToken())
+        .then(token => {
+            return (
+            fetch(`${API_ROOT}/getDishSearchResults?searchTag=`+searchTag, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'x-access-token': token
+                }
+                })
+            )
             })
             .catch(() => {
                 alert("No token found");
             })
-            .then(res => res.json())
+            .then(res => res.json())            
             .then(json => {
-    
-                dispatch(recommendDishSuccess(json));
-                console.log(json,"recommended dish");
+                console.log(json,"jsonnnn");
+                dispatch(fetchDishSearchResultsSuccess(json));
                 return json;
             })  
-            .catch(err => dispatch(recommendDishFailure(err)))
-        }
-    }
+        .catch(err => dispatch(fetchDishSearchResultsFailure(err)))
+}
+}
      
-    export function recommendDish() {
-        return {
-            type: RECOMMEND_DISH
-        }
+export function getDishSearchResults() {
+    return {
+        type: FETCH_DISH_SEARCH_RESULTS
     }
-    
-    export function recommendDishSuccess(recommendedDish) {
-        return {
-            type: RECOMMEND_DISH_SUCCESS,
-            payload: {recommendedDish} 
-        };
+}
+
+export function fetchDishSearchResultsSuccess(dishList) {
+    return {
+        type: FETCH_DISH_SEARCH_RESULTS_SUCCESS,
+        payload: {dishList} 
+    };
+}
+
+export function fetchDishSearchResultsFailure(error) {
+    return {
+        type: FETCH_DISH_SEARCH_RESULTS_FAILURE,
+        payload: {error} 
+    };
+}
+
+export function recommendDishDispatch(dish_rest_mapping_id) {
+    return (dispatch) => {
+        dispatch(recommendDish());
+        dispatch(authGetToken())
+        .then(token => {
+            return(
+                fetch(`${API_ROOT}/addRecommendedDish`, {
+                    method: 'POST',
+                    headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                    'x-access-token': token
+                    //'Content-Type': 'multipart/form-data',
+                    },
+                    body: JSON.stringify({
+                        mappingId: dish_rest_mapping_id,
+                        //userId: user_id,
+                    }),
+                    }
+                )
+            )
+        })
+        .catch(() => {
+            alert("No token found");
+        })
+        .then(res => res.json())
+        .then(json => {
+
+            dispatch(recommendDishSuccess(json));
+            console.log(json,"recommended dish");
+            return json;
+        })  
+        .catch(err => dispatch(recommendDishFailure(err)))
     }
-    
-    export function recommendDishFailure(error) {
-        return {
-            type: RECOMMEND_DISH_FAILURE,
-            payload: {error} 
-        };
+}
+     
+export function recommendDish() {
+    return {
+        type: RECOMMEND_DISH
     }
+}
+
+export function recommendDishSuccess(recommendedDish) {
+    return {
+        type: RECOMMEND_DISH_SUCCESS,
+        payload: {recommendedDish} 
+    };
+}
+
+export function recommendDishFailure(error) {
+    return {
+        type: RECOMMEND_DISH_FAILURE,
+        payload: {error} 
+    };
+}
 
 
 export function fetchTopDishes() {
-        return dispatch => {
-            dispatch(getTopDishes());
-            //return(
-            dispatch(authGetToken())
-            .then(token => {
-                return fetch(`${API_ROOT}/getTopDishes`, {
-                    method: 'GET',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'x-access-token': token
-                    }
-                })
+    return dispatch => {
+        dispatch(getTopDishes());
+        dispatch(authGetToken())
+        .then(token => {
+            return fetch(`${API_ROOT}/getTopDishes`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'x-access-token': token
+                }
             })
-            .catch(() => {
-                alert("No token found");
-            })
-           // )
-            .then(res => res.json())
-            .then(json => {
-                dispatch(fetchTopDishesSuccess(json));
-                console.log(json,"jsonnnnnnnnnnnnnn");
-                return json;
-            })  
-            .catch(err => dispatch(fetchTopDishesFailure(err)))
-        }
+        })
+        .catch(() => {
+            alert("No token found");
+        })
+        .then(res => res.json())
+        .then(json => {
+            dispatch(fetchTopDishesSuccess(json));
+            console.log(json,"jsonnnnnnnnnnnnnn");
+            return json;
+        })  
+        .catch(err => dispatch(fetchTopDishesFailure(err)))
+    }
 }
      
 export function getTopDishes() {
@@ -130,7 +179,7 @@ export function fetchAllDishes() {
         .then(json => {
 
             dispatch(fetchAllDishesSuccess(json.docs));
-            //console.log(json,"jsonnnnnnnnnnnnnn");
+            console.log(json,"jsonnnnnnnnnnnnnn");
             return json.docs;
         })  
         .catch(err => dispatch(fetchAllDishesFailure(err)))
