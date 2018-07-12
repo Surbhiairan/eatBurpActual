@@ -14,11 +14,13 @@ const dishList = (props) => {
             <DishCard 
                 dish_name = {dish.item.dish_name}
                 restaurant_name = {dish.item.restaurant_name}
-                recommendation = {dish.item.recommendation}
-                imageUrls = {dish.item.imageUrls}
+                recommended = {dish.item.recommended}
+                dish_images = {dish.item.dish_images}
+                reviews = {dish.item.reviews}
                 average_rating = {dish.item.average_rating}               
                 onDishCardPressed={() => props.onDishCardPressed(dish)}
                 onRecommendButtonPressed={() => props.onRecommendButtonPressed(dish)}
+                onReviewButtonPressed={() => props.onReviewButtonPressed(dish)}
             />
         )}
     />

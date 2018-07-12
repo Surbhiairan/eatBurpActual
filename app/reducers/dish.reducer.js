@@ -7,34 +7,37 @@ import {
     FETCH_TOP_DISHES_FAILURE,
     RECOMMEND_DISH,
     RECOMMEND_DISH_SUCCESS,
-    RECOMMEND_DISH_FAILURE
+    RECOMMEND_DISH_FAILURE,
+    FETCH_DISH_SEARCH_RESULTS,
+    FETCH_DISH_SEARCH_RESULTS_FAILURE,
+    FETCH_DISH_SEARCH_RESULTS_SUCCESS
 } from '../actions/dish.action';
 
 const initialState = {
-    
-        topDishes: [],
-        topDishesError: null,
-        topDishesLoading: false,
-        allDishes: [],
-        allDishesError: null,
-        allDishesLoading: false
+    topDishes: [],
+    topDishesError: null,
+    topDishesLoading: false,
+    allDishes: [],
+    allDishesError: null,
+    allDishesLoading: false,
+    dishSearchResults: [],
+    dishSearchResultsLoading: false,
+    dishSearchResultsError: null
 };
 
 const reducer = (state = initialState, action) => {
     switch (action.type) {
-    case FETCH_TOP_DISHES:// start fetching posts and set loading = true
+    case FETCH_TOP_DISHES:
       return { ...state,  topDishesError: null, topDishesLoading: true }; 
-    case FETCH_TOP_DISHES_SUCCESS:// return list of posts and make loading = false
+    case FETCH_TOP_DISHES_SUCCESS:
       return { ...state, topDishes: action.payload.topDishes, topDishesError:null, topDishesLoading: false };
-    case FETCH_TOP_DISHES_FAILURE:// return error and make loading = false
-      //error = action.payload || {message: action.payload.message};//2nd one is network or server down errors
+    case FETCH_TOP_DISHES_FAILURE:
       return { ...state, topDishes: [], topDishesError: action.payload.error, topDishesLoading: false};  
-    case FETCH_ALL_DISHES:// start fetching posts and set loading = true
+    case FETCH_ALL_DISHES:
       return { ...state,  allDishesError: null, allDishesLoading: true }; 
-    case FETCH_ALL_DISHES_SUCCESS:// return list of posts and make loading = false
+    case FETCH_ALL_DISHES_SUCCESS:
       return { ...state, allDishes: action.payload.allDishes, allDishesError:null, allDishesLoading: false };
-    case FETCH_ALL_DISHES_FAILURE:// return error and make loading = false
-      //error = action.payload || {message: action.payload.message};//2nd one is network or server down errors
+    case FETCH_ALL_DISHES_FAILURE:
       return { ...state, allDishes: [], allDishesError: action.payload.error, allDishesLoading: false};  
     case RECOMMEND_DISH:
       return { ...state, recommendError: null, recommendLoading: true };
@@ -46,7 +49,14 @@ const reducer = (state = initialState, action) => {
           return dish;
       })};
     case RECOMMEND_DISH_FAILURE:
-      default:
+      return { ...state, topDishes: [], recommendError: action.payload.error, recommendLoading: false};      
+    case FETCH_DISH_SEARCH_RESULTS:
+      return { ...state,  dishSearchResults: null, dishSearchResultsLoading: true }; 
+    case FETCH_DISH_SEARCH_RESULTS_SUCCESS:
+      return { ...state, dishSearchResults: action.payload.dishList, dishSearchResultsError:null, dishSearchResultsLoading: false };
+    case FETCH_DISH_SEARCH_RESULTS_FAILURE:
+      return { ...state, dishSearchResults: [], dishSearchResultsError: action.payload.error, dishSearchResultsLoading: false};  
+    default:
       return state;
     }
 };

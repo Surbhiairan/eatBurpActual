@@ -35,8 +35,7 @@ class Home extends Component {
   }
 
   componentDidMount() {
-      console.log("in component did mount");
-      this.props.dispatch(fetchTopDishes());
+      this.props.fetchTopDishes();
   }
 
   dishCardPressedHandler = dish => {
@@ -51,9 +50,20 @@ class Home extends Component {
   }
 
   recommendButtonPressHandler = dish => {
-      console.log("recommend", dish);
+     // console.log("recommend", dish);
     //dispatch action to increase recommendation count, pass dish_restaurant_mapping id
-    this.props.dispatch(recommendDishDispatch(dish.item._id));    
+    this.props.recommendDishDispatch(dish.item._id);    
+  }
+
+  reviewButtonPressHandler = dish => {
+    this.props.navigator.push({
+        screen: "ReviewDishScreen",
+        // title: dish.item.dish_name,
+        passProps: {
+          selectedDish: dish.item
+        }
+    });
+    //this.props.reviewDishDispatch(dish.item._id);        
   }
 
   searchBarPressHandler = () =>  {
@@ -79,6 +89,7 @@ class Home extends Component {
         <DishList
           dishes = {this.props.topDishes}
           onRecommendButtonPressed = {this.recommendButtonPressHandler}
+          onReviewButtonPressed = {this.reviewButtonPressHandler}
           onDishCardPressed = {this.dishCardPressedHandler}                    
         />
       </View>
@@ -94,4 +105,13 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps)(Home);
+const mapDispatchToProps = dispatch => {
+  return {
+    fetchTopDishes: () => dispatch(fetchTopDishes()),
+    recommendDishDispatch: (dish_id) => dispatch(recommendDishDispatch(dish_id)),
+    //reviewDishDispatch: (dish_id) => dispatch(reviewDishDispatch(dish_id)),
+  };
+};
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home);

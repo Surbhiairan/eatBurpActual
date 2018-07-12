@@ -1,0 +1,42 @@
+{
+    "_id": {
+        "$oid": "5b40b18c9038ad0004272d21"
+    },
+    "restaurant_name": "abc",
+    "phone_number": "9993725925",
+    "address": {
+        "building": "104",
+        "street": "Kanchanbag",
+        "locality": "South Tukoganj",
+        "zipcode": "452010",
+        "latitude": 22.719840899999998,
+        "longitude": 75.8824308
+    },
+    "category": [
+        "Cafe",
+        "Quick Bites"
+    ],
+    "cuisines": [],
+    "average_cost_for_two": "200",   
+    "famous_dishes": [
+        "Sandwiches",
+        " Maggi",
+        " Chocolate Shake",
+        " Pizza Sandwich",
+        " Brownie Shake",
+        " Hot Coffee",
+        " Oreo Shake"
+    ], 
+    "open_time": "7AM",
+    "close_time": "11PM",
+    "rush_hours": "7-10PM",
+    "payment_mode": [
+        "Cash",
+        " Card"
+    ],
+    "delivery_offered_in_kms": "3",
+    "days_closed": [],
+    "reviews": [],
+    "images": [],
+    "__v": 0
+}
