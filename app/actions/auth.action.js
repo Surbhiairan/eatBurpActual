@@ -127,7 +127,7 @@ export const authRemoveToken = () => {
     }
 }
 
-export function getUser() {
+/* export function getUser() {
     return {
         type: FETCH_USER
     }
@@ -145,4 +145,4 @@ export function postUserFailure(err) {
         type: POST_USER_FAILURE,
         payload: { err }
     }
-}
+} */
