@@ -95,7 +95,7 @@ export function recommendDishDispatch(dish_rest_mapping_id) {
         .then(res => res.json())
         .then(json => {
 
-            dispatch(recommendDishSuccess(json));
+            dispatch(recommendDishSuccess(json.success));
             console.log(json,"recommended dish");
             return json;
         })  
@@ -142,7 +142,7 @@ export function fetchTopDishes() {
         })
         .then(res => res.json())
         .then(json => {
-            dispatch(fetchTopDishesSuccess(json));
+            dispatch(fetchTopDishesSuccess(json.success));
             console.log(json,"jsonnnnnnnnnnnnnn");
             return json;
         })  

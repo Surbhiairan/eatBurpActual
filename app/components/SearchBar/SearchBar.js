@@ -10,14 +10,14 @@ import {
 
 const searchBar = (props) => {
   return(
-    <View style={styles.container}>
-      <TextInput style={styles.textBox}
+    <View style={[styles.container, props.style]}>
+      <TextInput style={[styles.textBox]}
       autoFocus={props.autoFocus}
       onFocus={props.onSearchBarPressed}
       onChangeText={props.onChangeText}
       onSubmitEditing={props.onSubmitEditing}
       values = {props.value}
-      placeholder='Find best food in the city'
+      placeholder='search'
       underlineColorAndroid='transparent'           //to remove underline in textinput
       />
     </View> 
@@ -27,21 +27,18 @@ const searchBar = (props) => {
 const styles = StyleSheet.create({
   container: {
     paddingLeft:20,
-    justifyContent: 'center',
     marginRight: 10,
-    marginTop:10,
+    marginTop:'62.26%',
     marginLeft:10,
-    marginBottom:10,
-    //backgroundColor: '#efefef',             //actual grey
-    backgroundColor: '#fff',
+    marginBottom:'37.74%',
+    backgroundColor: 'red',
     height: 40, 
     borderTopLeftRadius:20,
     borderTopRightRadius:20,
     borderBottomLeftRadius:20,
     borderBottomRightRadius:20,
     elevation:4,
-    //borderWidth:1,
-    //borderColor: '#e9e9e9',
+
   },
   textBox: {
     fontSize: 20,
