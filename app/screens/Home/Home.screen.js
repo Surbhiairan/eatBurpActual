@@ -4,7 +4,7 @@ import {
   StyleSheet,
   Text,
   View,
-  FlatList
+  Image
 } from 'react-native';
 
 import DishList from '../../components/DishList/DishList';
@@ -34,38 +34,6 @@ class Home extends Component {
       dishes: dishes
   }
 
-  componentDidMount() {
-      this.props.fetchTopDishes();
-  }
-
-  dishCardPressedHandler = dish => {
-      console.log("pressed dish",dish);
-      this.props.navigator.push({
-          screen: "DishDetailScreen",
-          title: dish.item.dish_name,
-          passProps: {
-            selectedDish: dish.item
-          }
-      });
-  }
-
-  recommendButtonPressHandler = dish => {
-     // console.log("recommend", dish);
-    //dispatch action to increase recommendation count, pass dish_restaurant_mapping id
-    this.props.recommendDishDispatch(dish.item._id);    
-  }
-
-  reviewButtonPressHandler = dish => {
-    this.props.navigator.push({
-        screen: "ReviewDishScreen",
-        // title: dish.item.dish_name,
-        passProps: {
-          selectedDish: dish.item
-        }
-    });
-    //this.props.reviewDishDispatch(dish.item._id);        
-  }
-
   searchBarPressHandler = () =>  {
     //navigate to search suggestion screen
     console.log("pressed search bar");
@@ -80,22 +48,50 @@ class Home extends Component {
 
   render() {
     return (
-      <View style={{backgroundColor: '#eaecee'}}>  
-
-        <SearchBar 
-          onSearchBarPressed = {this.searchBarPressHandler} 
-        />
-
-        <DishList
-          dishes = {this.props.topDishes}
-          onRecommendButtonPressed = {this.recommendButtonPressHandler}
-          onReviewButtonPressed = {this.reviewButtonPressHandler}
-          onDishCardPressed = {this.dishCardPressedHandler}                    
-        />
+      <View style={[styles.mainContainer]}>
+        <Image />
+       {/*  <Text/>
+        <SearchBar/>
+        <Icons />
+        <Location /> */}
       </View>
     );
   } 
 }
+
+const styles = StyleSheet.create({
+  mainContainer:{
+    flex:1,
+    backgroundColor:'#000'
+    //alignItems: 'center',
+    //justifyContent: 'center',
+
+  },
+  searchContainer: {
+    paddingLeft: 20,
+    marginRight: 10,
+    marginTop: 10,
+    marginLeft: 10,
+    marginBottom: 10,
+    backgroundColor: 'red',
+    height: 40,
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
+    borderBottomLeftRadius: 20,
+    borderBottomRightRadius: 20,
+    elevation: 4,
+    //justifyContent: 'center',
+    // alignItems: 'center',
+  },
+  textBox: {
+    fontSize: 20,
+    textAlign: 'auto',
+    fontFamily: 'open-sans-regular',
+    color: '#4d5656',    // grey
+    //color: '#000',
+    //fontWeight: 'bold'
+  },
+})
   
 const mapStateToProps = state => {
   return{

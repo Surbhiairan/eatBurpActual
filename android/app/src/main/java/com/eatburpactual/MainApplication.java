@@ -14,6 +14,7 @@ import java.util.List;
 
 import com.reactnativenavigation.NavigationApplication;
 import com.oblador.vectoricons.VectorIconsPackage;
+import com.horcrux.svg.SvgPackage;
 
 public class MainApplication extends NavigationApplication {
 
@@ -61,7 +62,8 @@ public class MainApplication extends NavigationApplication {
          return Arrays.<ReactPackage>asList(
              // eg. new VectorIconsPackage()
              new VectorIconsPackage(),
-             new PickerPackage()
+             new PickerPackage(),
+             new SvgPackage()
          );
      }
 
