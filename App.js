@@ -9,6 +9,7 @@ import UserProfileScreen from './app/screens/UserProfile/UserProfile.screen';
 import RestaurantDetail from './app/screens/RestaurantDetail/RestaurantDetail.screen';
 import ReviewDish from './app/screens/ReviewDish/ReviewDish.screen';
 import SearchResults from './app/screens/SearchResults/SearchResults.screen';
+import TopTenDish from './app/screens/TopTenDish/TopTenDish.screen';
 
 import { Provider } from 'react-redux';
 import store from './app/store/store';
@@ -23,6 +24,13 @@ Navigation.registerComponent(
 Navigation.registerComponent(
   "HomeScreen", 
   () => Home, 
+  store, 
+  Provider
+);
+
+Navigation.registerComponent(
+  "TopTenDishScreen", 
+  () => TopTenDish, 
   store, 
   Provider
 );
@@ -79,7 +87,7 @@ Navigation.registerComponent(
 // Start App
 export default () => Navigation.startSingleScreenApp({
   screen: {
-    screen: "AuthScreen",
-    title: "Login"
+    screen: "TopTenDishScreen",
+    //title: "Login"
   }
 });
