@@ -12,6 +12,7 @@ import SearchResults from './app/screens/SearchResults/SearchResults.screen';
 
 import { Provider } from 'react-redux';
 import store from './app/store/store';
+import HomeScreen from './app/screens/Home/Home.screen';
 // Register Screens
 Navigation.registerComponent(
   "AuthScreen", 
@@ -22,7 +23,7 @@ Navigation.registerComponent(
 
 Navigation.registerComponent(
   "HomeScreen", 
-  () => Home, 
+  () => HomeScreen, 
   store, 
   Provider
 );
@@ -79,7 +80,7 @@ Navigation.registerComponent(
 // Start App
 export default () => Navigation.startSingleScreenApp({
   screen: {
-    screen: "AuthScreen",
-    title: "Login"
+    screen: "HomeScreen",
+    title: "Home"
   }
 });
