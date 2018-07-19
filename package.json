@@ -8,10 +8,11 @@
   },
   "dependencies": {
     "react": "16.3.1",
-    "react-native": "0.55.4",
+    "react-native": "^0.55.4",
     "react-native-image-crop-picker": "^0.20.3",
     "react-native-navigation": "^1.1.472",
     "react-native-svg": "^6.4.1",
+    "react-native-svg-icon": "^0.8.1",
     "react-native-vector-icons": "^4.6.0",
     "react-redux": "^5.0.7",
     "redux": "^4.0.0",
@@ -26,5 +27,10 @@
   },
   "jest": {
     "preset": "react-native"
+  },
+  "rnpm": {
+    "assets": [
+	"./app/assets/fonts/"
+    ]
   }
 }

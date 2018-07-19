@@ -13,6 +13,7 @@ import TopTenDish from './app/screens/TopTenDish/TopTenDish.screen';
 
 import { Provider } from 'react-redux';
 import store from './app/store/store';
+import HomeScreen from './app/screens/Home/Home.screen';
 // Register Screens
 Navigation.registerComponent(
   "AuthScreen", 
@@ -23,7 +24,7 @@ Navigation.registerComponent(
 
 Navigation.registerComponent(
   "HomeScreen", 
-  () => Home, 
+  () => HomeScreen, 
   store, 
   Provider
 );
