@@ -12,7 +12,8 @@ import SearchBar from '../../components/SearchBar/SearchBar';
 import dishes from '../../data/data';
 import { connect } from 'react-redux';
 import { fetchTopDishes } from '../../actions/dish.action';
-import { recommendDishDispatch } from '../../actions/dish.action';;
+import { recommendDishDispatch } from '../../actions/dish.action';
+import Icon from '../../components/SvgIcons/SvgIcons';
 
 class Home extends Component {
   constructor(props) {
@@ -49,11 +50,11 @@ class Home extends Component {
   render() {
     return (
       <View style={[styles.mainContainer]}>
-        <Image />
-       {/*  <Text/>
-        <SearchBar/>
-        <Icons />
-        <Location /> */}
+          <Icon name= "likeYellowFilled" 
+             height="50" 
+             width="50"
+             fill="#FFA000"
+       />
       </View>
     );
   } 
@@ -62,7 +63,7 @@ class Home extends Component {
 const styles = StyleSheet.create({
   mainContainer:{
     flex:1,
-    backgroundColor:'#000'
+    backgroundColor:'#fff'
     //alignItems: 'center',
     //justifyContent: 'center',
 
