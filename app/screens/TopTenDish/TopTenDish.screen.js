@@ -16,6 +16,11 @@ import { fetchTopDishes } from '../../actions/dish.action';
 import { recommendDishDispatch } from '../../actions/dish.action';;
 
 class TopTenDish extends Component {
+
+    static navigatorStyle = {
+        navBarHidden: true
+    };
+
     constructor(props) {
         super(props);
         this.props.navigator.setOnNavigatorEvent(this.onNavigatorEvent);
@@ -81,7 +86,7 @@ class TopTenDish extends Component {
 
     render() {
         return (
-            <View style={{ backgroundColor: '#eaecee' }}>
+            <View style={{ backgroundColor: '#F9F9F9' }}>
                 <SearchBar
                     onSearchBarPressed={this.searchBarPressHandler}
                 />
