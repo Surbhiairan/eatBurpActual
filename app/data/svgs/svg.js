@@ -1,5 +1,5 @@
 import React from 'react';
-import { G, Path, Svg, style } from 'react-native-svg';
+import { G, Path, Svg, Defs, Polygon, Line } from 'react-native-svg';
 
 export default {
     Donut: {
@@ -52,6 +52,15 @@ export default {
     likeYellowFilled: {
         svg: <Path d="M23.89,9.37A10.91,10.91,0,0,1,20.54,15L12,22.6,3.63,15A10.86,10.86,0,0,1,.25,9.37,6.58,6.58,0,0,1,0,6.83a7.84,7.84,0,0,1,2.3-5h0A6.09,6.09,0,0,1,6.57.13,6.24,6.24,0,0,1,12,3.34,6.51,6.51,0,0,1,17.58.13c3.44,0,6.2,2.82,6.54,6.7A7,7,0,0,1,23.89,9.37Z" transform="translate(0 -0.13)" />,
         viewBox: '0 0 24.15 22.46',
-        fillRule: 'evenodd'
+    },
+    cityYellow: {
+        svg: <Svg>
+                <Path d="M512,455.11A56.89,56.89,0,0,1,455.11,512H56.89A56.89,56.89,0,0,1,0,455.11H0V56.89A56.89,56.89,0,0,1,56.89,0H455.11A56.89,56.89,0,0,1,512,56.89h0Z" transform="translate(0 0)"/> 
+                <Polygon points="204 110 204 481 182 481 182 134 121 134 121 481 99 481 99 110 204 110" /> 
+                <Polygon points="413 31 413 481 389 481 389 54 329 54 329 481 303 481 303 31 413 31" /> 
+                <Polygon points="295 187.73 295 481 277.61 481 277.61 206.71 229.39 206.71 229.39 481 212 481 212 187.73 295 187.73"/> 
+                <Line x1="44.6" y1="481" x2="470.58" y2="481" style="fill:none;"/>
+            </Svg>,
+        viewBox: '0 0 512 512'
     }
 }

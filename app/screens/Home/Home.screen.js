@@ -13,7 +13,9 @@ import dishes from '../../data/data';
 import { connect } from 'react-redux';
 import { fetchTopDishes } from '../../actions/dish.action';
 import { recommendDishDispatch } from '../../actions/dish.action';
-import Icon from '../../components/SvgIcons/SvgIcons';
+import LikeIcon from '../../components/SvgIcons/likeFilled.icon';
+import MealIcon from '../../components/SvgIcons/clock.icon';
+import CitySpecialIcon from '../../components/SvgIcons/citySpecial.icon';
 
 class Home extends Component {
   constructor(props) {
@@ -50,11 +52,10 @@ class Home extends Component {
   render() {
     return (
       <View style={[styles.mainContainer]}>
-          <Icon name= "likeYellowFilled" 
-             height="50" 
-             width="50"
-             fill="#FFA000"
-       />
+        <LikeIcon fill= "#f9f9f9"/>
+        <MealIcon />
+        <CitySpecialIcon />
+        
       </View>
     );
   } 
