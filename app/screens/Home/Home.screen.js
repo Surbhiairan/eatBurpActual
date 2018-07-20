@@ -13,17 +13,22 @@ import dishes from '../../data/data';
 import { connect } from 'react-redux';
 import { fetchTopDishes } from '../../actions/dish.action';
 import { recommendDishDispatch } from '../../actions/dish.action';
-import LikeIcon from '../../components/SvgIcons/likeFilled.icon';
 import MealIcon from '../../components/SvgIcons/clock.icon';
 import CitySpecialIcon from '../../components/SvgIcons/citySpecial.icon';
-
+import DonutIcon from '../../components/SvgIcons/donut.icon';
+import TopTenIcon from '../../components/SvgIcons/topTen.icon';
+import LocationIcon from '../../components/SvgIcons/location.icon';
 class Home extends Component {
+
+ 
+  
   constructor(props) {
      super(props);
      this.props.navigator.setOnNavigatorEvent(this.onNavigatorEvent);
   }
   
   onNavigatorEvent = event => {
+    console.log("event--------------", event)
     if (event.type === "NavBarButtonPress") {
       if (event.id === "sideDrawerToggle") {
         this.props.navigator.toggleDrawer({
@@ -37,25 +42,46 @@ class Home extends Component {
       dishes: dishes
   }
 
-  searchBarPressHandler = () =>  {
-    //navigate to search suggestion screen
-    console.log("pressed search bar");
-    this.props.navigator.push({
-        screen: "SearchSuggestionScreen",
-        // title: dish.item.dish_name,
-        // passProps: {
-        //   selectedDish: dish.item
-        // }
-    });
-  }
-
   render() {
     return (
       <View style={[styles.mainContainer]}>
-        <LikeIcon fill= "#f9f9f9"/>
-        <MealIcon />
-        <CitySpecialIcon />
-        
+        <View style={styles.donutView}> 
+          <DonutIcon />
+        </View>
+        <View style={styles.mainIconsView}>
+          <View >
+            <View style={styles.topTenIconView}>
+              <TopTenIcon />
+            </View>
+            <Text style={styles.topTenTextView}>
+              Top Ten
+            </Text>
+          </View>
+          <View>
+            <View style={styles.citySpecialView}>
+              <CitySpecialIcon  />
+            </View>
+            <Text style={styles.citySpecialTextView}>
+              City Special
+            </Text>
+          </View>
+          <View>
+            <View style={styles.mealView}>
+              <MealIcon />
+            </View>
+            <Text style={styles.MealTextView}>
+              Meals
+            </Text>
+          </View>
+        </View>
+        <View>
+          <View style={styles.locationView}>
+            <LocationIcon />
+          </View>
+          <Text style={styles.locationText}>
+            Kanchanbag, Geetabhavan
+          </Text>
+        </View>
       </View>
     );
   } 
@@ -65,34 +91,55 @@ const styles = StyleSheet.create({
   mainContainer:{
     flex:1,
     backgroundColor:'#fff'
-    //alignItems: 'center',
-    //justifyContent: 'center',
-
   },
-  searchContainer: {
-    paddingLeft: 20,
-    marginRight: 10,
-    marginTop: 10,
-    marginLeft: 10,
-    marginBottom: 10,
-    backgroundColor: 'red',
-    height: 40,
-    borderTopLeftRadius: 20,
-    borderTopRightRadius: 20,
-    borderBottomLeftRadius: 20,
-    borderBottomRightRadius: 20,
-    elevation: 4,
-    //justifyContent: 'center',
-    // alignItems: 'center',
+  donutView: {
+    marginLeft: 109
   },
-  textBox: {
-    fontSize: 20,
-    textAlign: 'auto',
-    fontFamily: 'open-sans-regular',
-    color: '#4d5656',    // grey
-    //color: '#000',
-    //fontWeight: 'bold'
+  mainIconsView: {
+    //backgroundColor: 'blue',
+    marginTop: 136.3,
+    flexDirection: 'row',
   },
+  topTenIconView: {
+    marginLeft: 60,
+  },
+  topTenTextView: {
+    fontFamily: "OpenSans-Bold",
+    fontSize: 15,
+    color: "#757575",
+    marginTop: 4,
+    marginLeft: 54,
+  },
+  citySpecialView: {
+    marginLeft: 50
+  },
+  citySpecialTextView: {
+    fontFamily: "OpenSans-Bold",
+    fontSize: 15,
+    color: "#757575",
+    marginTop: 4,
+    marginLeft: 34,
+  },
+  MealTextView: {
+    fontFamily: "OpenSans-Bold",
+    fontSize: 15,
+    color: "#757575",
+    marginTop: 4,
+    marginLeft: 36,
+  },
+  mealView: {
+    marginLeft: 40,
+  },
+  locationView: {
+    marginTop: 44,
+    marginLeft: 168,
+  },
+  locationText: {
+    fontFamily: "OpenSans-Regular",
+    fontSize: 15,
+    color: "#757575",
+    marginLeft: 92,
+  }
 })
   
 const mapStateToProps = state => {

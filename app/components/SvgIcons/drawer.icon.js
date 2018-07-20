@@ -6,7 +6,7 @@ import Svg, {
 } from 'react-native-svg';
 import { View } from "react-native";
 
-const clockYellow = (props) => {
+const drawer = (props) => {
     return (
         <View>
             <Svg height="50"
@@ -19,7 +19,7 @@ const clockYellow = (props) => {
     )
 }
 
-export default clockYellow;
+export default drawer;
 
 
 
