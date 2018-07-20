@@ -126,6 +126,20 @@ export function recommendDishFailure(error) {
 
 export function fetchTopDishes() {
     return dispatch => {
+
+
+        // dispatch(getTopDishes());
+        // return(fetch(`${API_ROOT}/getTopDishes`))
+        // .then(res => res.json())
+        // .then(json => {
+        //     console.log(json,"jsonnnnnnnnnnnnnn");
+            
+        //     dispatch(fetchTopDishesSuccess(json));
+        //     return json;
+        // })  
+        // .catch(err => dispatch(fetchTopDishesFailure(err)))
+
+
         dispatch(getTopDishes());
         dispatch(authGetToken())
         .then(token => {
@@ -133,7 +147,7 @@ export function fetchTopDishes() {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
-                    'x-access-token': token
+                    'x-access-token': "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1YjM0OTFmZTYxMjI3MTVmZDQyNWViZWUiLCJpYXQiOjE1MzIwNzc0NzN9.kDPfSIplPEa-6-CwoIMqkd_336UxlmZSoLkhpMM2PdE"
                 }
             })
         })
@@ -142,7 +156,7 @@ export function fetchTopDishes() {
         })
         .then(res => res.json())
         .then(json => {
-            dispatch(fetchTopDishesSuccess(json.success));
+            dispatch(fetchTopDishesSuccess(json));
             console.log(json,"jsonnnnnnnnnnnnnn");
             return json;
         })  

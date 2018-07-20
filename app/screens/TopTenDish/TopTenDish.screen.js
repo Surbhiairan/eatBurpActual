@@ -14,6 +14,7 @@ import dishes from '../../data/data';
 import { connect } from 'react-redux';
 import { fetchTopDishes } from '../../actions/dish.action';
 import { recommendDishDispatch } from '../../actions/dish.action';;
+import Icon from 'react-native-vector-icons/Ionicons';
 
 class TopTenDish extends Component {
 
@@ -86,18 +87,25 @@ class TopTenDish extends Component {
 
     render() {
         return (
-            <View style={{ backgroundColor: '#F9F9F9' }}>
+            <View style = {{ backgroundColor: '#F9F9F9' }}>
+            <View style = {style.header}>
+            <Icon style = {style.backIcon} name="md-arrow-round-back" size={30} color="#757575" />
+            <View style = {style.searchbar}>
                 <SearchBar
                     onSearchBarPressed={this.searchBarPressHandler}
                 />
+            </View >
+            </View>
+            <Text style = {style.topTen}>Top Ten</Text>
                 <ScrollView>
                     <View style={style.container}>
-                        <DishList
+                    {(this.props.topDishes) && <DishList
                             dishes={this.props.topDishes}
                             onRecommendButtonPressed={this.recommendButtonPressHandler}
                             onReviewButtonPressed={this.reviewButtonPressHandler}
                             onDishCardPressed={this.dishCardPressedHandler}
                         />
+                    }
                     </View>
                 </ScrollView>
             </View>
@@ -108,6 +116,26 @@ class TopTenDish extends Component {
 const style = StyleSheet.create({
     container: {
         flex: 1
+    },
+    header: {
+        paddingTop:20,
+        paddingBottom: 20,
+        flexDirection: 'row', 
+        alignItems: 'center',
+        backgroundColor: '#fff'
+    },
+    backIcon :{
+        paddingLeft:10
+    },
+    searchbar: {
+        paddingLeft: 10,
+    },
+    topTen:{
+        paddingLeft:25,
+        paddingTop:8,
+        fontFamily: 'OpenSans-ExtraBold',
+        fontSize: 22,
+        color:'#212121'
     }
 })
 
