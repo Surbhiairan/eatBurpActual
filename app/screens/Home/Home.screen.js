@@ -45,8 +45,21 @@ class Home extends Component {
   render() {
     return (
       <View style={[styles.mainContainer]}>
-        <View style={styles.donutView}> 
-          <DonutIcon />
+        <View style={styles.donutTextView}>
+          <View style={styles.textView}>
+            <Text style={styles.textStyle}>
+              What.
+            </Text>
+            <Text style={styles.textStyle}>
+              Where.
+            </Text>
+            <Text style={styles.textStyle}>
+              Food.
+            </Text>
+          </View>
+          <View style={styles.donutView}>
+            <DonutIcon />
+          </View>
         </View>
         <View style={styles.mainIconsView}>
           <View >
@@ -93,11 +106,26 @@ const styles = StyleSheet.create({
     backgroundColor:'#fff'
   },
   donutView: {
-    marginLeft: 109
+    marginLeft: 105,
+    position: 'absolute'
+  },
+  textStyle:{
+    fontFamily: 'OpenSans-ExtraBold',
+    fontSize: 30,
+    
+  },
+  textView: {
+    marginTop: 170,
+    marginLeft: 31,
+    flexDirection: 'column',
+    
+  },
+  donutTextView: {
+    flexDirection: 'row',
   },
   mainIconsView: {
     //backgroundColor: 'blue',
-    marginTop: 136.3,
+    marginTop: 70,
     flexDirection: 'row',
   },
   topTenIconView: {

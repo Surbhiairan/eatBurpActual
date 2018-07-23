@@ -143,13 +143,14 @@ export function fetchTopDishes() {
         dispatch(getTopDishes());
         dispatch(authGetToken())
         .then(token => {
-            return fetch(`${API_ROOT}/getTopDishes`, {
+            return (fetch(`${API_ROOT}/getTopDishes`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
                     'x-access-token': "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1YjM0OTFmZTYxMjI3MTVmZDQyNWViZWUiLCJpYXQiOjE1MzIwNzc0NzN9.kDPfSIplPEa-6-CwoIMqkd_336UxlmZSoLkhpMM2PdE"
                 }
             })
+        )
         })
         .catch(() => {
             alert("No token found");
