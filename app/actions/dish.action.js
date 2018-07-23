@@ -128,39 +128,41 @@ export function fetchTopDishes() {
     return dispatch => {
 
 
-        // dispatch(getTopDishes());
-        // return(fetch(`${API_ROOT}/getTopDishes`))
-        // .then(res => res.json())
-        // .then(json => {
-        //     console.log(json,"jsonnnnnnnnnnnnnn");
-            
-        //     dispatch(fetchTopDishesSuccess(json));
-        //     return json;
-        // })  
-        // .catch(err => dispatch(fetchTopDishesFailure(err)))
-
-
         dispatch(getTopDishes());
-        dispatch(authGetToken())
-        .then(token => {
-            return fetch(`${API_ROOT}/getTopDishes`, {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'x-access-token': "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1YjM0OTFmZTYxMjI3MTVmZDQyNWViZWUiLCJpYXQiOjE1MzIwNzc0NzN9.kDPfSIplPEa-6-CwoIMqkd_336UxlmZSoLkhpMM2PdE"
-                }
-            })
-        })
-        .catch(() => {
-            alert("No token found");
-        })
+           return (fetch(`${API_ROOT}/getTopDishes`)
+        ) 
         .then(res => res.json())
         .then(json => {
-            dispatch(fetchTopDishesSuccess(json));
-            console.log(json,"jsonnnnnnnnnnnnnn");
-            return json;
+            console.log(json.success,"jsonnnnnnnnnnnnnn");
+            
+            dispatch(fetchTopDishesSuccess(json.success));
+            return json.success;
         })  
-        .catch(err => dispatch(fetchTopDishesFailure(err)))
+        .catch(err => 
+            {console.log(err,"err");
+            dispatch(fetchTopDishesFailure(err))})
+
+        // dispatch(getTopDishes());
+        // dispatch(authGetToken())
+        // .then(token => {
+        //     return fetch(`${API_ROOT}/getTopDishes`, {
+        //         method: 'GET',
+        //         headers: {
+        //             'Content-Type': 'application/json',
+        //             'x-access-token': "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1YjM0OTFmZTYxMjI3MTVmZDQyNWViZWUiLCJpYXQiOjE1MzIwNzc0NzN9.kDPfSIplPEa-6-CwoIMqkd_336UxlmZSoLkhpMM2PdE"
+        //         }
+        //     })
+        // })
+        // .catch(() => {
+        //     alert("No token found");
+        // })
+        // .then(res => res.json())
+        // .then(json => {
+        //     dispatch(fetchTopDishesSuccess(json.success));
+        //     console.log(json.success,"jsonnnnnnnnnnnnnn");
+        //     return json.success;
+        // })  
+        // .catch(err => dispatch(fetchTopDishesFailure(err)))
     }
 }
      

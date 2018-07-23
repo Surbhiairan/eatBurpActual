@@ -8,8 +8,8 @@ import { View } from "react-native";
 const likeIcon = (props) => {
     return (
         <View>
-            <Svg height="70"
-                width="80"
+            <Svg height={props.height}
+                width={props.width}
                 viewBox="0 0 24.15 22.46">
                 <G>
                     <G>
