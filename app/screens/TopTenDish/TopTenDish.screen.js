@@ -5,7 +5,8 @@ import {
     Text,
     View,
     FlatList,
-    ScrollView
+    ScrollView,
+    TouchableOpacity
 } from 'react-native';
 
 import DishList from '../../components/DishList/DishList';
@@ -87,17 +88,18 @@ class TopTenDish extends Component {
 
     render() {
         return (
-            <View style = {{ backgroundColor: '#F9F9F9' }}>
+            <View style = {{ backgroundColor: '#fff', flex:1 }}>
             <View style = {style.header}>
-            <Icon style = {style.backIcon} name="md-arrow-round-back" size={30} color="#757575" />
+            <TouchableOpacity>
+              <Icon style = {style.backIcon} name="ios-arrow-round-back-outline" size={45} color="#757575" />
+            </TouchableOpacity>
             <View style = {style.searchbar}>
                 <SearchBar
                     onSearchBarPressed={this.searchBarPressHandler}
                 />
             </View >
             </View>
-            <Text style = {style.topTen}>Top Ten</Text>
-                <ScrollView>
+            <Text style = {style.topTen}>Top Ten{this.props.topDishesError}</Text>
                     <View style={style.container}>
                     {(this.props.topDishes) && <DishList
                             dishes={this.props.topDishes}
@@ -107,7 +109,6 @@ class TopTenDish extends Component {
                         />
                     }
                     </View>
-                </ScrollView>
             </View>
         );
     }
@@ -118,21 +119,22 @@ const style = StyleSheet.create({
         flex: 1
     },
     header: {
-        paddingTop:20,
-        paddingBottom: 20,
+        paddingTop:10,
+        paddingBottom: 6,
         flexDirection: 'row', 
         alignItems: 'center',
         backgroundColor: '#fff'
     },
     backIcon :{
-        paddingLeft:10
+        paddingLeft:10,
+
     },
     searchbar: {
         paddingLeft: 10,
     },
     topTen:{
         paddingLeft:25,
-        paddingTop:8,
+        paddingTop:5,
         fontFamily: 'OpenSans-ExtraBold',
         fontSize: 22,
         color:'#212121'

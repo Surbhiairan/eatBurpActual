@@ -88,7 +88,7 @@ Navigation.registerComponent(
 // Start App
 export default () => Navigation.startSingleScreenApp({
   screen: {
-    screen: "TopTenDish",
+    screen: "TopTenDishScreen",
     //title: "Login"
   }
 });
