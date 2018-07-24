@@ -7,7 +7,7 @@ import { View, StyleSheet } from "react-native";
 
 const topTenIcon = (props) => {
     return (
-        <View style={props.style}>
+        <View style={styles.container}>
             <Svg height="40"
                 width="40"
                 viewBox="0 0 512 512">
@@ -21,7 +21,8 @@ const topTenIcon = (props) => {
 }
 const styles = StyleSheet.create({
     container: {
-        marginLeft: 60 
+        elevation:5,
+       // backgroundColor: 'blue',
     }
 })
 

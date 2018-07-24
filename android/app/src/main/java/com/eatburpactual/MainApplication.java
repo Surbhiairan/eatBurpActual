@@ -12,6 +12,7 @@ import com.facebook.soloader.SoLoader;
 import java.util.Arrays;
 import java.util.List;
 
+import com.devfd.RNGeocoder.RNGeocoderPackage;
 import com.reactnativenavigation.NavigationApplication;
 import com.oblador.vectoricons.VectorIconsPackage;
 import com.horcrux.svg.SvgPackage;
@@ -63,7 +64,8 @@ public class MainApplication extends NavigationApplication {
              // eg. new VectorIconsPackage()
              new VectorIconsPackage(),
              new PickerPackage(),
-             new SvgPackage()
+             new SvgPackage(),
+             new RNGeocoderPackage()
          );
      }
 
