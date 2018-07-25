@@ -15,6 +15,9 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import MenuItem from '../MenuItem/MenuItem';
 import DishCard from '../DishCard/DishCard';
 
+const DEFAULT_IMAGE = require('../../data/images/sandwich.jpg');
+
+
 export default class RestaurantMenu extends Component {
 
 constructor(props) {
@@ -24,11 +27,11 @@ constructor(props) {
         selectedDishCategory: [],
         title: props.title,
         expanded: true,
-        animation: new Animated.Value(0)
+        animation: new Animated.Value()
     };  
 }
 
-renderMenuCategory = (menu) => {
+/* renderMenuCategory = (menu) => {
   return (
     <View>
       <Text         
@@ -40,21 +43,28 @@ renderMenuCategory = (menu) => {
 
 _handlePressDishCategory = (menu) => {
   this.setState({selectedDishCategory: menu.item.dishes});
-}
+} */
 
   renderRestaurantDishes = (category) => {
-  return (
-    <Text>Menu</Text>
-    // <DishCard  
-    //   dish_name = {category.item.dish_name}
-    //   restaurant_name = {category.item.restaurant_name}
-    //   recommended = {category.item.recommended}
-    //   dish_images = {category.item.dish_images}
-    //   average_rating = {category.item.average_rating}               
-    //   onDishCardPressed={() => props.onDishCardPressed(category)}
-    //   onRecommendButtonPressed={() => props.onRecommendButtonPressed(category)}
-    // />
-  )
+    //console.log(category)
+    return (
+      <View>
+        <View style={{marginLeft: 6,marginTop: 4,}}>
+          <Image 
+            source={DEFAULT_IMAGE}
+            style={styles.imageStyle}
+          />
+          <View style={styles.dishNameStyle}>
+            <Text style={styles.dishNameText}> 
+              {category.item.dish_name}
+            </Text>
+          </View>
+          <Text style={styles.priceText}>
+           Rs. {category.item.price}
+          </Text>
+        </View>
+      </View>
+    )
 };
 
 toggle() {
@@ -69,7 +79,7 @@ toggle() {
   Animated.spring(     //Step 4
     this.state.animation,
     {
-      toValue: finalValue
+      toValue: finalValue,
     }
   ).start();  //Step 5
 }
@@ -107,9 +117,11 @@ render(){
 
       <View style={styles.body} onLayout={this._setMaxHeight.bind(this)}>
         <FlatList
+          style={styles.list}
           data={this.props.menu}
           keyExtractor={(item, index) => index}
-          renderItem={this.renderRestaurantDishes} />
+          renderItem={this.renderRestaurantDishes}
+           />
       </View>
     </Animated.View>
   );
@@ -117,6 +129,10 @@ render(){
 }
 
 var styles = StyleSheet.create({
+  list: {
+    flexDirection: 'row',
+    flexWrap: 'wrap'
+  },
   container: {
     backgroundColor: '#fff',
     margin: 10,
@@ -138,7 +154,31 @@ var styles = StyleSheet.create({
     height: 25
   },
   body: {
-    padding: 10,
+    //padding: 10,
     paddingTop: 0
+  },
+  item: {
+    backgroundColor: 'red',
+    margin: 3,
+    width: 100
+  },
+  imageStyle: {
+    width: 96, 
+    height: 96
+  },
+  dishNameStyle: { 
+    alignSelf: 'flex-start', 
+    width: 100,
+    
+  },
+  dishNameText: {
+    fontFamily: 'OpenSans-SemiBold',
+    fontSize: 14,
+    color: '#463D3D'
+  },
+  priceText: {
+    fontFamily: 'OpenSans-Regular',
+    fontSize: 12,
+    color: '#463D3D'
   }
 });
