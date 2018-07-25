@@ -42,10 +42,6 @@ class TopTenDish extends Component {
         dishes: dishes
     }
 
-    componentDidMount() {
-        this.props.fetchTopDishes();
-    }
-
     dishCardPressedHandler = dish => {
         console.log("pressed dish", dish);
         this.props.navigator.push({

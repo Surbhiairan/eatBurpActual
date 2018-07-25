@@ -4,27 +4,30 @@ import {
   StyleSheet,
   Text,
   View,
-  Image
+  TouchableOpacity
 } from 'react-native';
-
-import DishList from '../../components/DishList/DishList';
-import SearchBar from '../../components/SearchBar/SearchBar';
-import dishes from '../../data/data';
 import { connect } from 'react-redux';
+import Geocoder from 'react-native-geocoder';
+
+import SearchBar from '../../components/SearchBar/SearchBar';
 import { fetchTopDishes } from '../../actions/dish.action';
-import { recommendDishDispatch } from '../../actions/dish.action';
 import MealIcon from '../../components/SvgIcons/clock.icon';
 import CitySpecialIcon from '../../components/SvgIcons/citySpecial.icon';
 import DonutIcon from '../../components/SvgIcons/donut.icon';
 import TopTenIcon from '../../components/SvgIcons/topTen.icon';
 import LocationIcon from '../../components/SvgIcons/location.icon';
+
 class Home extends Component {
 
- 
-  
   constructor(props) {
      super(props);
      this.props.navigator.setOnNavigatorEvent(this.onNavigatorEvent);
+
+     this.state = {
+       latitude: null,
+       longitude: null,
+       error: null
+     }
   }
   
   onNavigatorEvent = event => {
@@ -38,25 +41,86 @@ class Home extends Component {
     }
   };  
 
-  state = {
+  componentDidMount() {
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        this.setState({
+          latitude: position.coords.latitude,
+          longitude: position.coords.longitude,
+          error: null,
+        });
+        this.getAddress();
+      },
+      (error) => this.setState({ error: error.message }),
+      { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 },
+    );
+  }
+  /* state = {
       dishes: dishes
+  } */
+
+  getAddress = () => {
+    let position = {
+      lat: this.state.latitude,
+      lng: this.state.longitude
+    }
+    Geocoder.geocodePosition(position)
+      .then(res => {
+        console.log("loction-------", res)
+      })
+      .catch(err => {
+        console.log("error----------", err)
+      })
+  }
+
+  topTenDishesHandler = () => {
+    this.props.fetchTopDishes();  //To fetch the top 10 dishes from API and navigate to next screen
+    this.props.navigator.push({
+      screen: "TopTenDishScreen"
+    })
+  }
+
+  searchBarPressHandler = () => {
+    //navigate to search suggestion screen
+    this.props.navigator.push({
+      screen: "SearchSuggestionScreen",
+    });
   }
 
   render() {
     return (
       <View style={[styles.mainContainer]}>
-        <View style={styles.donutView}> 
-          <DonutIcon />
-        </View>
-        <View style={styles.mainIconsView}>
-          <View >
-            <View style={styles.topTenIconView}>
-              <TopTenIcon />
-            </View>
-            <Text style={styles.topTenTextView}>
-              Top Ten
+        <View style={styles.donutTextView}>
+          <View style={styles.textView}>
+            <Text style={styles.textStyle}>
+              What.
+            </Text>
+            <Text style={styles.textStyle}>
+              Where.
+            </Text>
+            <Text style={styles.textStyle}>
+              Food.
             </Text>
           </View>
+          <View style={styles.donutView}>
+            <DonutIcon />
+          </View>
+        </View>
+        <View style={styles.searchBarView}>
+          <SearchBar 
+            onSearchBarPressed={this.searchBarPressHandler} />
+        </View>
+        <View style={styles.mainIconsView}>
+          <TouchableOpacity onPress={this.topTenDishesHandler}>
+            <View>
+              <View style={styles.topTenIconView}>
+                <TopTenIcon />
+              </View>
+              <Text style={styles.topTenTextView}>
+                Top Ten
+              </Text>
+            </View>
+          </TouchableOpacity>
           <View>
             <View style={styles.citySpecialView}>
               <CitySpecialIcon  />
@@ -93,14 +157,35 @@ const styles = StyleSheet.create({
     backgroundColor:'#fff'
   },
   donutView: {
-    marginLeft: 109
+    marginLeft: 105,
+    position: 'absolute'
+  },
+  textStyle:{
+    fontFamily: 'OpenSans-ExtraBold',
+    fontSize: 30,
+  },
+  textView: {
+    marginTop: 170,
+    marginLeft: 31,
+    flexDirection: 'column',
+  },
+  donutTextView: {
+    flexDirection: 'row',
+  },
+  searchBarView: {
+    borderBottomColor: '#BDBDBD',
+    borderColor: 'transparent',
+    borderWidth: 1,
+    marginTop: 55,
+    marginLeft: 35,
+    marginRight: 35,
   },
   mainIconsView: {
-    //backgroundColor: 'blue',
-    marginTop: 136.3,
+    marginTop: 25,
     flexDirection: 'row',
   },
   topTenIconView: {
+    elevation: 5,
     marginLeft: 60,
   },
   topTenTextView: {
@@ -141,22 +226,12 @@ const styles = StyleSheet.create({
     marginLeft: 92,
   }
 })
-  
-const mapStateToProps = state => {
-  return{
-    topDishes: state.dish.topDishes,
-    topDishesLoading: state.dish.topDishesLoading,
-    topDishesError: state.dish.topDishesError
-  };
-};
 
 const mapDispatchToProps = dispatch => {
   return {
     fetchTopDishes: () => dispatch(fetchTopDishes()),
-    recommendDishDispatch: (dish_id) => dispatch(recommendDishDispatch(dish_id)),
-    //reviewDishDispatch: (dish_id) => dispatch(reviewDishDispatch(dish_id)),
   };
 };
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(Home);
+export default connect(null, mapDispatchToProps)(Home);
