@@ -10,6 +10,8 @@ import RestaurantDetail from './app/screens/RestaurantDetail/RestaurantDetail.sc
 import ReviewDish from './app/screens/ReviewDish/ReviewDish.screen';
 import SearchResults from './app/screens/SearchResults/SearchResults.screen';
 import TopTenDish from './app/screens/TopTenDish/TopTenDish.screen';
+import CitySpecial from './app/screens/CitySpecial/CitySpecial.screen';
+import Meals from './app/screens/Meals/Meals';
 
 import { Provider } from 'react-redux';
 import store from './app/store/store';
@@ -32,6 +34,20 @@ Navigation.registerComponent(
 Navigation.registerComponent(
   "TopTenDishScreen", 
   () => TopTenDish, 
+  store, 
+  Provider
+);
+
+Navigation.registerComponent(
+  "CitySpecialScreen", 
+  () => CitySpecial, 
+  store, 
+  Provider
+);
+
+Navigation.registerComponent(
+  "MealsScreen", 
+  () => Meals, 
   store, 
   Provider
 );
@@ -88,7 +104,7 @@ Navigation.registerComponent(
 // Start App
 export default () => Navigation.startSingleScreenApp({
   screen: {
-    screen: "AuthScreen",
+    screen: "CitySpecialScreen",
     //title: "Login"
   }
 });

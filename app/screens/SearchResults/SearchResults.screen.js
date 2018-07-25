@@ -15,6 +15,8 @@ import {
 import { connect } from 'react-redux';
 import { fetchDishSearchResults } from '../../actions/dish.action';
 import DishSearchResultListItem from '../../components/DishSearchResultItem/DishSearchResultListItem';
+import ListCard from '../../components/ListCard/ListCard';
+
 class SearchResults extends Component {
 
   constructor(props){
@@ -28,8 +30,15 @@ class SearchResults extends Component {
   renderDish = (dish) => {
     console.log("in render", dish);
     return(
-      <DishSearchResultListItem 
-        dish = {dish.item}
+      <ListCard
+        type = "dish"
+        dish_name = {dish.item.dish_name}
+        dish_price = {dish.item.price}
+        restaurant_name = {dish.item.restaurant_name}
+        restaurant_location = {dish.item.restaurant_location}
+        dish_rating = {dish.item.average_rating}
+        restaurant_type = {dish.item.restaurant_type}
+        image = {dish.item.image} 
       />   
     );
   }
