@@ -124,10 +124,10 @@ class Home extends Component {
           <SearchBar 
             onSearchBarPressed={this.searchBarPressHandler} />
         </View>
-        <View style={styles.mainIconsView}>
+        <View elevation = {5} style={styles.mainIconsView}>
           <TouchableOpacity onPress={this.topTenDishesHandler}>
             <View>
-              <View style={styles.topTenIconView}>
+              <View elevation={5} style={styles.topTenIconView} >
                 <TopTenIcon />
               </View>
               <Text style={styles.topTenTextView}>
@@ -203,7 +203,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   topTenIconView: {
-    elevation: 5,
     marginLeft: 60,
   },
   topTenTextView: {
