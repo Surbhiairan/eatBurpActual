@@ -31,10 +31,21 @@ class RestaurantDetail extends Component {
   renderRestaurantMenuCategory = (item) => (
     <RestaurantMenu 
       title={item.item.category}
-      menu={item.item.dishes}>
-      <Text>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</Text>
+      menu={item.item.dishes}
+      onDishPressed={this.dishPressedHandler}  
+      >
+      
     </RestaurantMenu >
   )
+
+  dishPressedHandler = (item) => {
+    this.props.navigator.push({
+      screen: "DishDetailScreen",
+      passProps: {
+        selectedDish: item
+      }
+    })
+  }
 
   render() {
     console.log("props---------", this.props)
@@ -85,7 +96,6 @@ class RestaurantDetail extends Component {
             Average Cost for Two Rs 220
           </Text>
         </View>
-        
           <View elevation={5} style={styles.menuContainer}>
             {menuList}
           </View>

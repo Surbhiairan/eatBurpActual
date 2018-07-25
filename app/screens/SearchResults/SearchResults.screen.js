@@ -33,7 +33,7 @@ class SearchResults extends Component {
       <ListCard
         type = "dish"
         dish_name = {dish.item.dish_name}
-        dish_price = {dish.item.price}
+        price = {dish.item.price}
         restaurant_name = {dish.item.restaurant_name}
         restaurant_location = {dish.item.restaurant_location}
         dish_rating = {dish.item.average_rating}

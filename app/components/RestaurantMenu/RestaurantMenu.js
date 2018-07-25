@@ -49,6 +49,7 @@ _handlePressDishCategory = (menu) => {
     //console.log(category)
     return (
       <View>
+        <TouchableHighlight onPress={() => this.props.onDishPressed(category.item)}>
         <View style={{marginLeft: 6,marginTop: 4,}}>
           <Image 
             source={DEFAULT_IMAGE}
@@ -63,10 +64,12 @@ _handlePressDishCategory = (menu) => {
            Rs. {category.item.price}
           </Text>
         </View>
+        </TouchableHighlight>
       </View>
     )
 };
 
+  
 toggle() {
   let initialValue = this.state.expanded ? this.state.maxHeight + this.state.minHeight : this.state.minHeight,
     finalValue = this.state.expanded ? this.state.minHeight : this.state.maxHeight + this.state.minHeight;

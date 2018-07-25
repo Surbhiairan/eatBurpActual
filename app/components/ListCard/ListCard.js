@@ -17,11 +17,11 @@ const ListCard = (props) =>{
 
     if(props.type === 'restaurant') { 
     return(
-
+        <TouchableOpacity onPress = {props.onPress}>
         <View elevation={5} style= {style.container}>
             <View style={style.image}>
             <Image 
-              source={{uri: props.image}}
+              source={{uri: props.image[0]}}
               style={{width: 100, height: 100 , borderRadius: 7, paddingBottom:5, }}
             />
             </View>
@@ -39,19 +39,22 @@ const ListCard = (props) =>{
                 </TouchableOpacity>
             </View>
         </View>
+        </TouchableOpacity>
     )
   } else 
      return (
+        <TouchableOpacity onPress = {props.onPress}>
+        
         <View elevation={5} style= {style.container}>
         <View style={style.image}>
         <Image 
-          source={{uri: props.image}}
+          source={{uri: props.image[0]}}
           style={{width: 100, height: 100 , borderRadius: 7, paddingBottom:5, }}
         />
         </View>
         <View style = {style.info}>
             <Text style = {{fontFamily: 'OpenSans-Bold', color: '#474040', fontSize: 16}}>{props.dish_name}</Text>
-            <Text style = {{fontFamily: 'OpenSans-SemiBold', color: '#474040', fontSize: 13}}>Rs. {props.dish_price}</Text>
+            <Text style = {{fontFamily: 'OpenSans-SemiBold', color: '#474040', fontSize: 13}}>Rs. {props.price}</Text>
             <Text style = {{fontFamily: 'OpenSans-Regular', color: '#474040', fontSize: 13}}>{props.restaurant_name}</Text>
             <Text style = {{fontFamily: 'OpenSans-Regular', color: '#474040', fontSize: 13}}>{props.restaurant_location}</Text>
             <View style = {{marginTop:5, backgroundColor: '#ffa000', borderRadius: 6, width:30, justifyContent: 'center', alignItems: 'center'}}>
@@ -64,6 +67,7 @@ const ListCard = (props) =>{
             </TouchableOpacity>
         </View>
     </View>
+    </TouchableOpacity>
      )
 }
 
