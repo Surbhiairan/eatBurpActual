@@ -80,6 +80,20 @@ class Home extends Component {
     })
   }
 
+  citySpecialHandler = () => {
+    this.props.fetchTopDishes();  //To fetch the top 10 dishes from API and navigate to next screen
+    this.props.navigator.push({
+      screen: "CitySpecialScreen"
+    })
+  }
+
+  mealHandler = () => {
+    this.props.fetchTopDishes();  //To fetch the top 10 dishes from API and navigate to next screen
+    this.props.navigator.push({
+      screen: "MealsScreen"
+    })
+  }
+
   searchBarPressHandler = () => {
     //navigate to search suggestion screen
     this.props.navigator.push({
@@ -121,6 +135,7 @@ class Home extends Component {
               </Text>
             </View>
           </TouchableOpacity>
+          <TouchableOpacity onPress={this.citySpecialHandler}>
           <View>
             <View style={styles.citySpecialView}>
               <CitySpecialIcon  />
@@ -129,6 +144,8 @@ class Home extends Component {
               City Special
             </Text>
           </View>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={this.mealHandler}>
           <View>
             <View style={styles.mealView}>
               <MealIcon />
@@ -137,6 +154,7 @@ class Home extends Component {
               Meals
             </Text>
           </View>
+          </TouchableOpacity>
         </View>
         <View>
           <View style={styles.locationView}>

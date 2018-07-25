@@ -40,7 +40,7 @@ class CitySpecial extends Component {
                     restaurant_location: "Anand Bazaar, Palasia",
                     restaurant_rating: "4.5",
                     restaurant_type: "Cafe",
-                    image:"https://images.pexels.com/photos/245535/pexels-photo-245535.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"
+                    image:["https://images.pexels.com/photos/245535/pexels-photo-245535.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"]
                 },
                 {
                     _id:2,
@@ -48,7 +48,7 @@ class CitySpecial extends Component {
                     restaurant_location: "Anand Bazaar, Palasia",
                     restaurant_rating: "4.5",
                     restaurant_type: "Cafe",
-                    image:"https://images.pexels.com/photos/245535/pexels-photo-245535.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"
+                    image:["https://images.pexels.com/photos/245535/pexels-photo-245535.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"]
                 },
                 {
                     _id:3,
@@ -56,19 +56,19 @@ class CitySpecial extends Component {
                     restaurant_location: "Anand Bazaar, Palasia",
                     restaurant_rating: "4.5",
                     restaurant_type: "Cafe",
-                    image:"https://images.pexels.com/photos/245535/pexels-photo-245535.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"
+                    image:["https://images.pexels.com/photos/245535/pexels-photo-245535.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"]
                 }
             ],
             citySpecialDishes:[
                 {
                     _id: 1,
                     dish_name: "French Fries",
-                    dish_price: "145",
+                    price: "145",
                     restaurant_name: "Dhaba",
                     restaurant_location: "Anand Bazaar, Palasia",
                     dish_rating: "4.5",
                     restaurant_type: "Cafe",
-                    image:"https://images.pexels.com/photos/245535/pexels-photo-245535.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"
+                    image:["https://images.pexels.com/photos/245535/pexels-photo-245535.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"]
                 
                 }
             ]
@@ -85,6 +85,24 @@ class CitySpecial extends Component {
         }
     };
 
+    listCardPressedHandler = (item) => {
+        if(this.state.restaurant){
+            this.props.navigator.push({
+                screen: "RestaurantDetailScreen",
+                passProps: {
+                    selectedRestaurant: item.item
+                }
+            })
+        }else {
+            this.props.navigator.push({
+                screen: "DishDetailScreen",
+                passProps: {
+                    selectedDish: item.item
+                }
+            })
+        }
+    }
+
     renderListComponent = (item) => {
         if(this.state.restaurant === true)
         return(
@@ -95,6 +113,7 @@ class CitySpecial extends Component {
                 restaurant_rating = {item.item.restaurant_rating}
                 restaurant_type = {item.item.restaurant_type}
                 image = {item.item.image}
+                onPress = {() => this.listCardPressedHandler(item)}
             />
             )
         else
@@ -102,12 +121,13 @@ class CitySpecial extends Component {
             <ListCard 
                 type = "dish"
                 dish_name = {item.item.dish_name}
-                dish_price = {item.item.dish_price}
+                price = {item.item.price}
                 restaurant_name = {item.item.restaurant_name}
                 restaurant_location = {item.item.restaurant_location}
                 dish_rating = {item.item.dish_rating}
                 restaurant_type = {item.item.restaurant_type}
                 image = {item.item.image}
+                onPress = {() => this.listCardPressedHandler(item)}
             />
         )
     }
