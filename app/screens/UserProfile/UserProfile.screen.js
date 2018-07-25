@@ -15,6 +15,10 @@ import UserInfo from '../../components/UserInfo/UserInfo';
 import Reviews from '../../components/Reviews/Reviews';
 import Recommendations from '../../components/Recommendations/Recommendations';
 
+import LikeIcon from '../../components/SvgIcons/like.icon';
+import PenIcon from '../../components/SvgIcons/pen.icon';
+import StarIcon from '../../components/SvgIcons/star.icon';
+
 class UserProfile extends Component {
 
   constructor(props){
@@ -45,9 +49,9 @@ class UserProfile extends Component {
   render() {
     return (
       <View> 
-        <HeadingText> 
+        {/* <HeadingText> 
           {this.props.userDetails.first_name}
-        </HeadingText>
+        </HeadingText> */}
         {this.props.userLoading ?
         <Text>Loading</Text>:
         <View>
@@ -58,7 +62,20 @@ class UserProfile extends Component {
          no_of_reviews={this.props.userDetails.no_of_reviews}
          no_of_recommendations={this.props.userDetails.no_of_recommendations}
          foodie_level={this.props.userDetails.foodie_level}
-        /> 
+        />
+         
+        <View style={{flexDirection: 'row', marginLeft: 10}}>
+        <TouchableOpacity onPress={() => this.setState({buttonPressed:"recommendations"})} style={{padding:4}}>
+          <LikeIcon fill={'#ffa000'} height={26} width={26}/>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => this.setState({buttonPressed:"reviews"})} style={{padding:4}}>
+          <PenIcon fill={'#ffa000'} height={26} width={26}/>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => this.setState({buttonPressed:"ratings"})} style={{padding:4}}>
+          <StarIcon fill={'#ffa000'} height={27} width={26}/>
+        </TouchableOpacity>
+        </View>
+
         <View style={{ flexDirection: 'row' }}>
         <Button
          title="Reviews"
