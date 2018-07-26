@@ -26,27 +26,32 @@ const CustomImage = (props) => {
   }
   else 
     return (
-      <View>      
+      <View style={{backgroundColor: "#000"}}>      
         <UserProfileIcon height={60} width={60} fill={'#ffa000'}/>
       </View>
       )
 }
 
 const userInfo = (props) => (
-  <View elevation = {5} style = {{borderRadius :5, padding: 10, margin: 16, flexDirection: 'row'}}>
+  <View elevation = {5} style = {{borderRadius :5, padding: 10, margin: 10, flexDirection: 'row'}}>
   <View style ={{marginLeft: 5}}>
     <CustomImage 
       profile_image = {props.profile_image}/>
   </View>
-  <View style={{marginLeft:10}}>
+  <View style={{marginLeft:20}}>
    <View style={{flexDirection: 'row'}}>
-    <Text style={{fontFamily: 'OpenSans-Regular', fontSize: 20, color: '#212121'}}>{props.first_name}</Text>
-    <Text style={{fontFamily: 'OpenSans-Regular', fontSize: 20, color: '#212121'}}>{props.last_name}</Text>
+    <Text style={{fontFamily: 'OpenSans-SemiBold', fontSize: 20, color: '#212121', paddingRight: 5}}>{props.first_name}</Text>
+    <Text style={{fontFamily: 'OpenSans-SemiBold', fontSize: 20, color: '#212121'}}>{props.last_name}</Text>
    </View>
-    <Text style={{color: '#000'}}>Reviews {props.no_of_reviews}</Text>
-    <Text style={{color: '#000'}}>Recommendations {props.no_of_recommendations}</Text>
-    <Text style={{color: '#000'}}>Foodie Level {props.foodie_level}</Text>
+    <Text style={{fontFamily: 'OpenSans-Regular',color: '#212121',fontSize: 14,}}>Reviews {props.no_of_reviews}</Text>
+    <Text style={{fontFamily: 'OpenSans-Regular',color: '#212121',fontSize: 14,}}>Recommendations {props.no_of_recommendations}</Text>
+    <Text style={{fontFamily: 'OpenSans-Regular',color: '#212121',fontSize: 14,}}>Foodie Level {props.foodie_level}</Text>
     </View>
+  <View style={{marginLeft:40}}>
+    <TouchableOpacity>
+      <Text>Edit</Text>
+    </TouchableOpacity>
+  </View>
   </View>
 );
  

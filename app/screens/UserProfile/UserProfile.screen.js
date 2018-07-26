@@ -6,7 +6,8 @@ import {
     Button,
     StyleSheet,
     TouchableOpacity,
-    FlatList
+    FlatList,
+    ScrollView
 } from "react-native";
 import { connect } from "react-redux";
 import { fetchUser } from '../../actions/user.action';
@@ -29,7 +30,85 @@ class UserProfile extends Component {
           buttonPressed : "reviews",
           recommendations: true,
           reviews: false,
-          ratings: false
+          ratings: false,
+          userReviews:[
+            {
+              _id:1,
+              user:{
+                first_name: "Anjali",
+                last_name: "Prajapati"
+              },
+              dish_name: "Poha Jalebi",
+              restaurant_name: "Young Tarang",
+              restaurant_location: "56 Dukan, Palasia",
+              review: "jdhfjsd fdsklj jdfh jdflsda jdflfl jfsd jdfld jdlj. jkdhf jdhfl"
+            },
+            {
+              _id:1,
+              user:{
+                first_name: "Anjali",
+                last_name: "Prajapati"
+              },
+              dish_name: "Poha Jalebi",
+              restaurant_name: "Young Tarang",
+              restaurant_location: "56 Dukan, Palasia",
+              review: "jdhfjsd fdsklj jdfh jdflsda jdflfl jfsd jdfld jdlj. jkdhf jdhfl"
+            },
+            {
+              _id:2,
+              user:{
+                first_name: "Anjali",
+                last_name: "Prajapati"
+              },
+              dish_name: "Poha Jalebi",
+              restaurant_name: "Young Tarang",
+              restaurant_location: "56 Dukan, Palasia",
+              review: "jdhfjsd fdsklj jdfh jdflsda jdflfl jfsd jdfld jdlj. jkdhf jdhfl"
+            },
+            {
+              _id:3,
+              user:{
+                first_name: "Anjali",
+                last_name: "Prajapati"
+              },
+              dish_name: "Poha Jalebi",
+              restaurant_name: "Young Tarang",
+              restaurant_location: "56 Dukan, Palasia",
+              review: "jdhfjsd fdsklj jdfh jdflsda jdflfl jfsd jdfld jdlj. jkdhf jdhfl"
+            }
+          ],
+          userRecommendations:[
+            {
+              _id: 1,
+              dish_name: "Jalebi",
+              restaurant_name: "Mathurawala",
+
+            },
+            {
+              _id: 2,
+              dish_name: "Jalebi",
+              restaurant_name: "Mathurawala",
+              
+            },
+            {
+              _id: 3,
+              dish_name: "Jalebi",
+              restaurant_name: "Mathurawala",
+              
+            },
+            {
+              _id: 4,
+              dish_name: "Jalebi",
+              restaurant_name: "Mathurawala",
+              
+            },
+            {
+              _id: 5,
+              dish_name: "Jalebi",
+              restaurant_name: "Mathurawala",
+              
+            }
+          ]
       }
   }
   componentDidMount(){
@@ -37,7 +116,7 @@ class UserProfile extends Component {
   } 
 
   renderRating = (rating) => {
-    
+
   }
 
   renderReview = (review) => {
@@ -51,19 +130,30 @@ class UserProfile extends Component {
     return(
     <Recommendations
       recommendation = {recommendation.item}
+      //onDishPressed={this.dishPressedHandler(recommendation.item)}  
     />
     )
   }
 
+  dishPressedHandler = (item) => {
+    this.props.navigator.push({
+      screen: "DishDetailScreen",
+      passProps: {
+        selectedDish: item
+      }
+    })
+  }
+
   render() {
     return (
-      <View> 
+      <View style = {{flex:1, backgroundColor: "#efefef"}}> 
+      <ScrollView>
         {/* <HeadingText> 
           {this.props.userDetails.first_name}
         </HeadingText> */}
         {this.props.userLoading ?
         <Text>Loading</Text>:
-        <View>
+        <View style = {{backgroundColor: "#ffa000"}}>
         <UserInfo
          first_name={this.props.userDetails.first_name}
          last_name={this.props.userDetails.last_name}
@@ -72,14 +162,14 @@ class UserProfile extends Component {
          no_of_recommendations={this.props.userDetails.no_of_recommendations}
          foodie_level={this.props.userDetails.foodie_level}
         />
-
-        <View style={{flexDirection: 'row', margin: 10}}>
+        <View elevation={5} style={{borderRadius: 5, backgroundColor: '#000' }}>
+        <View style={{flexDirection: 'row',backgroundColor: 'red', alignContent:'stretch'}}>
         <TouchableOpacity 
           onPress={() => this.setState({buttonPressed:"recommendations",
           recommendations: true,
           reviews: false,
-          ratings: false })} 
-          style={{margin: 10}}>
+          ratings: false })} >
+          {/* style={{marginLeft: 20, marginRight: 20, backgroundColor: 'blue'}}> */}
           <View elevation = {5} style={style.selectedTab}>
             {this.state.recommendations ? <LikeFilledIcon fill={'#ffa000'} height={26} width={26}/>
             : <LikeIcon fill={'#ffa000'} height={26} width={26}/>}
@@ -90,8 +180,8 @@ class UserProfile extends Component {
           onPress={() => this.setState({buttonPressed:"reviews",
           recommendations: false,
           reviews: true,
-          ratings: false })} 
-          style={{margin: 10}}>
+          ratings: false })} >
+          {/* style={{marginLeft: 20, marginRight: 20}}> */}
           <View elevation = {5} style={style.selectedTab}>
            {this.state.reviews ? <PenIcon fill={'#ffa000'} height={26} width={26}/>
             : <PenIcon fill={'#ffa000'} height={26} width={26}/>}
@@ -102,8 +192,8 @@ class UserProfile extends Component {
           onPress={() => this.setState({buttonPressed:"ratings",
           recommendations: false,
           reviews: false,
-          ratings: true })} 
-          style={{margin: 10}}>
+          ratings: true })} >
+          {/* style={{marginLeft: 20, marginRight: 20}}> */}
           <View elevation = {5} style={style.selectedTab}>
           {this.state.ratings ? <StarFilledIcon fill={'#ffa000'} height={26} width={26}/>
           : <StarIcon fill={'#ffa000'} height={26} width={26}/>}
@@ -125,19 +215,28 @@ class UserProfile extends Component {
         <View>
         {(this.state.reviews) && 
           <FlatList 
-          data = {this.props.userDetails.reviews}
+          data = {this.state.userReviews}
+          //data = {this.props.userDetails.reviews}
           renderItem = {this.renderReview}/>}
         {(this.state.ratings) && 
           <FlatList 
-          data = {this.props.userDetails.ratings}
+          data = {this.state.userRatings}
+          //data = {this.props.userDetails.ratings}
           renderItem = {this.renderRating}/>}
         {(this.state.recommendations) && 
+        <View elevation={5} style={{borderRadius: 10, padding: 10, margin: 10, alignItems: 'center'}}>
           <FlatList 
-          data = {this.props.userDetails.recommendations}
-          renderItem = {this.renderRecommendation}/>}
+          numColumns = {3}
+          style= {style.recommendationList}
+          keyExtractor={(item, index) => index}
+          //data = {this.props.userDetails.recommendations}
+          data = {this.state.userRecommendations}
+          renderItem = {this.renderRecommendation}/></View>}
 
         </View>
+        </View>
         </View>}
+        </ScrollView>
       </View>
     )
   }  
@@ -148,8 +247,8 @@ const style = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     padding:5,
-    backgroundColor: '#fff', 
-    borderRadius: 7,
+    backgroundColor: '#808000', 
+    borderRadius: 10,
     height: 40,
     width: 60
   },
@@ -160,6 +259,10 @@ const style = StyleSheet.create({
     width: 60,
     height: 40   
   },
+  recommendationList:{
+    // flexDirection: 'column',
+    // flexWrap: 'wrap'
+  }
 })
 
 const mapStateToProps = state => {
