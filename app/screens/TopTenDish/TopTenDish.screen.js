@@ -64,7 +64,7 @@ class TopTenDish extends Component {
             screen: "ReviewDishScreen",
             // title: dish.item.dish_name,
             passProps: {
-                selectedDish: dish.item
+                selectedDish: dish
             }
         });
         //this.props.reviewDishDispatch(dish.item._id);        

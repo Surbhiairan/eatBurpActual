@@ -77,6 +77,7 @@ export default class DishList extends Component {
 
     _onPressItem = (dish) => {
         this.setState({selected: dish});
+        this.setState({selectedDish:dish})
       // updater functions are preferred for transactional updates
     //   this.setState((state) => {
     //     // copy the map rather than modifying state.
@@ -89,6 +90,19 @@ export default class DishList extends Component {
     //   this.setState({selectedDish: dish.item});
     // }
 
+    // reviewButtonPressHandler = dish => {
+    //     console.log("in review",dish);
+    //     alert("review pressed")
+    //     this.props.navigator.push({
+    //         screen: "ReviewDishScreen",
+    //         // title: dish.item.dish_name,
+    //         passProps: {
+    //             selectedDish: dish.item
+    //         }
+    //     });
+    //     //this.props.reviewDishDispatch(dish.item._id);        
+    // }
+    
 render(){
 
     console.log(this.props.dishes[0],"props in render");
@@ -118,7 +132,7 @@ render(){
             average_rating = {this.state.selectedDish.average_rating}               
             onDishCardPressed={() => props.onDishCardPressed(this.state.selectedDish)}
             onRecommendButtonPressed={() => props.onRecommendButtonPressed(this.state.selectedDish)}
-            onReviewButtonPressed={() => props.onReviewButtonPressed(this.state.selectedDish)}
+            onReviewButtonPressed={() => this.props.onReviewButtonPressed(this.state.selectedDish)}
           />
         }
       </View>
