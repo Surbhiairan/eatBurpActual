@@ -9,8 +9,27 @@ import {
     Image,
     TouchableOpacity
 } from 'react-native';
-
 import Icon from 'react-native-vector-icons/Ionicons';
+//import Menu, { MenuDivider } from 'react-native-material-menu';
+
+import LikeIcon from '../SvgIcons/like.icon';
+import MenuItem from '../MoreMenu/MoreMenuItem';
+import Menu from '../MoreMenu/MoreMenu';
+
+_menu = null;
+
+setMenuRef = ref => {
+    this._menu = ref;
+};
+
+hideMenu = () => {
+    this._menu.hide();
+};
+
+showMenu = (event) => {
+    console.log("event----------", event.nativeEvent)
+    this._menu.show((event.nativeEvent.pageX - event.nativeEvent.locationX), (event.nativeEvent.pageY - event.nativeEvent.locationY));
+};
 
 const ListCard = (props) =>{
     console.log("prop", props);
@@ -18,26 +37,33 @@ const ListCard = (props) =>{
     if(props.type === 'restaurant') { 
     return(
         <TouchableOpacity onPress = {props.onPress}>
-        <View elevation={5} style= {style.container}>
-            <View style={style.image}>
-            <Image 
-              source={{uri: props.image[0]}}
-              style={{width: 100, height: 100 , borderRadius: 7, paddingBottom:5, }}
-            />
-            </View>
-            <View style = {style.info}>
-                <Text style = {{fontFamily: 'OpenSans-Bold', color: '#474040', fontSize: 16}}>{props.restaurant_name}</Text>
-                <Text style = {{fontFamily: 'OpenSans-Regular', color: '#474040', fontSize: 13}}>{props.restaurant_location}</Text>
-                <Text style = {{fontFamily: 'OpenSans-Regular', color: '#474040', fontSize: 13}}>{props.restaurant_type}</Text>
-                <View style = {{marginTop:5, backgroundColor: '#ffa000', borderRadius: 6, width:30, justifyContent: 'center', alignItems: 'center'}}>
-                    <Text style = {{fontFamily: 'OpenSans-Bold', color: '#fff', fontSize: 14, padding: 2}}>{props.restaurant_rating}</Text>
+            <View elevation={5} style={style.container}>
+                <View style={style.image}>
+                <Image 
+                source={{uri: props.image[0]}}
+                style={{width: 100, height: 100 , borderRadius: 7, paddingBottom:5, }}
+                />
                 </View>
-            </View>
-            <View style={style.moreMenu}>
-                <TouchableOpacity onPress={props.onMoreMenuPressed} style={{padding:4}}>      
-                    <Icon style = {style.searchIcon} name="md-more" size={25} color="#757575" />
-                </TouchableOpacity>
-            </View>
+                <View style = {style.info}>
+                    <Text style = {{fontFamily: 'OpenSans-Bold', color: '#474040', fontSize: 16}}>{props.restaurant_name}</Text>
+                    <Text style = {{fontFamily: 'OpenSans-Regular', color: '#474040', fontSize: 13}}>{props.restaurant_location}</Text>
+                    <Text style = {{fontFamily: 'OpenSans-Regular', color: '#474040', fontSize: 13}}>{props.restaurant_type}</Text>
+                    <View style = {{marginTop:5, backgroundColor: '#ffa000', borderRadius: 6, width:30, justifyContent: 'center', alignItems: 'center'}}>
+                        <Text style = {{fontFamily: 'OpenSans-Bold', color: '#fff', fontSize: 14, padding: 2}}>{props.restaurant_rating}</Text>
+                    </View>
+                </View>
+                <View style={style.moreMenu}>
+                    <Menu
+                        ref={this.setMenuRef}
+                        button={<TouchableOpacity onPress={(evt) => this.showMenu(evt)} style={{ padding: 4 }}>
+                            <Icon style={style.searchIcon} name="md-more" size={25} color="#757575" />
+                        </TouchableOpacity>}
+                        style={style.popUpStyle}
+                    >
+                    <MenuItem />
+                        
+                    </Menu>
+                </View>
         </View>
         </TouchableOpacity>
     )
@@ -62,13 +88,48 @@ const ListCard = (props) =>{
             </View>
         </View>
         <View style={style.moreMenu}>
-            <TouchableOpacity onPress={props.onMoreMenuPressed} style={{padding:4}}>      
-                <Icon style = {style.searchIcon} name="md-more" size={25} color="#757575" />
-            </TouchableOpacity>
+            <Menu
+                ref={this.setMenuRef}
+                button={<TouchableOpacity onPress={(evt) => this.showMenu(evt)} style={{ padding: 4 }}>
+                             <Icon style={style.searchIcon} name="md-more" size={25} color="#757575" />
+                         </TouchableOpacity>}
+                style={style.popUpStyle}
+            >
+                <MenuItem 
+                    onPressLike={this.onPressLike}
+                    onPressRating={() => this.onPressRating(props)}
+                    onPressReview={props.onPressReview} />
+            </Menu>
         </View>
     </View>
     </TouchableOpacity>
      )
+}
+find_dimesions = (layout) =>{
+    const { x, y, width, height } = layout;
+    console.log('x',x);
+    console.log('y',y);
+    console.log('width', width);
+    console.log('height', height);
+}
+
+onPressLike = () => {
+    alert("you have recommended this dish");
+    this._menu.hide();
+}
+
+onPressRating = (props) => {
+    console.log("rating opened-------", props);
+    return(
+        <Menu
+            ref={this.setMenuRef}
+            button={<Text> Rate it </Text>} 
+        >
+            <MenuItem 
+                />
+        </Menu>
+    )
+    
 }
 
 const style = StyleSheet.create({
@@ -91,6 +152,9 @@ const style = StyleSheet.create({
     moreMenu:{
         alignItems: 'flex-end'
     },
+    popUpStyle: {
+        backgroundColor: '#FFA000'
+    }
     
 })
 

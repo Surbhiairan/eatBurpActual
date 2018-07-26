@@ -9,15 +9,12 @@ import {
     Image,
     TouchableOpacity
 } from 'react-native';
-
 import Icon from 'react-native-vector-icons/Ionicons';
-
 import { connect } from 'react-redux';
+import Menu, { MenuItem, MenuDivider } from 'react-native-material-menu';
 
 import SearchBar from '../../components/SearchBar/SearchBar';
-
 import { fetchTopDishes } from '../../actions/dish.action';
-
 import ListCard from '../../components/ListCard/ListCard';
 
 class CitySpecial extends Component {
@@ -57,6 +54,22 @@ class CitySpecial extends Component {
                     restaurant_rating: "4.5",
                     restaurant_type: "Cafe",
                     image:["https://images.pexels.com/photos/245535/pexels-photo-245535.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"]
+                },
+                {
+                    _id: 4,
+                    restaurant_name: "Bakewell",
+                    restaurant_location: "Anand Bazaar, Palasia",
+                    restaurant_rating: "4.5",
+                    restaurant_type: "Cafe",
+                    image: ["https://images.pexels.com/photos/245535/pexels-photo-245535.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"]
+                },
+                {
+                    _id: 4,
+                    restaurant_name: "Bakewell",
+                    restaurant_location: "Anand Bazaar, Palasia",
+                    restaurant_rating: "4.5",
+                    restaurant_type: "Cafe",
+                    image: ["https://images.pexels.com/photos/245535/pexels-photo-245535.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"]
                 }
             ],
             citySpecialDishes:[
@@ -70,6 +83,50 @@ class CitySpecial extends Component {
                     restaurant_type: "Cafe",
                     image:["https://images.pexels.com/photos/245535/pexels-photo-245535.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"]
                 
+                },
+                {
+                    _id: 2,
+                    dish_name: "Cold coffee",
+                    price: "145",
+                    restaurant_name: "Dhaba",
+                    restaurant_location: "Anand Bazaar, Palasia",
+                    dish_rating: "4.5",
+                    restaurant_type: "Cafe",
+                    image: ["https://images.pexels.com/photos/245535/pexels-photo-245535.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"]
+
+                },
+                {
+                    _id: 3,
+                    dish_name: "Pasta",
+                    price: "145",
+                    restaurant_name: "Dhaba",
+                    restaurant_location: "Anand Bazaar, Palasia",
+                    dish_rating: "4.5",
+                    restaurant_type: "Cafe",
+                    image: ["https://images.pexels.com/photos/245535/pexels-photo-245535.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"]
+
+                },
+                {
+                    _id: 4,
+                    dish_name: "Pizza",
+                    price: "145",
+                    restaurant_name: "Dhaba",
+                    restaurant_location: "Anand Bazaar, Palasia",
+                    dish_rating: "4.5",
+                    restaurant_type: "Cafe",
+                    image: ["https://images.pexels.com/photos/245535/pexels-photo-245535.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"]
+
+                },
+                {
+                    _id: 5,
+                    dish_name: "Sandwiches",
+                    price: "145",
+                    restaurant_name: "Dhaba",
+                    restaurant_location: "Anand Bazaar, Palasia",
+                    dish_rating: "4.5",
+                    restaurant_type: "Cafe",
+                    image: ["https://images.pexels.com/photos/245535/pexels-photo-245535.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"]
+
                 }
             ]
         }
@@ -128,8 +185,23 @@ class CitySpecial extends Component {
                 restaurant_type = {item.item.restaurant_type}
                 image = {item.item.image}
                 onPress = {() => this.listCardPressedHandler(item)}
+                onPressLike = {this.recommendDishHandler}
+                onPressRating = {this.ratingDishHandler}
+                onPressReview = {this.reviewDishHandler}
             />
         )
+    }
+
+    recommendDishHandler = () => {
+        alert("recommended");
+    }
+
+    ratingDishHandler = () => {
+        alert("rated");
+    }
+
+    reviewDishHandler = () => {
+        alert("reviewed")
     }
 
     onButtonPress = (type) => {
@@ -162,15 +234,20 @@ class CitySpecial extends Component {
                 </View>
             </TouchableOpacity>
             </View>
-            <View>
-                {(this.state.restaurant) && 
-                <FlatList 
-                data = {this.state.citySpecialRestaurants}
-                renderItem = {this.renderListComponent}/>}
-                {(this.state.dishes) && 
-                <FlatList 
-                data = {this.state.citySpecialDishes}
-                renderItem = {this.renderListComponent}/>
+            <View style={{flex: 1}}>
+                {
+                    (this.state.restaurant) && 
+                    <FlatList 
+                        data = {this.state.citySpecialRestaurants}
+                        renderItem = {this.renderListComponent}
+                    />
+                }
+                {
+                    (this.state.dishes) && 
+                    <FlatList 
+                        data = {this.state.citySpecialDishes}
+                        renderItem = {this.renderListComponent}
+                    />
                 }
             </View>
                 
