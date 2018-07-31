@@ -17,6 +17,57 @@ export const FETCH_DISH_SEARCH_RESULTS = 'FETCH_DISH_SEARCH_RESULTS';
 export const FETCH_DISH_SEARCH_RESULTS_SUCCESS = 'FETCH_DISH_SEARCH_RESULTS_SUCCESS';
 export const FETCH_DISH_SEARCH_RESULTS_FAILURE = 'FETCH_DISH_SEARCH_RESULTS_FAILURE';
 
+export const FETCH_CITY_SPECIAL = 'FETCH_CITY_SPECIAL';
+export const FETCH_CITY_SPECIAL_SUCCESS = 'FETCH_CITY_SPECIAL_SUCCESS';
+export const FETCH_CITY_SPECIAL_FAILURE = 'FETCH_CITY_SPECIAL_FAILURE';
+
+export function fetchCitySpecial() {
+    return (dispatch) => {
+        dispatch(getCitySpecial());
+        dispatch(authGetToken())
+            .then(token => {
+                return (
+                    fetch(`${API_ROOT}/getCitySpecial?c_name=Indore`, {
+                        method: 'GET',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'x-access-token': token
+                        }
+                    })
+                )
+            })
+            .catch(() => {
+                alert("No token found");
+            })
+            .then(res => res.json())
+            .then(json => {
+                console.log(json, "jsonnnn");
+                dispatch(fetchCitySpecialSuccess(json));
+                return json;
+            })
+            .catch(err => dispatch(fetchCitySpecialFailure(err)))
+    }
+}
+
+export function getCitySpecial() {
+    return{
+        type: FETCH_CITY_SPECIAL
+    }
+}
+
+export function fetchCitySpecialSuccess(citySpecial) {
+    return {
+        type: FETCH_CITY_SPECIAL_SUCCESS,
+        payload: {citySpecial}
+    }
+}
+
+export function fetchCitySpecialFailure(error) {
+    return {
+        type: FETCH_CITY_SPECIAL_FAILURE,
+        payload: {error}
+    }
+}
 
 export function fetchDishSearchResults(searchTag) {
     console.log("inside fetchDishSearchResults")
