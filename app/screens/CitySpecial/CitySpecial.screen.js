@@ -260,48 +260,69 @@ class CitySpecial extends Component {
                 
                 },
                 {
-                    _id: 2,
-                    dish_name: "Cold coffee",
+                    _id: 1,
+                    dish_name: "French Fries",
                     price: "145",
                     restaurant_name: "Dhaba",
                     restaurant_location: "Anand Bazaar, Palasia",
                     dish_rating: "4.5",
                     restaurant_type: "Cafe",
-                    image: ["https://images.pexels.com/photos/245535/pexels-photo-245535.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"]
-
+                    image:["https://images.pexels.com/photos/245535/pexels-photo-245535.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"]
+                
                 },
                 {
-                    _id: 3,
-                    dish_name: "Pasta",
+                    _id: 1,
+                    dish_name: "French Fries",
                     price: "145",
                     restaurant_name: "Dhaba",
                     restaurant_location: "Anand Bazaar, Palasia",
                     dish_rating: "4.5",
                     restaurant_type: "Cafe",
-                    image: ["https://images.pexels.com/photos/245535/pexels-photo-245535.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"]
-
+                    image:["https://images.pexels.com/photos/245535/pexels-photo-245535.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"]
+                
                 },
                 {
-                    _id: 4,
-                    dish_name: "Pizza",
+                    _id: 1,
+                    dish_name: "French Fries",
                     price: "145",
                     restaurant_name: "Dhaba",
                     restaurant_location: "Anand Bazaar, Palasia",
                     dish_rating: "4.5",
                     restaurant_type: "Cafe",
-                    image: ["https://images.pexels.com/photos/245535/pexels-photo-245535.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"]
-
+                    image:["https://images.pexels.com/photos/245535/pexels-photo-245535.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"]
+                
                 },
                 {
-                    _id: 5,
-                    dish_name: "Sandwiches",
+                    _id: 1,
+                    dish_name: "French Fries",
                     price: "145",
                     restaurant_name: "Dhaba",
                     restaurant_location: "Anand Bazaar, Palasia",
                     dish_rating: "4.5",
                     restaurant_type: "Cafe",
-                    image: ["https://images.pexels.com/photos/245535/pexels-photo-245535.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"]
-
+                    image:["https://images.pexels.com/photos/245535/pexels-photo-245535.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"]
+                
+                },
+                {
+                    _id: 1,
+                    dish_name: "French Fries",
+                    price: "145",
+                    restaurant_name: "Dhaba",
+                    restaurant_location: "Anand Bazaar, Palasia",
+                    dish_rating: "4.5",
+                    restaurant_type: "Cafe",
+                    image:["https://images.pexels.com/photos/245535/pexels-photo-245535.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"]
+                
+                },{
+                    _id: 1,
+                    dish_name: "French Fries",
+                    price: "145",
+                    restaurant_name: "Dhaba",
+                    restaurant_location: "Anand Bazaar, Palasia",
+                    dish_rating: "4.5",
+                    restaurant_type: "Cafe",
+                    image:["https://images.pexels.com/photos/245535/pexels-photo-245535.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"]
+                
                 }
             ]
         }
@@ -423,6 +444,7 @@ class CitySpecial extends Component {
                         data = {this.state.citySpecialDishes}
                         renderItem = {this.renderListComponent}
                     />
+
                 }
             </View>
                 

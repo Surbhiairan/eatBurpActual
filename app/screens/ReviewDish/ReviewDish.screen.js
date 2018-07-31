@@ -104,6 +104,10 @@ class ReviewDish extends Component {
   render(){      
     return(
     <View>
+      <Image 
+       source ={{uri: this.props.selectedDish.images[0]}}
+       style = {{width: 200, height: 200}}
+      />
       <Text>{this.props.selectedDish.dish_name}</Text>
       <TextInput
         underlineColorAndroid = "transparent"
