@@ -14,25 +14,10 @@ import {
 
 import { connect } from 'react-redux';
 import { addReview } from '../../actions/reviews.action';
+import { fetchRestaurants, fetchRestaurantsSuccess, fetchRestaurantsFailure} from '../../actions/restaurant.action';
+import { fetchMenu } from '../../actions/menu.action';
 
 var ImagePicker = NativeModules.ImageCropPicker;
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
-  button: {
-    backgroundColor: 'blue',
-    marginBottom: 10
-  },
-  text: {
-    color: 'white',
-    fontSize: 20,
-    textAlign: 'center'
-  }
-});
 
 class ReviewDish extends Component {
 
@@ -41,8 +26,18 @@ class ReviewDish extends Component {
       this.state = {
         image: null,
         images: null,
-        review: '',        
+        review: '',   
+        searchedRestaurants: [],
+        searchedDishes: [],     
+        selectedRestaurantName: '',
+        selectedRestaurantId: '',
+        selectedDishName: '',
+        selectedDishId: ''
       };
+  }
+
+  componentDidMount() {
+    this.props.fetchRestaurants();
   }
 
   renderImage(image) {
@@ -101,28 +96,120 @@ class ReviewDish extends Component {
     this.setState({ review: text })
   }
 
+  handleRestaurant = (text) => {
+    console.log("this.props.restaurants=============",this.props.restaurants);
+    var searchedRestaurants = this.props.restaurants.filter(function(restaurant) {
+        return restaurant.restaurant_name.toLowerCase().indexOf(text.toLowerCase()) > -1;
+      });
+    this.setState({searchedRestaurants: searchedRestaurants});
+    this.setState({ restoName: text })
+  }
+
+  handleDish = (text) => {
+    if(this.props.menu){
+    var searchedDishes = this.props.menu.filter(function(dish) {
+        //console.log('foooooooo************************dddddddddddd',food);
+        if(dish.dish_name)
+        return dish.dish_name.toLowerCase().indexOf(text.toLowerCase()) > -1;
+      });
+    this.setState({ searchedDishes: searchedDishes});
+    this.setState({ selectedDishName: text })
+    }
+  }
+
+  _handlePressRestaurant = (restaurant) => {
+    this.setState ( { selectedRestaurantName: restaurant.restaurant_name});
+    this.setState ( { selectedRestaurantId: restaurant._id});      
+    this.setState ( { searchedRestaurants: []});
+    this.props.fetchMenu(restaurant._id);     
+    
+    //console.log("in handle press restaurant", this.state.restoName);
+  }
+
+  _handlePressFood = (dish) => {
+    this.setState ( { selectedDishName: dish.dish_name});
+    this.setState ( { selectedDishId: dish._id })        
+    this.setState ( { searchedDishes: []});
+    //console.log("in handle press food item", this.state.itemName);       
+  }
+
+  renderRestaurant = (restaurant) => {
+    return (
+      <View           
+      style= {styles.listItem}>
+        <Text 
+          style={styles.listItemText}
+          onPress={() => this._handlePressRestaurant(restaurant.item)}
+        >
+        {restaurant.item.restaurant_name}</Text>
+      </View>
+    );
+  };
+
+  renderDish = (dish) => {
+      return (
+        <View           
+        style= {styles.listItem}>
+          <Text 
+            style={styles.listItemText}
+            onPress={() => this._handlePressFood(dish.item)}
+          >
+          {dish.item.dish_name}</Text>
+        </View>
+      );
+  };
+
   render(){      
     return(
     <View>
-      <Image 
-       source ={{uri: this.props.selectedDish.images[0]}}
-       style = {{width: 200, height: 200}}
-      />
-      <Text>{this.props.selectedDish.dish_name}</Text>
+
       <TextInput
         underlineColorAndroid = "transparent"
+        placeholder = "Restaurant"
+        onChangeText = {this.handleRestaurant}/>
+        {this.props.restaurantsLoading ? <Text>Loading...</Text>
+          :
+        <FlatList
+        data = {this.state.searchedRestaurants}
+        renderItem = {this.renderRestaurant}
+        />
+        // <ListView
+        // dataSource={ds.cloneWithRows(this.state.searchedRestaurants)}
+        // renderRow={this.renderRestaurant} 
+        // enableEmptySections = {true}/>
+        }
+
+        <TextInput
+        underlineColorAndroid = "transparent"
+        placeholder = "Dish"
+        onChangeText = {this.handleDish}/>
+        {this.props.menuLoading ? <Text>Loading...</Text>
+             :
+        <FlatList
+        data={this.state.searchedDishes}
+        renderItem={this.renderDish}
+        />
+        }
+
+        <TextInput style = {styles.input}
+        underlineColorAndroid = "transparent"
         placeholder = "Review"
+        value = { this.state.review}
+        placeholderTextColor = "#9a73ef"
+        autoCapitalize = "none"
         onChangeText = {this.handleReview}/>
 
       <TouchableOpacity onPress={this.pickMultiple.bind(this)} style={styles.button}>
-        <Text style={styles.text}>Select Multiple</Text>
+        <Text style={styles.text}>Add Images</Text>
       </TouchableOpacity>
-      <TouchableOpacity
+      
+      <TouchableOpacity style={styles.submitButton}
         onPress = {
            () => this.addReview()
         }>
-        <Text style = {styles.submitButtonText}> Submit </Text>
+        <Text style = {styles.submitButtonText}>Submit</Text>
       </TouchableOpacity>
+      
       <ScrollView>
         {this.state.image ? this.renderAsset(this.state.image) : null}
         {this.state.images ? this.state.images.map(i => <View key={i.uri}>{this.renderAsset(i)}</View>) : null}
@@ -135,7 +222,56 @@ class ReviewDish extends Component {
 const mapDispatchToProps = dispatch => {
   return {
     addReview: (formData) => dispatch(addReview(formData)),
+    fetchMenu: (restaurant_id) => dispatch(fetchMenu(restaurant_id)),
+    fetchRestaurants: () => dispatch(fetchRestaurants()),
   };
 };
 
-export default connect(null, mapDispatchToProps)(ReviewDish);
+const mapStateToProps = (state) => ({
+  menu: state.menu.menu,
+  menuLoading: state.menu.menuLoading,
+  menuError: state.menu.menuError,
+  isLoading: state.ui.isLoading,
+  restaurants: state.restaurant.restaurants,
+  restaurantsLoading: state.restaurant.restaurantsLoading,
+  restaurantsError: state.restaurant.restaurantsError,
+});
+
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  button: {
+    backgroundColor: '#ffa000',
+    borderRadius: 12,
+    margin: 18,
+    height: 35,
+    alignItems: 'center',
+    justifyContent : 'center'
+  },
+  text: {
+    color: '#fff',
+    fontSize: 15,
+    fontFamily:'OpenSans-Regular',
+    textAlign: 'center'
+  },
+  submitButton: {
+    backgroundColor: '#ffa000',
+    borderRadius: 12,
+    margin: 18,
+    height: 50,
+    alignItems: 'center',
+    justifyContent : 'center'
+  },
+  submitButtonText: {
+    color: '#fff',
+    fontSize: 19,
+    fontFamily:'OpenSans-Regular',
+    textAlign: 'center'
+  }
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(ReviewDish);
