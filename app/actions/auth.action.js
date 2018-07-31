@@ -81,8 +81,8 @@ export const authGetToken = () => {
                         reject();
                         return;
                     }
-                    dispatch(authSetToken(tokenFromStorage));
-                    resolve(tokenFromStorage);
+                dispatch(authSetToken(tokenFromStorage));
+                resolve(tokenFromStorage);
                 });
             } else {
                 resolve(token);

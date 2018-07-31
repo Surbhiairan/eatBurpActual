@@ -10,7 +10,10 @@ import {
     RECOMMEND_DISH_FAILURE,
     FETCH_DISH_SEARCH_RESULTS,
     FETCH_DISH_SEARCH_RESULTS_FAILURE,
-    FETCH_DISH_SEARCH_RESULTS_SUCCESS
+    FETCH_DISH_SEARCH_RESULTS_SUCCESS,
+    FETCH_CITY_SPECIAL,
+    FETCH_CITY_SPECIAL_FAILURE,
+    FETCH_CITY_SPECIAL_SUCCESS
 } from '../actions/dish.action';
 
 const initialState = {
@@ -50,6 +53,12 @@ const reducer = (state = initialState, action) => {
       })};
     case RECOMMEND_DISH_FAILURE:
       return { ...state, topDishes: [], recommendError: action.payload.error, recommendLoading: false};      
+    case FETCH_CITY_SPECIAL: 
+      return { ...state, citySpecial: null, citySpecialLoading: true};
+    case FETCH_CITY_SPECIAL_SUCCESS:
+      return { ...state, citySpecial: action.payload.citySpecial, citySpecialLoading: false};
+    case FETCH_CITY_SPECIAL_FAILURE: 
+      return { ...state, citySpecial: action.payload.error, citySpecialLoading: false};
     case FETCH_DISH_SEARCH_RESULTS:
       return { ...state,  dishSearchResults: null, dishSearchResultsLoading: true }; 
     case FETCH_DISH_SEARCH_RESULTS_SUCCESS:

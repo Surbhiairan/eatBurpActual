@@ -12,7 +12,6 @@ import {
 import Icon from 'react-native-vector-icons/Ionicons';
 //import Menu, { MenuDivider } from 'react-native-material-menu';
 
-import LikeIcon from '../SvgIcons/like.icon';
 import MenuItem from '../MoreMenu/MoreMenuItem';
 import Menu from '../MoreMenu/MoreMenu';
 
@@ -60,8 +59,10 @@ const ListCard = (props) =>{
                         </TouchableOpacity>}
                         style={style.popUpStyle}
                     >
-                    <MenuItem />
-                        
+                        <MenuItem
+                            onPressLike={this.onPressLike}
+                            onPressReview={props.onPressReview}
+                        />
                     </Menu>
                 </View>
         </View>
@@ -97,7 +98,6 @@ const ListCard = (props) =>{
             >
                 <MenuItem 
                     onPressLike={this.onPressLike}
-                    onPressRating={() => this.onPressRating(props)}
                     onPressReview={props.onPressReview} />
             </Menu>
         </View>
@@ -105,31 +105,10 @@ const ListCard = (props) =>{
     </TouchableOpacity>
      )
 }
-find_dimesions = (layout) =>{
-    const { x, y, width, height } = layout;
-    console.log('x',x);
-    console.log('y',y);
-    console.log('width', width);
-    console.log('height', height);
-}
 
 onPressLike = () => {
     alert("you have recommended this dish");
     this._menu.hide();
-}
-
-onPressRating = (props) => {
-    console.log("rating opened-------", props);
-    return(
-        <Menu
-            ref={this.setMenuRef}
-            button={<Text> Rate it </Text>} 
-        >
-            <MenuItem 
-                />
-        </Menu>
-    )
-    
 }
 
 const style = StyleSheet.create({
