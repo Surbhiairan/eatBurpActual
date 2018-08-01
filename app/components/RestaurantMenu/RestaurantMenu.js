@@ -12,7 +12,7 @@ import {
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 
-import MenuItem from '../MenuItem/MenuItem';
+//import MenuItem from '../MenuItem/MenuItem';
 import DishCard from '../DishCard/DishCard';
 
 const DEFAULT_IMAGE = require('../../data/images/sandwich.jpg');

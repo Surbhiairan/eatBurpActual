@@ -10,7 +10,7 @@ import { connect } from 'react-redux';
 import Geocoder from 'react-native-geocoder';
 
 import SearchBar from '../../components/SearchBar/SearchBar';
-import { fetchTopDishes } from '../../actions/dish.action';
+import { fetchTopDishes, fetchCitySpecial } from '../../actions/dish.action';
 import MealIcon from '../../components/SvgIcons/clock.icon';
 import CitySpecialIcon from '../../components/SvgIcons/citySpecial.icon';
 import DonutIcon from '../../components/SvgIcons/donut.icon';
@@ -81,14 +81,14 @@ class Home extends Component {
   }
 
   citySpecialHandler = () => {
-    this.props.fetchTopDishes();  //To fetch the top 10 dishes from API and navigate to next screen
+    this.props.fetchCitySpecial();  //To fetch the top 10 dishes from API and navigate to next screen
     this.props.navigator.push({
       screen: "CitySpecialScreen"
     })
   }
 
   mealHandler = () => {
-    this.props.fetchTopDishes();  //To fetch the top 10 dishes from API and navigate to next screen
+    this.props.fetchCitySpecial();  //To fetch the top 10 dishes from API and navigate to next screen
     this.props.navigator.push({
       screen: "MealsScreen"
     })
@@ -247,6 +247,7 @@ const styles = StyleSheet.create({
 const mapDispatchToProps = dispatch => {
   return {
     fetchTopDishes: () => dispatch(fetchTopDishes()),
+    fetchCitySpecial: () => dispatch(fetchCitySpecial())
   };
 };
 

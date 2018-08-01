@@ -9,15 +9,12 @@ import {
     Image,
     TouchableOpacity
 } from 'react-native';
-
 import Icon from 'react-native-vector-icons/Ionicons';
-
 import { connect } from 'react-redux';
+import Menu, { MenuItem, MenuDivider } from 'react-native-material-menu';
 
 import SearchBar from '../../components/SearchBar/SearchBar';
-
 import { fetchTopDishes } from '../../actions/dish.action';
-
 import ListCard from '../../components/ListCard/ListCard';
 
 class CitySpecial extends Component {
@@ -35,61 +32,220 @@ class CitySpecial extends Component {
             dishes: false,
             citySpecialRestaurants:[
                 {
-                    _id:1,
-                    restaurant_name: "Dhaba",
-                    restaurant_location: "Anand Bazaar, Palasia",
-                    restaurant_rating: "4.5",
-                    restaurant_type: "Cafe",
-                    image:["https://images.pexels.com/photos/245535/pexels-photo-245535.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"]
+                    _id: "5ae865b2f36d282906c4c7b4",
+                    restaurant_name: "Tinkus",
+                    phone_number: "999999999",
+                    average_cost_for_two: 250,
+                    open_time: "10AM",
+                    close_time: "12PM",
+                    rush_hours: "",
+                    delivery_offered_in_kms: "4 km",
+                    average_rating: 4.3,
+                    cuisines: [
+                        "Indian",
+                        "Italian"
+                    ],
+                    reviews: [],
+                    days_closed: [
+                        ""
+                    ],
+                    images: [
+                        "https://images.pexels.com/photos/6267/menu-restaurant-vintage-table.jpg?auto=compress&cs=tinysrgb&h=650&w=940"
+                    ],
+                    famous_dishes: [
+                        "cold coffee",
+                        "cheee chutney sandwich"
+                    ],
+                    payment_mode: [
+                        "cash",
+                        "card"
+                    ],
+                    category: [
+                        "Cafe"
+                    ],
+                    address: {
+                        "building": "LG 9-10",
+                        "latitude": 22.7251,
+                        "longitude": 75.8902,
+                        "street": "Captain C S Naidu Arcade",
+                        "locality": "Old Palasia",
+                        "pincode": "452001",
+                        "state": "Madhya Pradesh",
+                        "country": "India"
+                    }
                 },
                 {
-                    _id:2,
-                    restaurant_name: "Foobae",
-                    restaurant_location: "Anand Bazaar, Palasia",
-                    restaurant_rating: "4.5",
-                    restaurant_type: "Cafe",
-                    image:["https://images.pexels.com/photos/245535/pexels-photo-245535.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"]
+                    _id: "5ae865b2f36d282906c4c7b4",
+                    restaurant_name: "BakeWell",
+                    phone_number: "999999999",
+                    average_cost_for_two: 250,
+                    open_time: "10AM",
+                    close_time: "12PM",
+                    rush_hours: "",
+                    delivery_offered_in_kms: "4 km",
+                    average_rating: 4.2,
+                    cuisines: [
+                        "Indian",
+                        "Italian"
+                    ],
+                    reviews: [],
+                    days_closed: [
+                        ""
+                    ],
+                    images: [
+                        "https://images.pexels.com/photos/6267/menu-restaurant-vintage-table.jpg?auto=compress&cs=tinysrgb&h=650&w=940"
+                    ],
+                    famous_dishes: [
+                        "cold coffee",
+                        "cheee chutney sandwich"
+                    ],
+                    payment_mode: [
+                        "cash",
+                        "card"
+                    ],
+                    category: [
+                        "Cafe"
+                    ],
+                    address: {
+                        "building": "LG 9-10",
+                        "latitude": 22.7251,
+                        "longitude": 75.8902,
+                        "street": "Captain C S Naidu Arcade",
+                        "locality": "Old Palasia",
+                        "pincode": "452001",
+                        "state": "Madhya Pradesh",
+                        "country": "India"
+                    }
                 },
                 {
-                    _id:3,
-                    restaurant_name: "Midtown Cafe",
-                    restaurant_location: "Anand Bazaar, Palasia",
-                    restaurant_rating: "4.5",
-                    restaurant_type: "Cafe",
-                    image:["https://images.pexels.com/photos/245535/pexels-photo-245535.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"]
+                    _id: "5ae865b2f36d282906c4c7b4",
+                    restaurant_name: "Just my Bakes",
+                    phone_number: "999999999",
+                    average_cost_for_two: 300,
+                    open_time: "10AM",
+                    close_time: "12PM",
+                    rush_hours: "",
+                    delivery_offered_in_kms: "4 km",
+                    average_rating: 4.0,
+                    cuisines: [
+                        "Indian",
+                        "Italian"
+                    ],
+                    reviews: [],
+                    days_closed: [
+                        ""
+                    ],
+                    images: [
+                        "https://images.pexels.com/photos/6267/menu-restaurant-vintage-table.jpg?auto=compress&cs=tinysrgb&h=650&w=940"
+                    ],
+                    famous_dishes: [
+                        "cold coffee",
+                        "cheee chutney sandwich"
+                    ],
+                    payment_mode: [
+                        "cash",
+                        "card"
+                    ],
+                    category: [
+                        "Cafe"
+                    ],
+                    address: {
+                        "building": "LG 9-10",
+                        "latitude": 22.7251,
+                        "longitude": 75.8902,
+                        "street": "Captain C S Naidu Arcade",
+                        "locality": "Old Palasia",
+                        "pincode": "452001",
+                        "state": "Madhya Pradesh",
+                        "country": "India"
+                    }
                 },
                 {
-                    _id:3,
-                    restaurant_name: "Midtown Cafe",
-                    restaurant_location: "Anand Bazaar, Palasia",
-                    restaurant_rating: "4.5",
-                    restaurant_type: "Cafe",
-                    image:["https://images.pexels.com/photos/245535/pexels-photo-245535.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"]
+                    _id: "5ae865b2f36d282906c4c7b4",
+                    restaurant_name: "Tinkus",
+                    phone_number: "999999999",
+                    average_cost_for_two: "250",
+                    open_time: "10AM",
+                    close_time: "12PM",
+                    rush_hours: "",
+                    delivery_offered_in_kms: "4 km",
+                    average_rating: 0,
+                    cuisines: [
+                        "Indian",
+                        "Italian"
+                    ],
+                    reviews: [],
+                    days_closed: [
+                        ""
+                    ],
+                    images: [
+                        "https://images.pexels.com/photos/6267/menu-restaurant-vintage-table.jpg?auto=compress&cs=tinysrgb&h=650&w=940"
+                    ],
+                    famous_dishes: [
+                        "cold coffee",
+                        "cheee chutney sandwich"
+                    ],
+                    payment_mode: [
+                        "cash",
+                        "card"
+                    ],
+                    category: [
+                        "Cafe"
+                    ],
+                    address: {
+                        "building": "LG 9-10",
+                        "latitude": 22.7251,
+                        "longitude": 75.8902,
+                        "street": "Captain C S Naidu Arcade",
+                        "locality": "Old Palasia",
+                        "pincode": "452001",
+                        "state": "Madhya Pradesh",
+                        "country": "India"
+                    }
                 },
                 {
-                    _id:3,
-                    restaurant_name: "Midtown Cafe",
-                    restaurant_location: "Anand Bazaar, Palasia",
-                    restaurant_rating: "4.5",
-                    restaurant_type: "Cafe",
-                    image:["https://images.pexels.com/photos/245535/pexels-photo-245535.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"]
+                    _id: "5ae865b2f36d282906c4c7b4",
+                    restaurant_name: "Veg Bites",
+                    phone_number: "999999999",
+                    average_cost_for_two: 250,
+                    open_time: "10AM",
+                    close_time: "12PM",
+                    rush_hours: "",
+                    delivery_offered_in_kms: "4 km",
+                    average_rating: 4.5,
+                    cuisines: [
+                        "Indian",
+                        "Italian"
+                    ],
+                    reviews: [],
+                    days_closed: [
+                        ""
+                    ],
+                    images: [
+                        "https://images.pexels.com/photos/6267/menu-restaurant-vintage-table.jpg?auto=compress&cs=tinysrgb&h=650&w=940"
+                    ],
+                    famous_dishes: [
+                        "cold coffee",
+                        "cheee chutney sandwich"
+                    ],
+                    payment_mode: [
+                        "cash",
+                        "card"
+                    ],
+                    category: [
+                        "Cafe"
+                    ],
+                    address: {
+                        "building": "LG 9-10",
+                        "latitude": 22.7251,
+                        "longitude": 75.8902,
+                        "street": "Captain C S Naidu Arcade",
+                        "locality": "Old Palasia",
+                        "pincode": "452001",
+                        "state": "Madhya Pradesh",
+                        "country": "India"
+                    }
                 },
-                {
-                    _id:3,
-                    restaurant_name: "Midtown Cafe",
-                    restaurant_location: "Anand Bazaar, Palasia",
-                    restaurant_rating: "4.5",
-                    restaurant_type: "Cafe",
-                    image:["https://images.pexels.com/photos/245535/pexels-photo-245535.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"]
-                },
-                {
-                    _id:3,
-                    restaurant_name: "Midtown Cafe",
-                    restaurant_location: "Anand Bazaar, Palasia",
-                    restaurant_rating: "4.5",
-                    restaurant_type: "Cafe",
-                    image:["https://images.pexels.com/photos/245535/pexels-photo-245535.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"]
-                }
             ],
             citySpecialDishes:[
                 {
@@ -206,10 +362,10 @@ class CitySpecial extends Component {
             <ListCard 
                 type = "restaurant"
                 restaurant_name = {item.item.restaurant_name}
-                restaurant_location = {item.item.restaurant_location}
-                restaurant_rating = {item.item.restaurant_rating}
-                restaurant_type = {item.item.restaurant_type}
-                image = {item.item.image}
+                restaurant_location = {item.item.address.locality}
+                restaurant_rating={item.item.average_rating}
+                restaurant_type={item.item.category}
+                image = {item.item.images}
                 onPress = {() => this.listCardPressedHandler(item)}
             />
             )
@@ -225,8 +381,23 @@ class CitySpecial extends Component {
                 restaurant_type = {item.item.restaurant_type}
                 image = {item.item.image}
                 onPress = {() => this.listCardPressedHandler(item)}
+                onPressLike = {this.recommendDishHandler}
+                onPressRating = {this.ratingDishHandler}
+                onPressReview = {this.reviewDishHandler}
             />
         )
+    }
+
+    recommendDishHandler = () => {
+        alert("recommended");
+    }
+
+    ratingDishHandler = () => {
+        alert("rated");
+    }
+
+    reviewDishHandler = () => {
+        alert("reviewed")
     }
 
     onButtonPress = (type) => {
@@ -259,15 +430,21 @@ class CitySpecial extends Component {
                 </View>
             </TouchableOpacity>
             </View>
-            <View style={{flex:1}}>
-                {(this.state.restaurant) && 
-                <FlatList 
-                data = {this.state.citySpecialRestaurants}
-                renderItem = {this.renderListComponent}/>}
-                {(this.state.dishes) && 
-                <FlatList 
-                data = {this.state.citySpecialDishes}
-                renderItem = {this.renderListComponent}/>
+            <View style={{flex: 1}}>
+                {
+                    (this.state.restaurant) && 
+                    <FlatList 
+                        data = {this.state.citySpecialRestaurants}
+                        renderItem = {this.renderListComponent}
+                    />
+                }
+                {
+                    (this.state.dishes) && 
+                    <FlatList 
+                        data = {this.state.citySpecialDishes}
+                        renderItem = {this.renderListComponent}
+                    />
+
                 }
             </View>
                 
