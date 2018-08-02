@@ -47,16 +47,16 @@ class CitySpecial extends Component {
     listCardPressedHandler = (item) => {
         if(this.state.restaurant){
             this.props.navigator.push({
-                screen: "RestaurantDetailScreen",
+                screen: "DishDetailScreen",
                 passProps: {
-                    selectedRestaurant: item.item
+                    selectedDish: item.item
                 }
             })
         }else {
             this.props.navigator.push({
-                screen: "DishDetailScreen",
+                screen: "SearchResultScreen",
                 passProps: {
-                    selectedDish: item.item
+                    dish_id: item.item._id
                 }
             })
         }
@@ -113,23 +113,6 @@ class CitySpecial extends Component {
         let flatListRestaurant = <ActivityIndicator />
         let flatListDishes = <ActivityIndicator />
 
-        if(!this.props.citySpecialLoading) {
-            console.log("city special----------", this.props.citySpecial[0])
-            flatListRestaurant = (
-                <FlatList
-                    data={this.props.citySpecial[0].city_special_restaurant_dish}
-                    renderItem={this.renderListComponent}
-                />
-            )
-            flatListDishes = (
-                <FlatList
-                    data={this.props.citySpecial[0].city_special_dishes}
-                    renderItem={this.renderListComponent}
-                />
-            )
-        }
-
-        
         return (
             <View style = {{ backgroundColor: '#fff', flex:1 }}>
                 <View style = {style.header}>
@@ -169,8 +152,9 @@ class CitySpecial extends Component {
                     {
                         (this.state.dishes) && 
                        <FlatList
+                            numColumns = {2}
                             data={this.props.citySpecial[0].city_special_dishes}
-                                renderItem={this.renderListComponent}
+                            renderItem={this.renderListComponent}
         />
                     }
                 </View>

@@ -125,14 +125,14 @@ export function fetchCitySpecialFailure(error) {
     }
 }
 
-export function fetchDishSearchResults(searchTag) {
+export function fetchDishSearchResults(dish_id) {
     console.log("inside fetchDishSearchResults")
     return (dispatch) => {
         dispatch(getDishSearchResults());
         dispatch(authGetToken())
         .then(token => {
             return (
-            fetch(`${API_ROOT}/getDishSearchResults?searchTag=`+searchTag, {
+            fetch(`${API_ROOT}/getDishSearchResults?dish_id=`+dish_id, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',

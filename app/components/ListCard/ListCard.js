@@ -77,13 +77,14 @@ const ListCard = (props) =>{
                  <View style={style.image}>
                      <Image
                          source={{ uri: props.image[0] }}
-                         style={{ width: 100, height: 100, borderRadius: 7, paddingBottom: 5, }}
+                         style={{ width: 150, height: 150, borderRadius: 7, paddingBottom: 5, }}
                      />
                  </View>
-                 <View style={style.info}>
-                     <Text style={{ fontFamily: 'OpenSans-Bold', color: '#474040', fontSize: 16 }}>{props.dish_name}</Text>
-                 </View>
-                 <View style={{}}>
+                 <View style={style.dishInfo}>
+                     <View style={{flex:1,flexWrap: 'wrap'}}>
+                         <Text style={{ fontFamily: 'OpenSans-Bold', color: '#474040', fontSize: 14 }}>{props.dish_name}</Text>
+                     </View>
+                     <View style={{alignItems: 'flex-end'}}>
                      <Menu
                          ref={this.setMenuRef}
                          button={<TouchableOpacity onPress={(evt) => this.showMenu(evt)} style={{ padding: 4 }}>
@@ -96,6 +97,8 @@ const ListCard = (props) =>{
                              onPressReview={props.onPressReview} />
                      </Menu>
                  </View>
+                 </View>
+                 
              </View>
          </TouchableOpacity>
      )
@@ -117,13 +120,11 @@ const style = StyleSheet.create({
         marginTop:15  
     },
     dishContainer: {
-        flex:1,
-        flexWrap: 'wrap',
         backgroundColor: '#fff',
         borderRadius: 10,
-        marginLeft: 19,
-        marginRight: 19,
-        marginTop: 15
+        margin:10,
+        padding:5,
+        
     },
     image: {
        
@@ -131,6 +132,10 @@ const style = StyleSheet.create({
     info:{
         paddingLeft: 8,
         width: 200
+    },
+    dishInfo: {
+        
+        flexDirection:'row'       
     },
     moreMenu:{
         alignItems: 'flex-end'
