@@ -29,10 +29,6 @@ class SearchSuggestions extends Component {
     }
 
     componentDidMount() {
-      this.props.dispatch(fetchRestaurants());
-      // this.setState({
-      //   tags:["sweet tooth", "dosa"]
-      // });
       this.props.dispatch(fetchAllDishes())
       .then( data => {
         var tags = [];
@@ -50,23 +46,23 @@ class SearchSuggestions extends Component {
     }
 
     handleChangeText = (searchedText) => {
+      searchedTextLength = searchedText.length;
+      console.log("check")
       this.setState({listView: true});
-      //console.log('list view-------', this.state.listView);
       if(this.state.searchFilter === 'food'){
           
         var searchedFood = this.state.tags.filter(function(tag) {
             return tag.toLowerCase().indexOf(searchedText.toLowerCase()) > -1;
         });
         this.setState({searchedItems: searchedFood});
-        //console.log("searchedItems", this.state.searchedItems);          
       }
       
       if(this.state.searchFilter === 'place'){
+        this.props.dispatch(fetchRestaurants());
         var searchedPlace = this.props.restaurants.filter(function(place) {
           return place.restaurant_name.toLowerCase().indexOf(searchedText.toLowerCase()) > -1;
         });
         this.setState({searchedItems: searchedPlace});
-        //console.log("searchedItems", this.state.searchedItems);                    
       }
     }
 
@@ -87,7 +83,6 @@ class SearchSuggestions extends Component {
         console.log("item in itemPressHandler",item)
         this.props.navigator.push({
             screen: "SearchResultScreen",
-            //title: item,
             passProps: {
               selectedTag: item
             }
@@ -109,7 +104,11 @@ class SearchSuggestions extends Component {
        <View>
         <SearchBar
           autoFocus={true}
-          onChangeText={this.handleChangeText} />
+          onChangeText = {(text) => {
+            setTimeout(() => {this.handleChangeText(text)}, 2000);
+           }
+          } 
+        />
                  
         <View style={{flexDirection: 'row',}}>
           <Button 
