@@ -8,8 +8,7 @@ import {
   TouchableOpacity
 } from 'react-native';
 import SearchBar from '../../components/SearchBar/SearchBar';
-import { fetchRestaurants, fetchRestaurantsSuccess, fetchRestaurantsFailure, selectedRestaurantDetails, fetchTopDishRestaurants } from '../../actions/restaurant.action';
-import { fetchAllDishes } from '../../actions/dish.action';
+import { searchDish, searchRestaurant } from '../../actions/search.action';
 import { connect } from 'react-redux';
 import SearchSuggestionList from '../../components/SearchSuggestionList/SearchSuggestionList';
 import Button from '../../components/Button/Button';
@@ -28,37 +27,35 @@ class SearchSuggestions extends Component {
         };  
     }
 
-    componentDidMount() {
-      this.props.dispatch(fetchAllDishes())
-      .then( data => {
-        var tags = [];
-        var searchedFood = data.filter(function(food) {
-          if(food.search_tag && food.search_tag.length!=0){
-            for( i in food.search_tag){
-                if(! (tags.indexOf(food.search_tag[i]) > -1)) {
-                    tags.push(food.search_tag[i]);
-                }
-            }
-          }
-           });
-           this.setState({tags: tags});
-      });
-    }
+    // componentDidMount() {
+    //   this.props.dispatch(fetchAllDishes())
+    //   .then( data => {
+    //     var tags = [];
+    //     var searchedFood = data.filter(function(food) {
+    //       if(food.search_tag && food.search_tag.length!=0){
+    //         for( i in food.search_tag){
+    //             if(! (tags.indexOf(food.search_tag[i]) > -1)) {
+    //                 tags.push(food.search_tag[i]);
+    //             }
+    //         }
+    //       }
+    //        });
+    //        this.setState({tags: tags});
+    //   });
+    // }
 
     handleChangeText = (searchedText) => {
-      searchedTextLength = searchedText.length;
-      console.log("check")
       this.setState({listView: true});
       if(this.state.searchFilter === 'food'){
-          
-        var searchedFood = this.state.tags.filter(function(tag) {
-            return tag.toLowerCase().indexOf(searchedText.toLowerCase()) > -1;
+        this.props.dispatch(searchDish(searchedText));        
+        var searchedFood = this.props.dishes.filter(function(dish) {
+            return dish.toLowerCase().indexOf(searchedText.toLowerCase()) > -1;
         });
         this.setState({searchedItems: searchedFood});
       }
       
       if(this.state.searchFilter === 'place'){
-        this.props.dispatch(fetchRestaurants());
+        this.props.dispatch(searchRestaurant(searchedText));
         var searchedPlace = this.props.restaurants.filter(function(place) {
           return place.restaurant_name.toLowerCase().indexOf(searchedText.toLowerCase()) > -1;
         });
@@ -124,12 +121,12 @@ class SearchSuggestions extends Component {
     }
 }
 const mapStateToProps = (state) => ({
-    restaurants: state.restaurant.restaurants,
-    restaurantsLoading: state.restaurant.restaurantsLoading,
-    restaurantsError: state.restaurant.restaurantsError,
-    allDishes: state.dish.allDishes,
-    alldishesLoading: state.dish.alldishesLoading,
-    allDishesError: state.dish.allDishesError,
+    restaurants: state.search.searchRestaurants,
+    restaurantsLoading: state.search.searchRestaurantsLoading,
+    restaurantsError: state.search.searchRestaurantsError,
+    dishes: state.search.searchDishes,
+    dishesLoading: state.search.searchDishesLoading,
+    dishesError: state.search.searchDishesError,
 });
 
 const styles = StyleSheet.create({
