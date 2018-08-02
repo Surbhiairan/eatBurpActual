@@ -84,7 +84,7 @@ class SearchSuggestions extends Component {
         this.props.navigator.push({
             screen: "SearchResultScreen",
             passProps: {
-              selectedTag: item
+              dish_id: item._id
             }
         });
       }

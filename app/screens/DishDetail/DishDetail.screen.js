@@ -34,9 +34,9 @@ class DishDetail extends Component {
             price = {this.props.selectedDish.price}
             restaurant_name = {this.props.selectedDish.restaurant_name}
             recommended = {this.props.selectedDish.recommended}
-            dish_images = {this.props.selectedDish.image}
+            dish_images = {this.props.selectedDish.images}
             reviews = {this.props.selectedDish.reviews}
-            average_rating = {this.props.selectedDish.dish_rating}               
+            average_rating = {this.props.selectedDish.average_rating}               
             onDishCardPressed={() => props.onDishCardPressed(this.props.selectedDish)}
             onRecommendButtonPressed={() => props.onRecommendButtonPressed(this.props.selectedDish)}
             onReviewButtonPressed={() => props.onReviewButtonPressed(this.props.selectedDish)}

@@ -7,7 +7,8 @@ import {
     FlatList,
     ScrollView,
     Image,
-    TouchableOpacity
+    TouchableOpacity,
+    ActivityIndicator
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { connect } from 'react-redux';
@@ -341,16 +342,16 @@ class CitySpecial extends Component {
     listCardPressedHandler = (item) => {
         if(this.state.restaurant){
             this.props.navigator.push({
-                screen: "RestaurantDetailScreen",
+                screen: "DishDetailScreen",
                 passProps: {
-                    selectedRestaurant: item.item
+                    selectedDish: item.item
                 }
             })
         }else {
             this.props.navigator.push({
-                screen: "DishDetailScreen",
+                screen: "SearchResultScreen",
                 passProps: {
-                    selectedDish: item.item
+                    dish_id: item.item._id
                 }
             })
         }
@@ -360,13 +361,17 @@ class CitySpecial extends Component {
         if(this.state.restaurant === true)
         return(
             <ListCard 
-                type = "restaurant"
+                type= "dishRestaurantMapping"
                 restaurant_name = {item.item.restaurant_name}
-                restaurant_location = {item.item.address.locality}
-                restaurant_rating={item.item.average_rating}
-                restaurant_type={item.item.category}
+                restaurant_location = {item.item.locality}
+                dish_rating={item.item.average_rating}
+                dish_name={item.item.dish_name}
+                price={item.item.price}
                 image = {item.item.images}
-                onPress = {() => this.listCardPressedHandler(item)}
+                onPress={() => this.listCardPressedHandler(item)}
+                onPressLike={this.recommendDishHandler}
+                onPressRating={this.ratingDishHandler}
+                onPressReview={this.reviewDishHandler}
             />
             )
         else
@@ -374,12 +379,7 @@ class CitySpecial extends Component {
             <ListCard 
                 type = "dish"
                 dish_name = {item.item.dish_name}
-                price = {item.item.price}
-                restaurant_name = {item.item.restaurant_name}
-                restaurant_location = {item.item.restaurant_location}
-                dish_rating = {item.item.dish_rating}
-                restaurant_type = {item.item.restaurant_type}
-                image = {item.item.image}
+                image = {item.item.images}
                 onPress = {() => this.listCardPressedHandler(item)}
                 onPressLike = {this.recommendDishHandler}
                 onPressRating = {this.ratingDishHandler}
@@ -405,48 +405,54 @@ class CitySpecial extends Component {
     }
 
     render() {
+        let flatListRestaurant = <ActivityIndicator />
+        let flatListDishes = <ActivityIndicator />
+
         return (
             <View style = {{ backgroundColor: '#fff', flex:1 }}>
-            <View style = {style.header}>
-            <TouchableOpacity>
-              <Icon style = {style.backIcon} name="ios-arrow-round-back-outline" size={45} color="#757575" />
-            </TouchableOpacity>
-            <View style = {style.searchbar}>
-                <SearchBar
-                    onSearchBarPressed={this.searchBarPressHandler}
-                />
-            </View >
-            </View>
-            <Text style = {style.topTen}>City Special</Text>
-            <View style = {style.tabBar}>
-            <TouchableOpacity onPress = {() => this.setState({restaurant: true, dishes: false})}>
-                <View elevation = {5} style = {[this.state.restaurant? style.selectedTab : style.tab]}>
-                    <Text style = {[this.state.restaurant? style.selectedTabText : style.tabText]}>Restaurant</Text>
-                </View>
-            </TouchableOpacity>
-            <TouchableOpacity onPress = {() => this.setState({restaurant: false, dishes: true})}>
-                <View elevation = {5} style = {[this.state.dishes? style.selectedTab : style.tab]}>
-                    <Text style = {[this.state.dishes? style.selectedTabText : style.tabText]}>Dish</Text>
-                </View>
-            </TouchableOpacity>
-            </View>
-            <View style={{flex: 1}}>
-                {
-                    (this.state.restaurant) && 
-                    <FlatList 
-                        data = {this.state.citySpecialRestaurants}
-                        renderItem = {this.renderListComponent}
+                <View style = {style.header}>
+                <TouchableOpacity>
+                <Icon style = {style.backIcon} name="ios-arrow-round-back-outline" size={45} color="#757575" />
+                </TouchableOpacity>
+                <View style = {style.searchbar}>
+                    <SearchBar
+                        onSearchBarPressed={this.searchBarPressHandler}
                     />
-                }
-                {
-                    (this.state.dishes) && 
-                    <FlatList 
-                        data = {this.state.citySpecialDishes}
-                        renderItem = {this.renderListComponent}
-                    />
-
-                }
-            </View>
+                </View >
+                </View>
+                <Text style = {style.topTen}>City Special</Text>
+                <View style = {style.tabBar}>
+                <TouchableOpacity onPress = {() => this.setState({restaurant: true, dishes: false})}>
+                    <View elevation = {5} style = {[this.state.restaurant? style.selectedTab : style.tab]}>
+                        <Text style = {[this.state.restaurant? style.selectedTabText : style.tabText]}>Restaurant</Text>
+                    </View>
+                </TouchableOpacity>
+                <TouchableOpacity onPress = {() => this.setState({restaurant: false, dishes: true})}>
+                    <View elevation = {5} style = {[this.state.dishes? style.selectedTab : style.tab]}>
+                        <Text style = {[this.state.dishes? style.selectedTabText : style.tabText]}>Dish</Text>
+                    </View>
+                </TouchableOpacity>
+                </View>
+                
+                <View style={{flex: 1}}>
+                    {
+                        (this.state.restaurant) && 
+                       (
+                            this.props.citySpecialLoading ? <ActivityIndicator /> : (<FlatList
+                                data={this.props.citySpecial[0].city_special_restaurant_dish}
+                                renderItem={this.renderListComponent}
+                            />)
+                            )
+                    }
+                    {
+                        (this.state.dishes) && 
+                       <FlatList
+                            numColumns = {2}
+                            data={this.props.citySpecial[0].city_special_dishes}
+                            renderItem={this.renderListComponent}
+        />
+                    }
+                </View>
                 
             </View>
         );
@@ -519,10 +525,11 @@ const style = StyleSheet.create({
 })
 
 const mapStateToProps = state => {
+    console.log("city special-------", state.dish)
     return {
-        topDishes: state.dish.topDishes,
-        topDishesLoading: state.dish.topDishesLoading,
-        topDishesError: state.dish.topDishesError
+        citySpecial: state.dish.citySpecial,
+        citySpecialLoading: state.dish.citySpecialLoading,
+        citySpecialError: state.dish.citySpecialError
     };
 };
 
