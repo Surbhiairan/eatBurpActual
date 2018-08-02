@@ -13,8 +13,7 @@ import DishList from '../../components/DishList/DishList';
 import SearchBar from '../../components/SearchBar/SearchBar';
 import dishes from '../../data/data';
 import { connect } from 'react-redux';
-import { fetchTopDishes } from '../../actions/dish.action';
-import { recommendDishDispatch } from '../../actions/dish.action';;
+import { fetchTopDishes, recommendDishDispatch } from '../../actions/dish.action';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 class TopTenDish extends Component {
@@ -84,27 +83,27 @@ class TopTenDish extends Component {
 
     render() {
         return (
-            <View style = {{ backgroundColor: '#fff', flex:1 }}>
-            <View style = {style.header}>
-            <TouchableOpacity>
-              <Icon style = {style.backIcon} name="ios-arrow-round-back-outline" size={45} color="#757575" />
-            </TouchableOpacity>
-            <View style = {style.searchbar}>
-                <SearchBar
-                    onSearchBarPressed={this.searchBarPressHandler}
-                />
-            </View >
-            </View>
-            <Text style = {style.topTen}>Top Ten{this.props.topDishesError}</Text>
-                    <View style={style.container}>
-                    {(this.props.topDishes) && <DishList
-                            dishes={this.props.topDishes}
-                            onRecommendButtonPressed={this.recommendButtonPressHandler}
-                            onReviewButtonPressed={this.reviewButtonPressHandler}
-                            onDishCardPressed={this.dishCardPressedHandler}
+            <View style={{ backgroundColor: '#fff', flex: 1 }}>
+                <View style={style.header}>
+                    <TouchableOpacity>
+                        <Icon style={style.backIcon} name="ios-arrow-round-back-outline" size={45} color="#757575" />
+                    </TouchableOpacity>
+                    <View style={style.searchbar}>
+                        <SearchBar
+                            onSearchBarPressed={this.searchBarPressHandler}
                         />
+                    </View >
+                </View>
+                <Text style={style.topTen}>Top Ten{this.props.topDishesError}</Text>
+                <View style={style.container}>
+                    {(this.props.topDishes) && <DishList
+                        dishes={this.props.topDishes}
+                        onRecommendButtonPressed={this.recommendButtonPressHandler}
+                        onReviewButtonPressed={this.reviewButtonPressHandler}
+                        onDishCardPressed={this.dishCardPressedHandler}
+                    />
                     }
-                    </View>
+                </View>
             </View>
         );
     }
@@ -115,25 +114,25 @@ const style = StyleSheet.create({
         flex: 1
     },
     header: {
-        paddingTop:10,
+        paddingTop: 10,
         paddingBottom: 6,
-        flexDirection: 'row', 
+        flexDirection: 'row',
         alignItems: 'center',
         backgroundColor: '#fff'
     },
-    backIcon :{
-        paddingLeft:10,
+    backIcon: {
+        paddingLeft: 10,
 
     },
     searchbar: {
         paddingLeft: 10,
     },
-    topTen:{
-        paddingLeft:25,
-        paddingTop:5,
+    topTen: {
+        paddingLeft: 25,
+        paddingTop: 5,
         fontFamily: 'OpenSans-ExtraBold',
         fontSize: 22,
-        color:'#212121'
+        color: '#212121'
     }
 })
 

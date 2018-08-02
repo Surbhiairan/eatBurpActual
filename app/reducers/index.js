@@ -6,6 +6,7 @@ import auth from './auth.reducer';
 import restaurant from './restaurant.reducer';
 import menu from './menu.reducer';
 import user from './user.reducer';
+import reviews from './reviews.reducer';
 
 export default combineReducers({
     dish,
@@ -14,4 +15,5 @@ export default combineReducers({
     restaurant,
     menu,
     user,
+    reviews
 })

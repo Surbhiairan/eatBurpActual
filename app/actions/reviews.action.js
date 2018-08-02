@@ -29,7 +29,7 @@ export function fetchReviews() {
     })
     .then(res => res.json())
     .then(json => {
-       dispatch(fetchReviewsSuccess(json));
+       dispatch(fetchReviewsSuccess(json.success));
        return json;
     })  
     .catch(err => dispatch(fetchReviewsFailure(err)))
@@ -74,7 +74,7 @@ export function fetchRecommendations() {
     })
     .then(res => res.json())
     .then(json => {
-       dispatch(fetchRecommendationsSuccess(json));
+       dispatch(fetchRecommendationsSuccess(json.success));
        return json;
     })  
     .catch(err => dispatch(fetchRecommendationsFailure(err)))
