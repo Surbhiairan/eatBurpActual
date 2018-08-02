@@ -35,45 +35,6 @@ class Meals extends Component {
             snacks: true,
             lunch: false,
             breakfast:false,
-            snacksDishes:[
-                {
-                    _id: 1,
-                    dish_name: "French Fries",
-                    price: "145",
-                    restaurant_name: "Dhaba",
-                    restaurant_location: "Anand Bazaar, Palasia",
-                    dish_rating: "4.5",
-                    restaurant_type: "Cafe",
-                    image:["https://images.pexels.com/photos/245535/pexels-photo-245535.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"]
-                
-                }
-            ],
-            lunchDishes:[
-                {
-                    _id: 1,
-                    dish_name: "Dal Baati",
-                    price: "145",
-                    restaurant_name: "Dhaba",
-                    restaurant_location: "Anand Bazaar, Palasia",
-                    dish_rating: "4.5",
-                    restaurant_type: "Cafe",
-                    image:["https://images.pexels.com/photos/245535/pexels-photo-245535.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"]
-                
-                }
-            ],
-            breakfastDishes:[
-                {
-                    _id: 1,
-                    dish_name: "Cheese Omlette",
-                    price: "145",
-                    restaurant_name: "Dhaba",
-                    restaurant_location: "Anand Bazaar, Palasia",
-                    dish_rating: "4.5",
-                    restaurant_type: "Cafe",
-                    image:["https://images.pexels.com/photos/245535/pexels-photo-245535.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"]
-                
-                }
-            ]
         }
     }
 
@@ -134,65 +95,67 @@ class Meals extends Component {
     render() {
         return (
             <View style = {{ backgroundColor: '#fff', flex:1 }}>
-            <View style = {style.header}>
-            <TouchableOpacity>
-              <Icon style = {style.backIcon} name="ios-arrow-round-back-outline" size={45} color="#757575" />
-            </TouchableOpacity>
-            <View style = {style.searchbar}>
-                <SearchBar
-                    onSearchBarPressed={this.searchBarPressHandler}
-                />
-            </View >
-            </View>
-            <Text style = {style.meals}>Meals</Text>
+                <View style = {style.header}>
+                    <TouchableOpacity>
+                        <Icon style = {style.backIcon} name="ios-arrow-round-back-outline" size={45} color="#757575" />
+                    </TouchableOpacity>
+                    <View style = {style.searchbar}>
+                        <SearchBar
+                            onSearchBarPressed={this.searchBarPressHandler}
+                        />
+                    </View >
+                </View>
+                <Text style = {style.meals}>Meals</Text>
 
-            <View style = {style.tabBar}>
-            <TouchableOpacity onPress = {() => this.setState({snacks: true, lunch: false, breakfast: false})}>
-                <View elevation = {5} style = {[this.state.snacks? style.selectedTab : style.tab]}>
-                    <Text style = {[this.state.snacks? style.selectedTabText : style.tabText]}>Snacks</Text>
+                <View style = {style.tabBar}>
+                    <TouchableOpacity onPress = {() => this.setState({snacks: true, lunch: false, breakfast: false})}>
+                        <View elevation = {5} style = {[this.state.snacks? style.selectedTab : style.tab]}>
+                            <Text style = {[this.state.snacks? style.selectedTabText : style.tabText]}>Snacks</Text>
+                        </View>
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress = {() => this.setState({lunch: true, snacks: false, breakfast: false})}>
+                        <View elevation = {5} style = {[this.state.lunch? style.selectedTab : style.tab]}>
+                            <Text style = {[this.state.lunch? style.selectedTabText : style.tabText]}>Lunch/Dinner</Text>
+                        </View>
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress = {() => this.setState({breakfast: true, snacks: false, lunch: false})}>
+                        <View elevation = {5} style = {[this.state.breakfast? style.selectedTab : style.tab]}>
+                            <Text style = {[this.state.breakfast? style.selectedTabText : style.tabText]}>Breakfast</Text>
+                        </View>
+                    </TouchableOpacity>
                 </View>
-            </TouchableOpacity>
-            <TouchableOpacity onPress = {() => this.setState({lunch: true, snacks: false, breakfast: false})}>
-                <View elevation = {5} style = {[this.state.lunch? style.selectedTab : style.tab]}>
-                    <Text style = {[this.state.lunch? style.selectedTabText : style.tabText]}>Lunch/Dinner</Text>
+                <View>
+                    {
+                        (this.state.snacks) 
+                            && 
+                        (this.props.mealLoading ? 
+                            <ActivityIndicator/> : 
+                            (<FlatList 
+                                data = {this.props.meal}
+                                renderItem = {this.renderListComponent}
+                            />)
+                        )
+                    }
+                    {
+                        (this.state.lunch) && 
+                            (this.props.mealLoading ?
+                            <ActivityIndicator /> :
+                            (<FlatList
+                                data={this.props.meal}
+                                renderItem={this.renderListComponent}
+                            />)
+                        )
+                    }
+                    {
+                        (this.state.breakfast) && (this.props.mealLoading ?
+                            <ActivityIndicator /> :
+                            (<FlatList
+                                data={this.props.meal}
+                                renderItem={this.renderListComponent}
+                            />)
+                        )
+                    }
                 </View>
-            </TouchableOpacity>
-            <TouchableOpacity onPress = {() => this.setState({breakfast: true, snacks: false, lunch: false})}>
-                <View elevation = {5} style = {[this.state.breakfast? style.selectedTab : style.tab]}>
-                    <Text style = {[this.state.breakfast? style.selectedTabText : style.tabText]}>Breakfast</Text>
-                </View>
-            </TouchableOpacity>
-            </View>
-            <View>
-                {
-                    (this.state.snacks) 
-                        && 
-                    (this.props.mealLoading ? 
-                        <ActivityIndicator/> : 
-                        (<FlatList 
-                            data = {this.props.meal}
-                            renderItem = {this.renderListComponent}
-                        />)
-                    )
-                }
-                    {(this.state.lunch) && 
-                        (this.props.mealLoading ?
-                        <ActivityIndicator /> :
-                        (<FlatList
-                            data={this.props.meal}
-                            renderItem={this.renderListComponent}
-                        />)
-                    )}
-                    {(this.state.breakfast) && (this.props.mealLoading ?
-                        <ActivityIndicator /> :
-                        (<FlatList
-                            data={this.props.meal}
-                            renderItem={this.renderListComponent}
-                        />)
-                    )}
-
-            </View>
-                
             </View>
         );
     }
