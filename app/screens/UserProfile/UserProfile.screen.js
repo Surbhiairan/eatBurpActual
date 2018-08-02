@@ -11,6 +11,8 @@ import {
 } from "react-native";
 import { connect } from "react-redux";
 import { fetchUser } from '../../actions/user.action';
+import { fetchReviews } from '../../actions/reviews.action';
+import { fetchRecommendations } from '../../actions/reviews.action'
 import HeadingText from '../../components/UI/HeadingText/HeadingText'
 import UserInfo from '../../components/UserInfo/UserInfo';
 import Reviews from '../../components/Reviews/Reviews';
@@ -30,7 +32,6 @@ class UserProfile extends Component {
           buttonPressed : "reviews",
           recommendations: true,
           reviews: false,
-          ratings: false,
           userReviews:[
             {
               _id:1,
@@ -113,11 +114,10 @@ class UserProfile extends Component {
   }
   componentDidMount(){
     this.props.fetchUser();
+    this.props.fetchReviews();
+    this.props.fetchRecommendations();
   } 
 
-  renderRating = (rating) => {
-
-  }
 
   renderReview = (review) => {
     return(
@@ -148,9 +148,7 @@ class UserProfile extends Component {
     return (
       <View style = {{flex:1, backgroundColor: "#efefef"}}> 
       <ScrollView>
-        {/* <HeadingText> 
-          {this.props.userDetails.first_name}
-        </HeadingText> */}
+        
         {this.props.userLoading ?
         <Text>Loading</Text>:
         <View style = {{backgroundColor: "#ffa000"}}>
@@ -167,9 +165,7 @@ class UserProfile extends Component {
         <TouchableOpacity 
           onPress={() => this.setState({buttonPressed:"recommendations",
           recommendations: true,
-          reviews: false,
-          ratings: false })} >
-          {/* style={{marginLeft: 20, marginRight: 20, backgroundColor: 'blue'}}> */}
+          reviews: false})} >
           <View elevation = {5} style={style.selectedTab}>
             {this.state.recommendations ? <LikeFilledIcon fill={'#ffa000'} height={26} width={26}/>
             : <LikeIcon fill={'#ffa000'} height={26} width={26}/>}
@@ -179,58 +175,28 @@ class UserProfile extends Component {
         <TouchableOpacity 
           onPress={() => this.setState({buttonPressed:"reviews",
           recommendations: false,
-          reviews: true,
-          ratings: false })} >
-          {/* style={{marginLeft: 20, marginRight: 20}}> */}
+          reviews: true})} >
           <View elevation = {5} style={style.selectedTab}>
            {this.state.reviews ? <PenIcon fill={'#ffa000'} height={26} width={26}/>
             : <PenIcon fill={'#ffa000'} height={26} width={26}/>}
           </View>
         </TouchableOpacity>
 
-        <TouchableOpacity 
-          onPress={() => this.setState({buttonPressed:"ratings",
-          recommendations: false,
-          reviews: false,
-          ratings: true })} >
-          {/* style={{marginLeft: 20, marginRight: 20}}> */}
-          <View elevation = {5} style={style.selectedTab}>
-          {this.state.ratings ? <StarFilledIcon fill={'#ffa000'} height={26} width={26}/>
-          : <StarIcon fill={'#ffa000'} height={26} width={26}/>}
-          </View>
-        </TouchableOpacity>
         </View>
-
-        {/* <View style={{ flexDirection: 'row' }}>
-        <Button
-         title="Reviews"
-         onPress = {() => this.setState({buttonPressed:"reviews"})}
-        />
-        <Button
-         title = "Recommendations"
-         onPress = {() => this.setState({buttonPressed:"recommendations"})}
-        />
-        </View> */}
         
         <View>
         {(this.state.reviews) && 
           <FlatList 
-          data = {this.state.userReviews}
-          //data = {this.props.userDetails.reviews}
+          data = {this.props.reviews}
           renderItem = {this.renderReview}/>}
-        {(this.state.ratings) && 
-          <FlatList 
-          data = {this.state.userRatings}
-          //data = {this.props.userDetails.ratings}
-          renderItem = {this.renderRating}/>}
+
         {(this.state.recommendations) && 
         <View elevation={5} style={{borderRadius: 10, padding: 10, margin: 10, alignItems: 'center'}}>
           <FlatList 
           numColumns = {3}
           style= {style.recommendationList}
           keyExtractor={(item, index) => index}
-          //data = {this.props.userDetails.recommendations}
-          data = {this.state.userRecommendations}
+          data = {this.props.recommendations}
           renderItem = {this.renderRecommendation}/></View>}
 
         </View>
@@ -260,8 +226,7 @@ const style = StyleSheet.create({
     height: 40   
   },
   recommendationList:{
-    // flexDirection: 'column',
-    // flexWrap: 'wrap'
+
   }
 })
 
@@ -269,13 +234,21 @@ const mapStateToProps = state => {
   return {
     userDetails: state.user.userDetails,
     userLoading: state.user.userLoading,
-    userError: state.user.userError
+    userError: state.user.userError,
+    reviews: state.reviews.reviews,
+    reviewsError: state.reviews.reviewsError,
+    reviewsLoading: state.reviews.reviewsLoading,
+    recommendations: state.reviews.recommendations,
+    recommendationsError: state.reviews.recommendationsError,
+    recommendationsLoading: state.reviews.recommendationsLoading
   }
 };
 
 const mapDispatchToProps = dispatch => {
   return {
     fetchUser: () => dispatch(fetchUser()),
+    fetchReviews: () => dispatch(fetchReviews()),
+    fetchRecommendations: () => dispatch(fetchRecommendations())
   };
 };
 

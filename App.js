@@ -104,7 +104,7 @@ Navigation.registerComponent(
 // Start App
 export default () => Navigation.startSingleScreenApp({
   screen: {
-    screen: "RestaurantDetailScreen",
+    screen: "AuthScreen",
     //title: "Login"
   }
 });
