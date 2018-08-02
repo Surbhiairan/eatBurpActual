@@ -5,6 +5,9 @@ import {
     ADD_REVIEW, 
     ADD_REVIEW_SUCCESS, 
     ADD_REVIEW_FAILURE,
+    FETCH_RECOMMENDATIONS,
+    FETCH_RECOMMENDATIONS_FAILURE,
+    FETCH_RECOMMENDATIONS_SUCCESS
   } from '../actions/reviews.action';
   
   const initialState = {
@@ -13,7 +16,10 @@ import {
     reviewsLoading: false,
     newReview: [],
     newReviewError: null,
-    newReviewLoading: false
+    newReviewLoading: false,
+    recommendations: [],
+    recommendationsError: null,
+    recommendationsLoading: false
   };
   
   const reducer = (state = initialState, action) => {
@@ -24,6 +30,12 @@ import {
       return { ...state, reviews: action.payload.reviews, reviewsError:null, reviewsLoading: false };
     case FETCH_REVIEWS_FAILURE:
       return { ...state, reviews: [], reviewsError: action.payload.error, reviewsLoading: false};  
+    case FETCH_RECOMMENDATIONS:
+      return { ...state,  recommendationsError: null, recommendationsLoading: true }; 
+    case FETCH_RECOMMENDATIONS_SUCCESS:
+      return { ...state, recommendations: action.payload.recommendations, recommendationsError:null, recommendationsLoading: false };
+    case FETCH_RECOMMENDATIONS_FAILURE:
+      return { ...state, recommendations: [], recommendationsError: action.payload.error, recommendationsLoading: false};  
     case ADD_REVIEW:
       return { ...state, newReviewLoading: true }; 
     case ADD_REVIEW_SUCCESS:

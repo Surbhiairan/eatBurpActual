@@ -13,6 +13,10 @@ export const RECOMMEND_DISH = 'RECOMMEND_DISH';
 export const RECOMMEND_DISH_SUCCESS = 'RECOMMEND_DISH_SUCCESS';
 export const RECOMMEND_DISH_FAILURE = 'RECOMMEND_DISH_FAILURE';
 
+export const FETCH_DISH_MAPPINGS = 'DISH_MAPPINGS';
+export const FETCH_DISH_MAPPINGS_SUCCESS = 'DISH_MAPPINGS_SUCCESS';
+export const FETCH_DISH_MAPPINGS_FAILURE = 'DISH_MAPPINGS_FAILURE';
+
 export const FETCH_DISH_SEARCH_RESULTS = 'FETCH_DISH_SEARCH_RESULTS';
 export const FETCH_DISH_SEARCH_RESULTS_SUCCESS = 'FETCH_DISH_SEARCH_RESULTS_SUCCESS';
 export const FETCH_DISH_SEARCH_RESULTS_FAILURE = 'FETCH_DISH_SEARCH_RESULTS_FAILURE';
@@ -321,6 +325,54 @@ export function fetchAllDishesSuccess(allDishes) {
 export function fetchAllDishesFailure(error) {
     return {
         type: FETCH_ALL_DISHES_FAILURE,
+        payload: {error} 
+    };
+}
+
+export function fetchDishMappings(restaurantId) {
+    return (dispatch) => {
+        dispatch(getDishMappings());
+        dispatch(authGetToken())  
+        .then(token => {            
+            return(
+            fetch(`${API_ROOT}/getMenu?rid=`+restaurantId,{
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'x-access-token': token
+                }
+                })
+            )
+            })
+            .catch(() => {
+                alert("No token found");
+            })
+            .then(res => res.json())
+            .then(json => {
+                dispatch(fetchDishMappingsSuccess(json.success));
+                console.log(json.success,"jsonnnnnnnnnnnnnn");
+                return json.success;
+            })  
+            .catch(err => dispatch(fetchDishMappingsFailure(err)))
+    }
+}
+ 
+export function getDishMappings() {
+    return {
+        type: FETCH_DISH_MAPPINGS
+    }
+}
+
+export function fetchDishMappingsSuccess(dishMappings) {
+    return {
+        type: FETCH_DISH_MAPPINGS_SUCCESS,
+        payload: {dishMappings} 
+    };
+}
+
+export function fetchDishMappingsFailure(error) {
+    return {
+        type: FETCH_DISH_MAPPINGS_FAILURE,
         payload: {error} 
     };
 }

@@ -16,7 +16,10 @@ import {
     FETCH_CITY_SPECIAL_SUCCESS,
     FETCH_MEAL,
     FETCH_MEAL_FAILURE,
-    FETCH_MEAL_SUCCESS
+    FETCH_MEAL_SUCCESS,
+    FETCH_DISH_MAPPINGS,
+    FETCH_DISH_MAPPINGS_SUCCESS,
+    FETCH_DISH_MAPPINGS_FAILURE,
 } from '../actions/dish.action';
 
 const initialState = {
@@ -32,7 +35,9 @@ const initialState = {
     citySpecial: [],
     citySpecialLoading: false,
     citySpecialError: null,
-
+    dishMappings: [],
+    dishMappingsLoading: false,
+    dishMappingsError: null
 };
 
 const reducer = (state = initialState, action) => {
@@ -78,6 +83,12 @@ const reducer = (state = initialState, action) => {
       return { ...state, dishSearchResults: action.payload.dishList, dishSearchResultsError:null, dishSearchResultsLoading: false };
     case FETCH_DISH_SEARCH_RESULTS_FAILURE:
       return { ...state, dishSearchResults: [], dishSearchResultsError: action.payload.error, dishSearchResultsLoading: false};  
+    case FETCH_DISH_MAPPINGS:
+      return { ...state,  dishMappings: null, dishMappingsLoading: true };    
+    case FETCH_DISH_MAPPINGS_SUCCESS:
+      return { ...state, dishMappings: action.payload.dishMappings, dishMappingsError:null, dishMappingsLoading: false };
+    case FETCH_DISH_MAPPINGS_FAILURE:
+      return { ...state, dishMappings: [], dishMappingsError: action.payload.error, dishMappingsLoading: false};      
     default:
       return state;
     }

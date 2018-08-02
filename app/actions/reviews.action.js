@@ -7,6 +7,9 @@ export const FETCH_REVIEWS_FAILURE = 'FETCH_REVIEWS_FAILURE';
 export const ADD_REVIEW = 'ADD_REVIEW';
 export const ADD_REVIEW_SUCCESS = 'ADD_REVIEW_SUCCESS';
 export const ADD_REVIEW_FAILURE = 'ADD_REVIEW_FAILURE';
+export const FETCH_RECOMMENDATIONS = 'FETCH_RECOMMENDATIONS';
+export const FETCH_RECOMMENDATIONS_SUCCESS = 'FETCH_RECOMMENDATIONS_SUCCESS';
+export const FETCH_RECOMMENDATIONS_FAILURE = 'FETCH_RECOMMENDATIONS_FAILURE';
 
 export function fetchReviews() {
   return (dispatch) => {
@@ -49,6 +52,51 @@ export function fetchReviewsSuccess(reviews) {
 export function fetchReviewsFailure(error) {
   return {
       type: FETCH_REVIEWS_FAILURE,
+      payload: {error} 
+  };
+}
+
+export function fetchRecommendations() {
+  return (dispatch) => {
+    dispatch(getRecommndations());
+    dispatch(authGetToken())
+    .then(token => {
+        return fetch(`${API_ROOT}/getUserRecommendation`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'x-access-token': token
+            }
+        })
+    })
+    .catch(() => {
+        alert("No token found");
+    })
+    .then(res => res.json())
+    .then(json => {
+       dispatch(fetchRecommendationsSuccess(json));
+       return json;
+    })  
+    .catch(err => dispatch(fetchRecommendationsFailure(err)))
+  };
+}
+     
+export function getRecommndations() {
+  return {
+      type: FETCH_RECOMMENDATIONS
+  }
+}
+
+export function fetchRecommendationsSuccess(recommendations) {
+  return {
+      type: FETCH_RECOMMENDATIONS_SUCCESS,
+      payload: {recommendations} 
+  };
+}
+
+export function fetchRecommendationsFailure(error) {
+  return {
+      type: FETCH_RECOMMENDATIONS_FAILURE,
       payload: {error} 
   };
 }
