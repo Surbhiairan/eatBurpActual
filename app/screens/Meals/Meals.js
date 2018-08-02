@@ -7,7 +7,8 @@ import {
     FlatList,
     ScrollView,
     Image,
-    TouchableOpacity
+    TouchableOpacity,
+    ActivityIndicator
 } from 'react-native';
 
 import Icon from 'react-native-vector-icons/Ionicons';
@@ -29,50 +30,11 @@ class Meals extends Component {
     constructor(props) {
         super(props);
         this.props.navigator.setOnNavigatorEvent(this.onNavigatorEvent);
-        this.state ={
-            selected: "snacks",
+        this.state = {
+            selected: props.selectedMeal,
             snacks: true,
             lunch: false,
             breakfast:false,
-            citySpecialRestaurants:[
-                {
-                    _id:1,
-                    restaurant_name: "Dhaba",
-                    restaurant_location: "Anand Bazaar, Palasia",
-                    restaurant_rating: "4.5",
-                    restaurant_type: "Cafe",
-                    image:"https://images.pexels.com/photos/245535/pexels-photo-245535.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"
-                },
-                {
-                    _id:2,
-                    restaurant_name: "Foobae",
-                    restaurant_location: "Anand Bazaar, Palasia",
-                    restaurant_rating: "4.5",
-                    restaurant_type: "Cafe",
-                    image:"https://images.pexels.com/photos/245535/pexels-photo-245535.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"
-                },
-                {
-                    _id:3,
-                    restaurant_name: "Midtown Cafe",
-                    restaurant_location: "Anand Bazaar, Palasia",
-                    restaurant_rating: "4.5",
-                    restaurant_type: "Cafe",
-                    image:"https://images.pexels.com/photos/245535/pexels-photo-245535.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"
-                }
-            ],
-            citySpecialDishes:[
-                {
-                    _id: 1,
-                    dish_name: "French Fries",
-                    price: "145",
-                    restaurant_name: "Dhaba",
-                    restaurant_location: "Anand Bazaar, Palasia",
-                    dish_rating: "4.5",
-                    restaurant_type: "Cafe",
-                    image:"https://images.pexels.com/photos/245535/pexels-photo-245535.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"
-                
-                }
-            ],
             snacksDishes:[
                 {
                     _id: 1,
@@ -115,6 +77,22 @@ class Meals extends Component {
         }
     }
 
+    componentWillMount() {
+        if(this.state.selected === 'breakfast') {
+            this.setState({
+                snacks: false,
+                lunch: false,
+                breakfast: true,
+            })
+        } else if (this.state.selected === 'lunch/dinner') {
+            this.setState({
+                snacks: false,
+                lunch: true,
+                breakfast: false,
+            })
+        }
+    }
+
     onNavigatorEvent = event => {
         if (event.type === "NavBarButtonPress") {
             if (event.id === "sideDrawerToggle") {
@@ -137,14 +115,13 @@ class Meals extends Component {
     renderListComponent = (item) => {
         return(
             <ListCard 
-                type = "dish"
+                type = "dishRestaurantMapping"
                 dish_name = {item.item.dish_name}
                 price = {item.item.price}
                 restaurant_name = {item.item.restaurant_name}
-                restaurant_location = {item.item.restaurant_location}
-                dish_rating = {item.item.dish_rating}
-                restaurant_type = {item.item.restaurant_type}
-                image = {item.item.image}
+                restaurant_location = {item.item.locality}
+                dish_rating = {item.item.average_rating}
+                image = {item.item.images}
                 onPress = {() => this.listCardPressedHandler(item)}
             />
         )
@@ -187,15 +164,32 @@ class Meals extends Component {
             </TouchableOpacity>
             </View>
             <View>
-                {(this.state.snacks) && <FlatList 
-                data = {this.state.snacksDishes}
-                renderItem = {this.renderListComponent}/>}
-                {(this.state.lunch) && <FlatList 
-                data = {this.state.lunchDishes}
-                renderItem = {this.renderListComponent}/>}
-                {(this.state.breakfast) && <FlatList 
-                data = {this.state.breakfastDishes}
-                renderItem = {this.renderListComponent}/>}
+                {
+                    (this.state.snacks) 
+                        && 
+                    (this.props.mealLoading ? 
+                        <ActivityIndicator/> : 
+                        (<FlatList 
+                            data = {this.props.meal}
+                            renderItem = {this.renderListComponent}
+                        />)
+                    )
+                }
+                    {(this.state.lunch) && 
+                        (this.props.mealLoading ?
+                        <ActivityIndicator /> :
+                        (<FlatList
+                            data={this.props.meal}
+                            renderItem={this.renderListComponent}
+                        />)
+                    )}
+                    {(this.state.breakfast) && (this.props.mealLoading ?
+                        <ActivityIndicator /> :
+                        (<FlatList
+                            data={this.props.meal}
+                            renderItem={this.renderListComponent}
+                        />)
+                    )}
 
             </View>
                 
@@ -282,15 +276,15 @@ const style = StyleSheet.create({
 
 const mapStateToProps = state => {
     return {
-        topDishes: state.dish.topDishes,
-        topDishesLoading: state.dish.topDishesLoading,
-        topDishesError: state.dish.topDishesError
+        meal: state.dish.meal,
+        mealLoading: state.dish.mealLoading,
+        mealError: state.dish.mealError
     };
 };
 
 const mapDispatchToProps = dispatch => {
     return {
-        fetchTopDishes: () => dispatch(fetchTopDishes()),
+        fetchMeal: () => dispatch(fetchMeal()),
         recommendDishDispatch: (dish_id) => dispatch(recommendDishDispatch(dish_id)),
         //reviewDishDispatch: (dish_id) => dispatch(reviewDishDispatch(dish_id)),
     };

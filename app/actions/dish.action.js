@@ -13,6 +13,10 @@ export const RECOMMEND_DISH = 'RECOMMEND_DISH';
 export const RECOMMEND_DISH_SUCCESS = 'RECOMMEND_DISH_SUCCESS';
 export const RECOMMEND_DISH_FAILURE = 'RECOMMEND_DISH_FAILURE';
 
+export const FETCH_DISH_MAPPINGS = 'DISH_MAPPINGS';
+export const FETCH_DISH_MAPPINGS_SUCCESS = 'DISH_MAPPINGS_SUCCESS';
+export const FETCH_DISH_MAPPINGS_FAILURE = 'DISH_MAPPINGS_FAILURE';
+
 export const FETCH_DISH_SEARCH_RESULTS = 'FETCH_DISH_SEARCH_RESULTS';
 export const FETCH_DISH_SEARCH_RESULTS_SUCCESS = 'FETCH_DISH_SEARCH_RESULTS_SUCCESS';
 export const FETCH_DISH_SEARCH_RESULTS_FAILURE = 'FETCH_DISH_SEARCH_RESULTS_FAILURE';
@@ -21,9 +25,57 @@ export const FETCH_CITY_SPECIAL = 'FETCH_CITY_SPECIAL';
 export const FETCH_CITY_SPECIAL_SUCCESS = 'FETCH_CITY_SPECIAL_SUCCESS';
 export const FETCH_CITY_SPECIAL_FAILURE = 'FETCH_CITY_SPECIAL_FAILURE';
 
-export const FETCH_DISH_MAPPINGS = 'DISH_MAPPINGS';
-export const FETCH_DISH_MAPPINGS_SUCCESS = 'DISH_MAPPINGS_SUCCESS';
-export const FETCH_DISH_MAPPINGS_FAILURE = 'DISH_MAPPINGS_FAILURE';
+export const FETCH_MEAL = 'FETCH_MEAL';
+export const FETCH_MEAL_SUCCESS = 'FETCH_MEAL_SUCCESS';
+export const FETCH_MEAL_FAILURE = 'FETCH_MEAL_FAILURE';
+
+export function fetchMeal(mealType) {
+    return (dispatch) => {
+        dispatch(getMeal());
+        dispatch(authGetToken())
+            .then(token => {
+                return (
+                    fetch(`${API_ROOT}/topDishesOfMeal?meal=`+mealType, {
+                        method: 'GET',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'x-access-token': token
+                        }
+                    })
+                )
+            })
+            .catch(() => {
+                alert("No token found");
+            })
+            .then(res => res.json())
+            .then(json => {
+                console.log(json, "jsonnnn");
+                dispatch(fetchMealSuccess(json.success));
+                return json;
+            })
+            .catch(err => dispatch(fetchMealFailure(err)))
+    }
+}
+
+export function getMeal() {
+    return {
+        type: FETCH_MEAL
+    }
+}
+
+export function fetchMealSuccess(meals) {
+    return {
+        type: FETCH_MEAL_SUCCESS,
+        payload: { meals }
+    }
+}
+
+export function fetchMealFailure(error) {
+    return {
+        type: FETCH_MEAL_FAILURE,
+        payload: { error }
+    }
+}
 
 export function fetchCitySpecial() {
     return (dispatch) => {
