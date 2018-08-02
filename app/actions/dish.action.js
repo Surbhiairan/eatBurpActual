@@ -21,6 +21,58 @@ export const FETCH_CITY_SPECIAL = 'FETCH_CITY_SPECIAL';
 export const FETCH_CITY_SPECIAL_SUCCESS = 'FETCH_CITY_SPECIAL_SUCCESS';
 export const FETCH_CITY_SPECIAL_FAILURE = 'FETCH_CITY_SPECIAL_FAILURE';
 
+export const FETCH_MEAL = 'FETCH_MEAL';
+export const FETCH_MEAL_SUCCESS = 'FETCH_MEAL_SUCCESS';
+export const FETCH_MEAL_FAILURE = 'FETCH_MEAL_FAILURE';
+
+export function fetchMeal(mealType) {
+    return (dispatch) => {
+        dispatch(getMeal());
+        dispatch(authGetToken())
+            .then(token => {
+                return (
+                    fetch(`${API_ROOT}/topDishesOfMeal?meal=`+mealType, {
+                        method: 'GET',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'x-access-token': token
+                        }
+                    })
+                )
+            })
+            .catch(() => {
+                alert("No token found");
+            })
+            .then(res => res.json())
+            .then(json => {
+                console.log(json, "jsonnnn");
+                dispatch(fetchMealSuccess(json.success));
+                return json;
+            })
+            .catch(err => dispatch(fetchMealFailure(err)))
+    }
+}
+
+export function getMeal() {
+    return {
+        type: FETCH_MEAL
+    }
+}
+
+export function fetchMealSuccess(meals) {
+    return {
+        type: FETCH_MEAL_SUCCESS,
+        payload: { meals }
+    }
+}
+
+export function fetchMealFailure(error) {
+    return {
+        type: FETCH_MEAL_FAILURE,
+        payload: { error }
+    }
+}
+
 export function fetchCitySpecial() {
     return (dispatch) => {
         dispatch(getCitySpecial());

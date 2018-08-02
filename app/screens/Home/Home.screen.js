@@ -10,7 +10,7 @@ import { connect } from 'react-redux';
 import Geocoder from 'react-native-geocoder';
 
 import SearchBar from '../../components/SearchBar/SearchBar';
-import { fetchTopDishes, fetchCitySpecial } from '../../actions/dish.action';
+import { fetchTopDishes, fetchCitySpecial, fetchMeal } from '../../actions/dish.action';
 import MealIcon from '../../components/SvgIcons/clock.icon';
 import CitySpecialIcon from '../../components/SvgIcons/citySpecial.icon';
 import DonutIcon from '../../components/SvgIcons/donut.icon';
@@ -26,7 +26,8 @@ class Home extends Component {
      this.state = {
        latitude: null,
        longitude: null,
-       error: null
+       error: null,
+       time: new Date().getHours()
      }
   }
   
@@ -81,16 +82,30 @@ class Home extends Component {
   }
 
   citySpecialHandler = () => {
-    this.props.fetchCitySpecial();  //To fetch the top 10 dishes from API and navigate to next screen
+    this.props.fetchCitySpecial();  //To fetch city special from API and navigate to next screen
     this.props.navigator.push({
       screen: "CitySpecialScreen"
     })
   }
 
   mealHandler = () => {
-    this.props.fetchCitySpecial();  //To fetch the top 10 dishes from API and navigate to next screen
+    console.log(" time-------", this.state.time);
+    /* let hour = this.state.time.getHours();
+    console.log("hours---------", hour) */
+    let selectedMeal = null;
+    if(this.state.time < 11 && this.state.time > 6) {
+      selectedMeal = 'breakfast';
+    } else if ((this.state.time > 10 && this.state.time < 16)  ||  (this.state.time > 18 && this.state.time < 24)) {
+                 selectedMeal = 'lunch/dinner';
+            } else {
+              selectedMeal = 'snacks';
+            }
+    this.props.fetchMeal(selectedMeal);  //To fetch the top 10 dishes from API and navigate to next screen
     this.props.navigator.push({
-      screen: "MealsScreen"
+      screen: "MealsScreen",
+      passProps: {
+        selectedMeal: selectedMeal
+      }
     })
   }
 
@@ -247,7 +262,8 @@ const styles = StyleSheet.create({
 const mapDispatchToProps = dispatch => {
   return {
     fetchTopDishes: () => dispatch(fetchTopDishes()),
-    fetchCitySpecial: () => dispatch(fetchCitySpecial())
+    fetchCitySpecial: () => dispatch(fetchCitySpecial()),
+    fetchMeal: (selectedMeal) => dispatch(fetchMeal(selectedMeal))
   };
 };
 
