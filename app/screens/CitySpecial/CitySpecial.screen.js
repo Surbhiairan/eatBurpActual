@@ -28,7 +28,7 @@ class CitySpecial extends Component {
     constructor(props) {
         super(props);
         this.props.navigator.setOnNavigatorEvent(this.onNavigatorEvent);
-        this.state ={
+        this.state = {
             selected: "restaurant",
             restaurant: true,
             dishes: false,
@@ -46,14 +46,14 @@ class CitySpecial extends Component {
     };
 
     listCardPressedHandler = (item) => {
-        if(this.state.restaurant){
+        if (this.state.restaurant) {
             this.props.navigator.push({
                 screen: "DishDetailScreen",
                 passProps: {
                     selectedDish: item.item
                 }
             })
-        }else {
+        } else {
             this.props.navigator.push({
                 screen: "SearchResultScreen",
                 passProps: {
@@ -104,126 +104,142 @@ class CitySpecial extends Component {
     }
 
     onButtonPress = (type) => {
-        this.setState({selected: type})
+        this.setState({ selected: type })
+    }
+
+    backIconPress = () => {
+        this.props.navigator.pop();
+    }
+    searchBarPressHandler = () => {
+        //navigate to search suggestion screen
+        this.props.navigator.push({
+            screen: "SearchSuggestionScreen",
+        });
     }
 
     render() {
-        let flatListRestaurant = <ActivityIndicator />
-        let flatListDishes = <ActivityIndicator />
 
         return (
-            <View style = {{ backgroundColor: '#fff', flex:1 }}>
-                <View style = {style.header}>
-                <TouchableOpacity>
-                <Icon style = {style.backIcon} name="ios-arrow-round-back-outline" size={45} color="#757575" />
-                </TouchableOpacity>
-                <View style = {style.searchbar}>
-                    <SearchBar
-                        onSearchBarPressed={this.searchBarPressHandler}
-                    />
-                </View >
+            <View style={{ backgroundColor: '#fff', flex: 1 }}>
+                <View style={style.header}>
+                    <TouchableOpacity onPress={this.backIconPress}>
+                        <Icon style={style.backIcon} name="ios-arrow-round-back-outline" size={45} color="#757575" />
+                    </TouchableOpacity>
+                    <View style={style.searchbar}>
+                        <SearchBar
+                            onSearchBarPressed={this.searchBarPressHandler}
+                        />
+                    </View >
                 </View>
-                <Text style = {style.topTen}>City Special</Text>
-                <View style = {style.tabBar}>
-                <TouchableOpacity onPress = {() => this.setState({restaurant: true, dishes: false})}>
-                    <View elevation = {5} style = {[this.state.restaurant? style.selectedTab : style.tab]}>
-                        <Text style = {[this.state.restaurant? style.selectedTabText : style.tabText]}>Restaurant</Text>
-                    </View>
-                </TouchableOpacity>
-                <TouchableOpacity onPress = {() => this.setState({restaurant: false, dishes: true})}>
-                    <View elevation = {5} style = {[this.state.dishes? style.selectedTab : style.tab]}>
-                        <Text style = {[this.state.dishes? style.selectedTabText : style.tabText]}>Dish</Text>
-                    </View>
-                </TouchableOpacity>
+                <Text style={style.topTen}>City Special</Text>
+                <View style={style.tabBar}>
+                    <TouchableOpacity onPress={() => this.setState({ restaurant: true, dishes: false })}>
+                        <View elevation={5} style={[this.state.restaurant ? style.selectedTab : style.tab]}>
+                            <Text style={[this.state.restaurant ? style.selectedTabText : style.tabText]}>Restaurant</Text>
+                        </View>
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={() => this.setState({ restaurant: false, dishes: true })}>
+                        <View elevation={5} style={[this.state.dishes ? style.selectedTab : style.tab]}>
+                            <Text style={[this.state.dishes ? style.selectedTabText : style.tabText]}>Dish</Text>
+                        </View>
+                    </TouchableOpacity>
                 </View>
-                
-                <View style={{flex: 1}}>
+
+                <View style={{ flex: 1 }}>
                     {
-                        (this.state.restaurant) && 
-                       (
+                        (this.state.restaurant) &&
+                        (
                             this.props.citySpecialLoading ? <ActivityIndicator /> : (<FlatList
                                 data={this.props.citySpecial[0].city_special_restaurant_dish}
                                 renderItem={this.renderListComponent}
                             />)
-                            )
+                        )
                     }
                     {
-                        (this.state.dishes) && 
-                       <FlatList
-                            numColumns = {2}
+                        (this.state.dishes) &&
+                        <FlatList
+                            numColumns={2}
                             data={this.props.citySpecial[0].city_special_dishes}
                             renderItem={this.renderListComponent}
-        />
+                        />
                     }
                 </View>
-                
+
             </View>
         );
     }
-} 
+}
 
 const style = StyleSheet.create({
     container: {
-        flex:1,
-        backgroundColor: '#fff', 
-        flexDirection:'row',
-        borderRadius: 10, 
+        flex: 1,
+        backgroundColor: '#fff',
+        flexDirection: 'row',
+        borderRadius: 10,
         marginLeft: 19,
         marginRight: 19,
-        marginTop:15  
+        marginTop: 15
     },
     tabBar: {
         flexDirection: 'row',
         paddingLeft: 15,
-       // marginLeft: 20,
+        // marginLeft: 20,
     },
     selectedTab: {
         paddingLeft: 10,
         paddingRight: 10,
-        backgroundColor: '#ffa000', 
+        backgroundColor: '#ffa000',
         borderRadius: 18,
         margin: 5,
     },
-    tab:{
-        
+    tab: {
+
         paddingLeft: 10,
         paddingRight: 10,
         backgroundColor: '#fff',
-        borderRadius: 18,   
-        margin: 5,        
+        borderRadius: 18,
+        margin: 5,
     },
-    selectedTabText:{
+    selectedTabText: {
         padding: 6,
         fontFamily: 'OpenSans-SemiBold',
-        fontSize: 15, 
+        fontSize: 15,
         color: '#fff'
     },
-    tabText:{
+    tabText: {
         padding: 6,
         fontFamily: 'OpenSans-Bold',
-        fontSize: 13, 
+        fontSize: 13,
         color: '#212121'
     },
     header: {
-        paddingTop:10,
+        paddingTop: 10,
         paddingBottom: 6,
-        flexDirection: 'row', 
+        flexDirection: 'row',
         alignItems: 'center',
         backgroundColor: '#fff'
     },
-    backIcon :{
-        paddingLeft:10,
+    backIcon: {
+        paddingLeft: 10,
 
     },
     searchbar: {
         paddingLeft: 10,
+        borderColor: '#BDBDBD',
+        borderWidth: 1,
+        alignItems: 'center',
+        borderTopLeftRadius: 15,
+        borderTopRightRadius: 15,
+        borderBottomLeftRadius: 15,
+        borderBottomRightRadius: 15,
+        marginLeft: 10,
     },
-    topTen:{
-        paddingLeft:25,
-        paddingTop:5,
+    topTen: {
+        paddingLeft: 25,
+        paddingTop: 5,
         fontFamily: 'OpenSans-ExtraBold',
         fontSize: 22,
-        color:'#212121'
+        color: '#212121'
     }
 })
 

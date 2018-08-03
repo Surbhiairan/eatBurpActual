@@ -13,6 +13,7 @@ import {
     ViewPropTypes,
     TouchableHighlight
 } from 'react-native';
+
 import LikeIcon from '../SvgIcons/like.icon';
 import PenIcon from '../SvgIcons/pen.icon';
 

@@ -5,7 +5,7 @@ import SearchSuggestionItem from '../SearchSuggestionItem/SearchSuggestionItem';
 const searchSuggestionList = (props) => {
     searchSuggestion = ({item}) =>(
       <SearchSuggestionItem 
-        item_name = {item}
+        item_name = {item.search_tag}
         onItemPressed={() => props.onItemPressed(item, props.type)}
     />
     )

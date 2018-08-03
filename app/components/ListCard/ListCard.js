@@ -84,20 +84,9 @@ const ListCard = (props) =>{
                  </View>
                  <View style={style.dishInfo}>
                      <View style={{flex:1,flexWrap: 'wrap'}}>
-                         <Text style={{ fontFamily: 'OpenSans-Bold', color: '#474040', fontSize: 14 }}>{props.dish_name}</Text>
+                         <Text style={style.dishTextStyle}>{props.dish_name}</Text>
                      </View>
                      <View style={{alignItems: 'flex-end'}}>
-                     <Menu
-                         ref={this.setMenuRef}
-                         button={<TouchableOpacity onPress={(evt) => this.showMenu(evt)} style={{ padding: 4 }}>
-                             <Icon style={style.searchIcon} name="md-more" size={25} color="#757575" />
-                         </TouchableOpacity>}
-                         style={style.popUpStyle}
-                     >
-                        <MenuItem
-                        onPressLike={() => {props.onPressLike(props.dish)}}
-                        onPressReview={props.onPressReview} />
-                     </Menu>
                  </View>
                  </View>
                  
@@ -112,12 +101,13 @@ onPressLike = (dish) => {
 }
 
 const style = StyleSheet.create({
-    container: {
-        height: 48,
-        justifyContent: 'center',
-        maxWidth: 200,
-        minWidth: 35,
-      },
+
+    dishTextStyle: {
+        fontFamily: 'OpenSans-Bold', 
+        color: '#474040', 
+        fontSize: 14,
+        textAlign: 'center'
+    },
     restaurantContainer: {
         flex:1,
         backgroundColor: '#fff', 

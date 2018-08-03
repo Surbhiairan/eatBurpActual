@@ -24,7 +24,7 @@ class SearchResults extends Component {
   }
 
   componentDidMount(){
-    this.props.fetchDishSearchResults(this.props.dish_id);
+    //this.props.fetchDishSearchResults(this.props.dish_id);
   }
 
   listCardPressedHandler = (item) => {

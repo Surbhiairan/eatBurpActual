@@ -8,11 +8,12 @@ import PenIcon from '../SvgIcons/pen.icon';
 function MenuItem({
   style,
   onPressLike,
-  onPressReview
+  onPressReview,
+  dish
 }) {
   return (
     <View>
-      <TouchableHighlight onPress={onPressLike} style={[styles.container, style]} >
+      <TouchableHighlight onPress={() => onPressLike(dish)} style={[styles.container, style]} >
         <LikeIcon width={23.17} height={21.55} fill= {'white'}/>
       </TouchableHighlight>
       <TouchableHighlight onPress={onPressReview} style={[styles.container, style]} >
@@ -25,6 +26,7 @@ function MenuItem({
 MenuItem.propTypes = {
   onPress: PropTypes.func,
   style: TouchableHighlight.propTypes.style,
+  dish: PropTypes.node
 };
 
 const styles = StyleSheet.create({

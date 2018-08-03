@@ -4,7 +4,8 @@ import {
   StyleSheet,
   Text,
   View,
-  TouchableOpacity
+  TouchableOpacity,
+  ActivityIndicator
 } from 'react-native';
 import { connect } from 'react-redux';
 import Geocoder from 'react-native-geocoder';
@@ -27,6 +28,7 @@ class Home extends Component {
        latitude: null,
        longitude: null,
        error: null,
+       location: null,
        time: new Date().getHours()
      }
   }
@@ -67,7 +69,10 @@ class Home extends Component {
     }
     Geocoder.geocodePosition(position)
       .then(res => {
-        console.log("loction-------", res)
+        console.log("loction-------", res);
+        this.setState({
+          location: res[0]
+        })
       })
       .catch(err => {
         console.log("error----------", err)
@@ -175,9 +180,9 @@ class Home extends Component {
           <View style={styles.locationView}>
             <LocationIcon />
           </View>
-          <Text style={styles.locationText}>
-            Kanchanbag, Geetabhavan
-          </Text>
+          {(this.state.location === null ? <ActivityIndicator /> : (<Text style={styles.locationText}>
+            {this.state.location.subLocality} , {this.state.location.locality}
+          </Text>))}
         </View>
       </View>
     );
@@ -216,46 +221,51 @@ const styles = StyleSheet.create({
   mainIconsView: {
     marginTop: 25,
     flexDirection: 'row',
+    justifyContent: 'space-evenly'
   },
   topTenIconView: {
-    marginLeft: 60,
+    //marginLeft: 60,
   },
   topTenTextView: {
     fontFamily: "OpenSans-Bold",
     fontSize: 15,
     color: "#757575",
     marginTop: 4,
-    marginLeft: 54,
+    textAlign: 'center',
+    backgroundColor: 'blue'
+    //marginLeft: 54,
   },
   citySpecialView: {
-    marginLeft: 50
+    //marginLeft: 50
   },
   citySpecialTextView: {
     fontFamily: "OpenSans-Bold",
     fontSize: 15,
     color: "#757575",
     marginTop: 4,
-    marginLeft: 34,
+    //marginLeft: 34,
   },
   MealTextView: {
     fontFamily: "OpenSans-Bold",
     fontSize: 15,
     color: "#757575",
     marginTop: 4,
-    marginLeft: 36,
+    //marginLeft: 36,
   },
   mealView: {
-    marginLeft: 40,
+    //marginLeft: 40,
   },
   locationView: {
     marginTop: 44,
-    marginLeft: 168,
+    alignItems: 'center',
+    //marginLeft: 168,
   },
   locationText: {
     fontFamily: "OpenSans-Regular",
     fontSize: 15,
     color: "#757575",
-    marginLeft: 92,
+    textAlign: 'center'
+    //marginLeft: 92,
   }
 })
 
