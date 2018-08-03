@@ -92,11 +92,22 @@ class Meals extends Component {
         this.setState({selected: type})
     }
 
+    backIconPress = () => {
+        this.props.navigator.pop();
+    }
+
+    searchBarPressHandler = () => {
+        //navigate to search suggestion screen
+        this.props.navigator.push({
+            screen: "SearchSuggestionScreen",
+        });
+    }
+
     render() {
         return (
             <View style = {{ backgroundColor: '#fff', flex:1 }}>
                 <View style = {style.header}>
-                    <TouchableOpacity>
+                    <TouchableOpacity onPress={this.backIconPress}>
                         <Icon style = {style.backIcon} name="ios-arrow-round-back-outline" size={45} color="#757575" />
                     </TouchableOpacity>
                     <View style = {style.searchbar}>
@@ -225,7 +236,14 @@ const style = StyleSheet.create({
     },
     searchbar: {
         paddingLeft: 10,
-        paddingLeft:10
+        borderColor: '#BDBDBD',
+        borderWidth: 1,
+        alignItems: 'center',
+        borderTopLeftRadius: 15,
+        borderTopRightRadius: 15,
+        borderBottomLeftRadius: 15,
+        borderBottomRightRadius: 15,
+        marginLeft: 10,
     },
 
     meals:{

@@ -56,16 +56,20 @@ const RestaurantCard = (props) => (
             <Text style={styles.addressText}>
                 {props.restaurantBuilding} {props.restaurantStreet}
             </Text>
-            <View style={styles.likeIcon}>
-                <LikeIcon height={22.67}
-                    width={22.67}
-                    fill={'#FFA000'} />
-            </View>
-            <View style={styles.penIcon}>
-                <PenIcon height= {22.67}
-                        width= {22.67}
-                        fill={'#FFA000'}/>
-            </View>
+            <TouchableOpacity onPress={props.onRecommendButtonPressed} style={{ padding: 4 }}>
+                <View style={styles.likeIcon}>
+                    <LikeIcon height={22.67}
+                        width={22.67}
+                        fill={'#FFA000'} />
+                </View>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={props.onReviewButtonPressed} style={{ padding: 4 }}>
+                <View style={styles.penIcon}>
+                    <PenIcon height={22.67}
+                        width={22.67}
+                        fill={'#FFA000'} />
+                </View>
+            </TouchableOpacity>
         </View>
         <View style={styles.cuisineAndPhone}>
             <Text style={styles.cuisineView}>

@@ -15,7 +15,7 @@ export function searchRestaurant(searchedText) {
     .then(token => {
         console.log("token in get user", token)
         return (
-            fetch(`${API_ROOT}/searchDishes?searchedText=`+searchedText,{
+            fetch(`${API_ROOT}/searchRestaurants?searchedText=`+searchedText,{
             method: 'GET',
             headers: {
                 'Accept': 'application/json',
@@ -59,12 +59,12 @@ export function searchRestaurantFailure(error) {
 
 export function searchDish(searchedText) {
   return (dispatch) => {
-    dispatch(getsearchDish());
+    dispatch(getSearchDish());
     dispatch(authGetToken())
     .then(token => {
         console.log("token in get user", token)
         return (
-            fetch(`${API_ROOT}/searchRestaurants?searchedText=`+searchedText,{
+            fetch(`${API_ROOT}/searchDishes?searchedText=`+searchedText,{
             method: 'GET',
             headers: {
                 'Accept': 'application/json',
@@ -86,7 +86,7 @@ export function searchDish(searchedText) {
   };
 }
      
-export function getsearchDish() {
+export function getSearchDish() {
   return {
       type: SEARCH_DISH
   }

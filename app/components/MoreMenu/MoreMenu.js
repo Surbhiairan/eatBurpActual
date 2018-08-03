@@ -12,6 +12,7 @@ import {
     View,
     ViewPropTypes,
 } from 'react-native';
+import MenuItem from '../MoreMenu/MoreMenuItem';
 
 const STATES = {
     HIDDEN: 'HIDDEN',
@@ -169,7 +170,7 @@ class Menu extends React.Component {
         const animationStarted = menuState === STATES.ANIMATING;
         const modalVisible = menuState === STATES.SHOWN || animationStarted;
 
-        const { testID, button, style, children } = this.props;
+        const { testID, button, style, children, dish } = this.props;
 
         return (
             <View ref={this._setContainerRef} collapsable={false} testID={testID}>
@@ -201,8 +202,11 @@ class Menu extends React.Component {
                                 <Animated.View
                                     style={[styles.menuContainer, animationStarted && menuSize]}
                                 >
-                                    {children}
-                                </Animated.View>
+                                    <MenuItem
+                                        onPressLike={this.onPressLike}
+                                        onPressReview={props.onPressReview}
+                                        dish={dish} />                                
+                                    </Animated.View>
                             </Animated.View>
                         </View>
                     </TouchableWithoutFeedback>
@@ -218,6 +222,7 @@ Menu.propTypes = {
     onHidden: PropTypes.func,
     style: ViewPropTypes.style,
     testID: ViewPropTypes.testID,
+    dish: ViewPropTypes.dish
 };
 
 const styles = StyleSheet.create({

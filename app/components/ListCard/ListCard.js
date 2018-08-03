@@ -60,10 +60,9 @@ const ListCard = (props) =>{
                             <Icon style={style.searchIcon} name="md-more" size={25} color="#757575" />
                         </TouchableOpacity>}
                         style={style.popUpStyle}
+                        dish= {props.dish}
                     >
-                        <MenuItem
-                            onPressLike={this.onPressLike}
-                            onPressReview={props.onPressReview} />
+                        
                     </Menu>
                 </View>
             </View>
@@ -82,20 +81,9 @@ const ListCard = (props) =>{
                  </View>
                  <View style={style.dishInfo}>
                      <View style={{flex:1,flexWrap: 'wrap'}}>
-                         <Text style={{ fontFamily: 'OpenSans-Bold', color: '#474040', fontSize: 14 }}>{props.dish_name}</Text>
+                         <Text style={style.dishTextStyle}>{props.dish_name}</Text>
                      </View>
                      <View style={{alignItems: 'flex-end'}}>
-                     <Menu
-                         ref={this.setMenuRef}
-                         button={<TouchableOpacity onPress={(evt) => this.showMenu(evt)} style={{ padding: 4 }}>
-                             <Icon style={style.searchIcon} name="md-more" size={25} color="#757575" />
-                         </TouchableOpacity>}
-                         style={style.popUpStyle}
-                     >
-                         <MenuItem
-                             onPressLike={this.onPressLike}
-                             onPressReview={props.onPressReview} />
-                     </Menu>
                  </View>
                  </View>
                  
@@ -110,6 +98,12 @@ onPressLike = () => {
 }
 
 const style = StyleSheet.create({
+    dishTextStyle: {
+        fontFamily: 'OpenSans-Bold', 
+        color: '#474040', 
+        fontSize: 14,
+        textAlign: 'center'
+    },
     restaurantContainer: {
         flex:1,
         backgroundColor: '#fff', 

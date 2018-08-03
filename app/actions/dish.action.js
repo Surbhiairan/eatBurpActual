@@ -132,7 +132,7 @@ export function fetchDishSearchResults(dish_id) {
         dispatch(authGetToken())
         .then(token => {
             return (
-            fetch(`${API_ROOT}/getDishSearchResults?dish_id=`+dish_id, {
+            fetch(`${API_ROOT}/getDishSearchResults?search_tag=`+dish_id, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
