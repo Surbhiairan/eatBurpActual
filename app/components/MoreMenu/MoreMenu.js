@@ -11,7 +11,10 @@ import {
     TouchableWithoutFeedback,
     View,
     ViewPropTypes,
+    TouchableHighlight
 } from 'react-native';
+import LikeIcon from '../SvgIcons/like.icon';
+import PenIcon from '../SvgIcons/pen.icon';
 
 const STATES = {
     HIDDEN: 'HIDDEN',
@@ -27,6 +30,7 @@ class Menu extends React.Component {
     _container = null;
 
     state = {
+        dish: null,
         menuState: STATES.HIDDEN,
 
         top: 0,
@@ -83,7 +87,7 @@ class Menu extends React.Component {
         this.setState({ buttonWidth: width, buttonHeight: height });
     };
 
-    show = (x, y) => {
+    show = (x, y, dish) => {
         /* this._container.measureInWindow((x, y) => {
           const top = Math.max(SCREEN_INDENT, y);
           const left = Math.max(SCREEN_INDENT, x);
@@ -93,6 +97,9 @@ class Menu extends React.Component {
         const left = x;
         this.setState({
             menuState: STATES.SHOWN, top, left
+        });
+        this.setState({
+            dish:dish
         })
     };
 
@@ -169,7 +176,7 @@ class Menu extends React.Component {
         const animationStarted = menuState === STATES.ANIMATING;
         const modalVisible = menuState === STATES.SHOWN || animationStarted;
 
-        const { testID, button, style, children } = this.props;
+        const { testID, button, style} = this.props;
 
         return (
             <View ref={this._setContainerRef} collapsable={false} testID={testID}>
@@ -201,7 +208,14 @@ class Menu extends React.Component {
                                 <Animated.View
                                     style={[styles.menuContainer, animationStarted && menuSize]}
                                 >
-                                    {children}
+                                <View>
+                    <TouchableHighlight onPress={()=>this.props.onPressLike(this.state.dish)} style={[style.container, style]} >
+                      <LikeIcon width={23.17} height={21.55} fill= {'white'}/>
+                    </TouchableHighlight>
+                    <TouchableHighlight onPress={()=>this.props.onPressReview(this.state.dish)} style={[style.container, style]} >
+                      <PenIcon width={22.75} height={22.69} fill={'white'}/>
+                    </TouchableHighlight>
+                  </View>
                                 </Animated.View>
                             </Animated.View>
                         </View>
@@ -214,10 +228,11 @@ class Menu extends React.Component {
 
 Menu.propTypes = {
     button: PropTypes.node.isRequired,
-    children: PropTypes.node.isRequired,
     onHidden: PropTypes.func,
     style: ViewPropTypes.style,
     testID: ViewPropTypes.testID,
+    onPressLike: PropTypes.func,
+    onPressReview: PropTypes.func
 };
 
 const styles = StyleSheet.create({

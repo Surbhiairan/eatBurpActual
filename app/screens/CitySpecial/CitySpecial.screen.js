@@ -17,6 +17,7 @@ import Menu, { MenuItem, MenuDivider } from 'react-native-material-menu';
 import SearchBar from '../../components/SearchBar/SearchBar';
 import { fetchTopDishes } from '../../actions/dish.action';
 import ListCard from '../../components/ListCard/ListCard';
+import { recommendDishDispatch } from '../../actions/dish.action';
 
 class CitySpecial extends Component {
 
@@ -66,6 +67,7 @@ class CitySpecial extends Component {
         if(this.state.restaurant === true)
         return(
             <ListCard 
+                dish = {item.item}
                 type= "dishRestaurantMapping"
                 restaurant_name = {item.item.restaurant_name}
                 restaurant_location = {item.item.locality}
@@ -74,35 +76,31 @@ class CitySpecial extends Component {
                 price={item.item.price}
                 image = {item.item.images}
                 onPress={() => this.listCardPressedHandler(item)}
-                onPressLike={this.recommendDishHandler}
-                onPressRating={this.ratingDishHandler}
                 onPressReview={this.reviewDishHandler}
             />
             )
         else
         return(
             <ListCard 
+                dish = {item.item}
                 type = "dish"
                 dish_name = {item.item.dish_name}
                 image = {item.item.images}
                 onPress = {() => this.listCardPressedHandler(item)}
-                onPressLike = {this.recommendDishHandler}
-                onPressRating = {this.ratingDishHandler}
-                onPressReview = {this.reviewDishHandler}
             />
         )
     }
 
-    recommendDishHandler = () => {
-        alert("recommended");
-    }
-
-    ratingDishHandler = () => {
-        alert("rated");
-    }
-
-    reviewDishHandler = () => {
-        alert("reviewed")
+    reviewDishHandler = (dish) => {
+        
+        this.props.navigator.push({
+            screen: "ReviewDishScreen",
+            // title: dish.item.dish_name,
+            passProps: {
+                selectedDish: dish
+            }
+        });
+        alert("reviewed");
     }
 
     onButtonPress = (type) => {
