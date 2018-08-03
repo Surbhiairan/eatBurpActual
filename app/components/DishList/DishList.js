@@ -131,7 +131,7 @@ render(){
             reviews = {this.state.selectedDish.reviews}
             average_rating = {this.state.selectedDish.average_rating}               
             onDishCardPressed={() => props.onDishCardPressed(this.state.selectedDish)}
-            onRecommendButtonPressed={() => props.onRecommendButtonPressed(this.state.selectedDish)}
+            onRecommendButtonPressed={() => this.props.onRecommendButtonPressed(this.state.selectedDish)}
             onReviewButtonPressed={() => this.props.onReviewButtonPressed(this.state.selectedDish)}
           />
         }

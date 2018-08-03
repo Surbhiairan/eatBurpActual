@@ -1,14 +1,14 @@
 import React, { Component } from "react";
 import {
-    View,
-    Image,
-    Text,
-    Button,
-    StyleSheet,
-    TouchableOpacity,
-    FlatList,
-    ScrollView,
-    ActivityIndicator
+  View,
+  Image,
+  Text,
+  Button,
+  StyleSheet,
+  TouchableOpacity,
+  FlatList,
+  ScrollView,
+  ActivityIndicator
 } from "react-native";
 import { connect } from "react-redux";
 import { fetchUser } from '../../actions/user.action';
@@ -24,35 +24,35 @@ import PenIcon from '../../components/SvgIcons/pen.icon';
 
 class UserProfile extends Component {
 
-  constructor(props){
-      super(props);
-      this.state = {
-          buttonPressed : "reviews",
-          recommendations: true,
-          reviews: false
-      }
+  constructor(props) {
+    super(props);
+    this.state = {
+      buttonPressed: "reviews",
+      recommendations: true,
+      reviews: false
+    }
   }
-  componentDidMount(){
+
+  componentDidMount() {
     this.props.fetchUser();
     this.props.fetchReviews();
     this.props.fetchRecommendations();
-  } 
-
+  }
 
   renderReview = (review) => {
     console.log("review items---------", review)
-    return(
-    <Reviews
-      review = {review.item.review}
-    />
+    return (
+      <Reviews
+        review={review.item}
+      />
     );
   }
   renderRecommendation = (recommendation) => {
-    return(
-    <Recommendations
-      recommendation = {recommendation.item}
+    return (
+      <Recommendations
+        recommendation={recommendation.item}
       //onDishPressed={this.dishPressedHandler(recommendation.item)}  
-    />
+      />
     )
   }
 
@@ -67,87 +67,108 @@ class UserProfile extends Component {
 
   render() {
     return (
-      <View style = {{flex:1, backgroundColor: "#efefef"}}> 
+      <View style={{ flex: 1}}>
         <ScrollView>
           {this.props.userLoading ?
-          <ActivityIndicator/>:
-            <View style = {{backgroundColor: "#ffa000"}}>
-            <UserInfo
-            first_name={this.props.userDetails.first_name}
-            last_name={this.props.userDetails.last_name}
-            profile_image={this.props.userDetails.profile_image}
-            no_of_reviews={this.props.userDetails.no_of_reviews}
-            no_of_recommendations={this.props.userDetails.no_of_recommendations}
-            foodie_level={this.props.userDetails.foodie_level}
-            />
-            <View elevation={5} style={{borderRadius: 5, backgroundColor: '#000' }}>
-              <View style={{flexDirection:'row',backgroundColor: 'red', alignContent:'stretch'}}>
-                <TouchableOpacity 
-                  onPress={() => this.setState({buttonPressed:"recommendations",
-                  recommendations: true,
-                  reviews: false})} >
-                    <View elevation = {5} style={style.selectedTab}>
-                      {this.state.recommendations ? <LikeFilledIcon fill={'#ffa000'} height={26} width={26}/>
-                      : <LikeIcon fill={'#ffa000'} height={26} width={26}/>}
+            <ActivityIndicator /> :
+            <View style={{  }}>
+              <UserInfo
+                first_name={this.props.userDetails.first_name}
+                last_name={this.props.userDetails.last_name}
+                profile_image={this.props.userDetails.profile_image}
+                no_of_reviews={this.props.userDetails.no_of_reviews}
+                no_of_recommendations={this.props.userDetails.no_of_recommendations}
+                foodie_level={this.props.userDetails.foodie_level}
+              />
+              <View elevation={3} style={{ borderRadius: 5, padding: 5, margin: 5, alignItems: 'center' }}>
+              <View style={{ flexDirection: 'row',paddingTop:10}}>
+                <View style={{flex:1, alignItems:'center'}}>
+                  <TouchableOpacity
+                    onPress={() => this.setState({
+                      buttonPressed: "recommendations",
+                      recommendations: true,
+                      reviews: false
+                    })} >
+                    <View style={style.selectedTab}>
+                      {this.state.recommendations ? 
+                      <View style={{flexDirection: 'row'}}>
+                      <LikeFilledIcon fill={'#ffa000'} height={26} width={26} />
+                      <Text style={{fontFamily: 'OpenSans-Regular', fontSize: 15, color: '#ffa000'}}>Recommendations</Text>
+                      </View> 
+                        : 
+                      <View style={{flexDirection: 'row'}}>
+                      <LikeIcon fill={'#757575'} height={26} width={26} />
+                      <Text style={{fontFamily: 'OpenSans-Regular', fontSize: 15, color: '#757575'}}>Recommendations</Text>
+                      </View> 
+                      }
                     </View>
-                </TouchableOpacity>
+                  </TouchableOpacity></View>
 
-                <TouchableOpacity 
-                  onPress={() => this.setState({buttonPressed:"reviews",
-                  recommendations: false,
-                  reviews: true})} >
-                    <View elevation = {5} style={style.selectedTab}>
-                    {this.state.reviews ? <PenIcon fill={'#ffa000'} height={26} width={26}/>
-                      : <PenIcon fill={'#ffa000'} height={26} width={26}/>}
+                  <View style={{flex:1,alignItems:'center'}}>
+                  <TouchableOpacity
+                    onPress={() => this.setState({
+                      buttonPressed: "reviews",
+                      recommendations: false,
+                      reviews: true
+                    })} >
+                    <View style={style.selectedTab}>
+                      {this.state.reviews ? 
+                      <View style={{flexDirection: 'row'}}>
+                      <PenIcon fill={'#ffa000'} height={26} width={26} />
+                      <Text style={{fontFamily: 'OpenSans-Regular', fontSize: 15, color: '#ffa000'}}>Reviews</Text>
+                      </View>  
+                        : 
+                      <View style={{flexDirection: 'row'}}>
+                      <PenIcon fill={'#757575'} height={26} width={26} />
+                      <Text style={{fontFamily: 'OpenSans-Regular', fontSize: 15, color: '#757575'}}>Reviews</Text>
+                      </View>}
                     </View>
-                </TouchableOpacity>
+                  </TouchableOpacity></View>
 
-              </View>
-              
-              <View>
-                {(this.state.reviews) && (this.props.reviewsLoading? <ActivityIndicator /> : 
-                    <FlatList 
-                      data = {this.props.reviews}
-                              renderItem={this.renderReview} />)}
+                </View>
 
-                          {(this.state.recommendations) && (this.props.recommendationsLoading ? <ActivityIndicator /> :
-                    <View elevation={5} style={{ borderRadius: 10, padding: 10, margin: 10, alignItems: 'center' }}>
+                <View>
+                  {(this.state.reviews) && (this.props.reviewsLoading ? <ActivityIndicator /> :
+                    <FlatList
+                      data={this.props.reviews}
+                      renderItem={this.renderReview} />)}
+
+                  {(this.state.recommendations) && (this.props.recommendationsLoading ? <ActivityIndicator /> :
                       <FlatList
                         numColumns={3}
                         style={style.recommendationList}
                         keyExtractor={(item, index) => index}
                         data={this.props.recommendations}
                         renderItem={this.renderRecommendation} />
-                    </View>
                   )
-                }
+                  }
+                </View>
               </View>
-            </View>
-          </View>}
+            </View>}
         </ScrollView>
       </View>
     )
-  }  
+  }
 }
 
 const style = StyleSheet.create({
   selectedTab: {
     alignItems: 'center',
     justifyContent: 'center',
-    padding:5,
-    backgroundColor: '#808000', 
+    padding: 5,
+    //backgroundColor: '#808000',
     borderRadius: 10,
-    height: 40,
-    width: 60
+    // height: 40,
+    // width: 60
   },
-  tab:{
+  tab: {
     padding: 5,
     backgroundColor: '#fff',
     borderRadius: 7,
-    width: 60,
-    height: 40   
+    // width: 60,
+    // height: 40
   },
-  recommendationList:{
+  recommendationList: {
 
   }
 })

@@ -26,14 +26,14 @@ const CustomImage = (props) => {
   }
   else 
     return (
-      <View style={{backgroundColor: "#000"}}>      
-        <UserProfileIcon height={60} width={60} fill={'#ffa000'}/>
+      <View >      
+        <UserProfileIcon height={80} width={80} fill={'#ffa000'}/>
       </View>
       )
 }
 
 const userInfo = (props) => (
-  <View elevation = {5} style = {{borderRadius :5, padding: 10, margin: 10, flexDirection: 'row'}}>
+  <View elevation = {3} style = {{borderRadius :5, padding: 10, margin: 5, flexDirection: 'row'}}>
   <View style ={{marginLeft: 5}}>
     <CustomImage 
       profile_image = {props.profile_image}/>

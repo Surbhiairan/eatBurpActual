@@ -6,28 +6,31 @@ import {
     View,
     FlatList,
     TouchableOpacity,
-    Image
+    Image,
   } from 'react-native';
   
 const DEFAULT_IMAGE = require('../../data/images/review.jpg');
   
 const reviews = (props) => {
     return(
-    <View elevation = {5} style ={{padding:10,borderRadius:10, margin: 10,backgroundColor : "#fff"}}>
-    <Image 
-      source={DEFAULT_IMAGE}
-      style={styles.imageStyle}
-    />
-      {/* <Text>{props.review.user.first_name}</Text><Text>{props.review.user.last_name}</Text> */}
-      <Text style={{color:"#212121", fontFamily: "OpenSans-Bold", fontSize: 20}}>{props.review.dish_name}</Text>
-      <Text style={{color:"#212121", fontFamily: "OpenSans-Semibold", fontSize: 16}}>{props.review.restaurant_name}</Text>
-      <Text>{props.review.rating}</Text>
-      <Text style={{color:"#212121", fontFamily: "OpenSans-Regular", fontSize: 12}}>{props.review.review}</Text>
-
-      {/* <Image 
-        source={{uri: props.review.review_images[0]}}
-        style={{width: 400, height: 400}}
-      /> */}
+    <View style ={{padding:10,borderRadius:5, margin: 3,backgroundColor : "#fff"}}>
+      <Text style={{color:"#212121", fontFamily: "OpenSans-SemiBold", fontSize: 16}}>{props.review.dish_detail.dish_name}</Text>
+      <View style={{flexDirection:'row'}}>
+      <Text style={{color:"#757575", fontFamily: "OpenSans-Bold", fontSize: 13}}>{props.review.dish_detail.restaurant_name},</Text>
+      <Text style={{paddingLeft: 4, color:"#757575", fontFamily: "OpenSans-Bold", fontSize: 13}}>{props.review.dish_detail.locality}</Text>
+      </View>
+      <Text style={{color:"#757575", fontFamily: "OpenSans-Regular", fontSize: 13}}>Your Rating {props.review.review.rating}</Text>
+      <Text style={{color:"#212121", fontFamily: "OpenSans-Regular", fontSize: 14}}>{props.review.review.review}</Text>
+      <FlatList
+        numColumns = {4}
+        data={props.review.review.images}
+        renderItem = {({item})=>
+         <Image 
+          source={{uri: item}}
+          style={{width: 100, height: 100}}
+          />
+        }
+      />
     </View>
     );
 };

@@ -7,13 +7,16 @@ import {
     FlatList,
     ScrollView,
     Image,
-    TouchableOpacity
+    TouchableOpacity,
+    TouchableHighlight
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 //import Menu, { MenuDivider } from 'react-native-material-menu';
 
 import MenuItem from '../MoreMenu/MoreMenuItem';
 import Menu from '../MoreMenu/MoreMenu';
+import LikeIcon from '../SvgIcons/like.icon';
+import PenIcon from '../SvgIcons/pen.icon';
 
 _menu = null;
 
@@ -25,9 +28,9 @@ hideMenu = () => {
     this._menu.hide();
 };
 
-showMenu = (event) => {
+showMenu = (event, dish) => {
     console.log("event----------", event.nativeEvent)
-    this._menu.show((event.nativeEvent.pageX - event.nativeEvent.locationX), (event.nativeEvent.pageY - event.nativeEvent.locationY));
+    this._menu.show((event.nativeEvent.pageX - event.nativeEvent.locationX), (event.nativeEvent.pageY - event.nativeEvent.locationY), dish);
 };
 
 const ListCard = (props) =>{
@@ -56,13 +59,13 @@ const ListCard = (props) =>{
                 <View style={style.moreMenu}>
                     <Menu
                         ref={this.setMenuRef}
-                        button={<TouchableOpacity onPress={(evt) => this.showMenu(evt)} style={{ padding: 4 }}>
+                        button={<TouchableOpacity onPress={(evt) => this.showMenu(evt, props.dish)} style={{ padding: 4 }}>
                             <Icon style={style.searchIcon} name="md-more" size={25} color="#757575" />
                         </TouchableOpacity>}
                         style={style.popUpStyle}
-                        dish= {props.dish}
-                    >
-                        
+                        onPressLike={this.onPressLike}
+                        onPressReview={props.onPressReview}
+                    > 
                     </Menu>
                 </View>
             </View>
@@ -92,12 +95,13 @@ const ListCard = (props) =>{
      )
 }
 
-onPressLike = () => {
+onPressLike = (dish) => {
     alert("you have recommended this dish");
     this._menu.hide();
 }
 
 const style = StyleSheet.create({
+
     dishTextStyle: {
         fontFamily: 'OpenSans-Bold', 
         color: '#474040', 

@@ -55,7 +55,7 @@ class TopTenDish extends Component {
     recommendButtonPressHandler = dish => {
         // console.log("recommend", dish);
         //dispatch action to increase recommendation count, pass dish_restaurant_mapping id
-        this.props.recommendDishDispatch(dish.item._id);
+        this.props.recommendDishDispatch(dish._id);
     }
 
     reviewButtonPressHandler = dish => {
