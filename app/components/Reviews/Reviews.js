@@ -8,9 +8,7 @@ import {
     TouchableOpacity,
     Image,
   } from 'react-native';
-  
-const DEFAULT_IMAGE = require('../../data/images/review.jpg');
-  
+    
 const reviews = (props) => {
     return(
     <View style ={{padding:10,borderRadius:5, margin: 3,backgroundColor : "#fff"}}>

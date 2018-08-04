@@ -98,7 +98,6 @@ export default class DishList extends Component {
                                 reviews={this.state.selectedDish.reviews}
                                 average_rating={this.state.selectedDish.average_rating}
                                 locality={this.state.selectedDish.locality}
-                                onDishCardPressed={() => props.onDishCardPressed(this.state.selectedDish)}
                                 onRecommendButtonPressed={() => this.props.onRecommendButtonPressed(this.state.selectedDish)}
                                 onReviewButtonPressed={() => this.props.onReviewButtonPressed(this.state.selectedDish)}
                                 onRestaurantPressed={() => this.props.onRestaurantPressed(this.state.selectedDish.restaurant_id[0])}

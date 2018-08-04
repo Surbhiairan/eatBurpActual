@@ -38,6 +38,23 @@ class DishDetail extends Component {
     });
   }
 
+  reviewDishHandler = (dish) => {
+    this.props.navigator.push({
+        screen: "ReviewDishScreen",
+        title: 'Add Review',
+        passProps: {
+            selectedDish: dish
+        }
+    });
+    alert("reviewed");
+  }
+  
+  recommendButtonPressHandler = dish => {
+    alert('recommended');
+    console.log("recommend", dish);
+    //dispatch action to increase recommendation count, pass dish_restaurant_mapping id
+    //this.props.recommendDishDispatch(dish._id);
+}
   render() {
     return (
       <View style={styles.container}>
@@ -51,21 +68,21 @@ class DishDetail extends Component {
             />
           </View >
         </View>
-        <View>
           <ScrollView>
+            <View>
           <DishCard 
             dish_name = {this.props.selectedDish.dish_name}
             price = {this.props.selectedDish.price}
             restaurant_name = {this.props.selectedDish.restaurant_name}
             recommended = {this.props.selectedDish.recommended}
             dish_images = {this.props.selectedDish.images}
+            locality = {this.props.selectedDish.locality}
             reviews = {this.props.selectedDish.reviews}
             average_rating = {this.props.selectedDish.average_rating}               
-            onDishCardPressed={() => props.onDishCardPressed(this.props.selectedDish)}
-            onRecommendButtonPressed={() => props.onRecommendButtonPressed(this.props.selectedDish)}
-            onReviewButtonPressed={() => props.onReviewButtonPressed(this.props.selectedDish)}
-          /></ScrollView>
-        </View>
+            onRecommendButtonPressed={() => this.recommendButtonPressHandler(this.props.selectedDish)}
+            onReviewButtonPressed={() => this.reviewDishHandler(this.props.selectedDish)}
+          /></View>
+          </ScrollView>
         {/* <View>
           <TouchableOpacity onPress={this.placeDeletedHandler}>
             <View style={styles.deleteButton}>
@@ -80,6 +97,7 @@ class DishDetail extends Component {
 
 const styles = StyleSheet.create({
   container: {
+    flex:1
   },
   placeImage: {
     width: "100%",

@@ -45,7 +45,7 @@ const ListCard = (props) =>{
                 </View>
                 <View style={style.info}>
                     <Text style={{ fontFamily: 'OpenSans-SemiBold', color: '#474040', fontSize: 16 }}>{props.restaurant_name}</Text>
-                    <Text style={{ fontFamily: 'OpenSans-Regular', color: '#474040', fontSize: 13 }}>{props.restaurant_location}</Text>
+                    <Text style={{ fontFamily: 'OpenSans-Regular', color: '#474040', fontSize: 13 }}>{props.locality}</Text>
                     <View style={{flexDirection:'row'}}> 
                     <Text style={{ fontFamily: 'OpenSans-Bold', color: '#474040', fontSize: 13 }}>{props.dish_name},</Text>
                     <Text style={{ fontFamily: 'OpenSans-SemiBold', color: '#474040', fontSize: 13, paddingLeft:5 }}>Rs. {props.price}</Text>

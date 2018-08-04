@@ -11,7 +11,7 @@ import {
     TouchableWithoutFeedback,
     View,
     ViewPropTypes,
-    TouchableHighlight
+    TouchableOpacity
 } from 'react-native';
 
 import LikeIcon from '../SvgIcons/like.icon';
@@ -210,12 +210,12 @@ class Menu extends React.Component {
                                     style={[styles.menuContainer, animationStarted && menuSize]}
                                 >
                                     <View style={{backgroundColor:'#ffa000',borderRadius:4}}>
-                                        <TouchableHighlight onPress={() => this.props.onPressLike(this.state.dish)} style={[style.container]} >
+                                        <TouchableOpacity onPress={() => this.props.onPressLike(this.state.dish)} style={[style.container]} >
                                             <View style={{margin:10,}}><LikeIcon width={28.17} height={26.55} fill={'white'} /></View>
-                                        </TouchableHighlight>
-                                        <TouchableHighlight onPress={() => this.props.onPressReview(this.state.dish)} style={[style.container]} >
+                                        </TouchableOpacity>
+                                        <TouchableOpacity onPress={() => this.props.onPressReview(this.state.dish)} style={[style.container]} >
                                         <View style={{margin:10}}><PenIcon width={27.75} height={27.69} fill={'white'} /></View>
-                                        </TouchableHighlight>
+                                        </TouchableOpacity>
                                     </View>
                                 </Animated.View>
                             </Animated.View>

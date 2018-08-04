@@ -169,7 +169,7 @@ class ReviewDish extends Component {
   render(){      
 
     return(
-    <View style={{flex:1}}>
+    <View style={{flex:1, backgroundColor:'#fff'}}>
       <ScrollView>
       <View style={[styles.textBoxView]}>
       <TextInput style={[styles.textBox]}

@@ -73,19 +73,6 @@ class Meals extends Component {
         })
     }
 
-
-    reviewDishHandler = (dish) => {
-        console.log("reviewDishHandler", dish)
-        this.props.navigator.push({
-            screen: "ReviewDishScreen",
-            // title: dish.item.dish_name,
-            passProps: {
-                selectedDish: dish
-            }
-        });
-        alert("reviewed");
-    }
-
     renderListComponent = (item) => {
         return(
             <ListCard 
@@ -94,14 +81,24 @@ class Meals extends Component {
                 dish_name = {item.item.dish_name}
                 price = {item.item.price}
                 restaurant_name = {item.item.restaurant_name}
-                restaurant_location = {item.item.locality}
+                locality = {item.item.locality}
                 dish_rating = {item.item.average_rating}
                 image = {item.item.images}
                 onPress = {() => this.listCardPressedHandler(item)}
                 onPressReview={this.reviewDishHandler}
-
             />
         )
+    }
+
+    reviewDishHandler = (dish) => { 
+        this.props.navigator.push({
+            screen: "ReviewDishScreen",
+            title: 'Add Review',
+            passProps: {
+                selectedDish: dish
+            }
+        });
+        alert("reviewed");
     }
 
     onButtonPress = (type) => {
