@@ -98,7 +98,7 @@ class TopTenDish extends Component {
                         />
                     </View >
                 </View>
-                <Text style={style.topTen}>Top Ten{this.props.topDishesError}</Text>
+                <Text style={style.topTen}>Top Ten Dishes{this.props.topDishesError}</Text>
                 <View style={style.container}>
                     {(this.props.topDishes) && <DishList
                         dishes={this.props.topDishes}
