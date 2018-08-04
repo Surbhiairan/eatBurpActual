@@ -121,7 +121,7 @@ class TopTenDish extends Component {
                         onReviewButtonPressed={this.reviewButtonPressHandler}
                         onDishCardPressed={this.dishCardPressedHandler}
                         onRestaurantPressed={this.restaurantPressedHandler}
-                    />
+                    />)
 
                     }
                 </View>
