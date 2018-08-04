@@ -21,6 +21,7 @@ const searchSuggestionList = (props) => {
     return (       
       <View>
       <FlatList
+          keyExtractor={(item, index) => index.toString()}
           data = { props.suggestions }
           renderItem = {this.searchSuggestion} />
       </View>

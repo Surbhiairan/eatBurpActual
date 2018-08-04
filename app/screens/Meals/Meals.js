@@ -160,6 +160,7 @@ class Meals extends Component {
                             (<FlatList 
                                 data = {this.props.meal}
                                 renderItem = {this.renderListComponent}
+                                keyExtractor={(item, index) => index.toString()}
                             />)
                         )
                     }
@@ -170,6 +171,7 @@ class Meals extends Component {
                             (<FlatList
                                 data={this.props.meal}
                                 renderItem={this.renderListComponent}
+                                keyExtractor={(item, index) => index.toString()}
                             />)
                         )
                     }
@@ -179,6 +181,7 @@ class Meals extends Component {
                             (<FlatList
                                 data={this.props.meal}
                                 renderItem={this.renderListComponent}
+                                keyExtractor={(item, index) => index.toString()}
                             />)
                         )
                     }

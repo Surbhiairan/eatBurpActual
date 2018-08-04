@@ -4,7 +4,6 @@ import {
   StyleSheet,
   Text,
   View,
-  FlatList,
   TouchableOpacity,
   ScrollView
 } from 'react-native';
@@ -150,9 +149,6 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
   },
-  searchBarContainer: {
-    marginTop: 20,
-  },
   defaultText: {
     fontSize: 15,
     color: '#7e7e7e',
@@ -191,7 +187,6 @@ const styles = StyleSheet.create({
   },
   backIcon: {
     paddingLeft: 10,
-
   },
   searchbar: {
     paddingLeft: 10,
@@ -203,6 +198,7 @@ const styles = StyleSheet.create({
     borderBottomLeftRadius: 15,
     borderBottomRightRadius: 15,
     marginLeft: 10,
+    marginTop:10,
   },
   unselectedText: {
     fontFamily: 'OpenSans-Regular',

@@ -83,6 +83,7 @@ const dishCard = (props) => {
         Reviews
       </Text>
       <FlatList
+        keyExtractor={(item, index) => index.toString()}
         data={props.reviews}
         renderItem={(item) => {
           return (

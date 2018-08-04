@@ -10,6 +10,7 @@ const restaurantList = (props) => {
         <View> 
             <Text> Top Restaurants </Text>
             <FlatList
+                keyExtractor={(item, index) => index.toString()}
                 style={styles.listContainer}
                 data={props.restaurants}
                 renderItem={(info) => (

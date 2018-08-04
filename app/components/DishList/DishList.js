@@ -9,16 +9,26 @@ class ButtonComponent extends React.PureComponent {
 
     render() {
         const { selected, dish, id } = this.props;
-        const textColor = selected === id ? "red" : "black";
-        return (
+        //const textColor = selected === id ? "red" : "black";
+        if(selected === id)
+        return(
             <TouchableOpacity onPress={this._onPress}>
-                <View>
-                    <Text style={{ color: textColor }}>
+                <View style={{backgroundColor:'#ffa000',borderRadius: 16, paddingLeft:10, paddingRight:10,paddingTop:8, paddingBottom:8, marginRight:10}}>
+                    <Text style={{ color: '#fff', fontFamily:'OpenSans-SemiBold', fontSize:15 }}>
                         {this.props.title}
                     </Text>
                 </View>
             </TouchableOpacity>
-        );
+        )
+        else return(
+        <TouchableOpacity onPress={this._onPress}>
+        <View style={{backgroundColor:'#F9F9F9',borderRadius:16 ,paddingLeft:10, paddingRight:10,paddingTop:8, paddingBottom:8, marginRight:10}}>
+            <Text style={{ color: '#212121', fontFamily:'OpenSans-Bold', fontSize:13 }}>
+                {this.props.title}
+            </Text>
+        </View>
+    </TouchableOpacity>
+    )
     }
 }
 
@@ -27,26 +37,21 @@ export default class DishList extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            selectedDish: null,
-            selected: null,
+            selectedDish: props.dishes[0],
+            selected: props.dishes[0]._id,
         };
     }
 
     //state = {selected: (new Map(): Map<string, boolean>)};
 
-    componentWillReceiveProps(nextProps) {
-        console.log(nextProps, "nextProps");
-        this.setState({ selectedDish: nextProps.dishes[0] })
+    // componentWillReceiveProps(nextProps) {
+    //     console.log(nextProps, "nextProps");
+    //     this.setState({ selectedDish: nextProps.dishes[0] })
 
-    }
-
-    
-    _keyExtractor = (item, index) => item._id;
+    // }
 
     renderDishNames = (dish) => {
-        console.log("dish", dish);
-        console.log(this.props.dishes[0], "props in renderDishNames");
-        console.log(this.state.selectedDish, "this.state.selectedDish");
+    
         return (
             <ButtonComponent
                 id={dish.item._id}
@@ -70,16 +75,17 @@ export default class DishList extends Component {
 
         return (
             <View style={{ flex: 1 }}>
-
-                <FlatList
+            <View style={{marginTop:5}}>
+                <FlatList 
                     style={styles.dishListContainer}
                     data={this.props.dishes}
                     horizontal={true}
                     renderItem={this.renderDishNames}
                     showsHorizontalScrollIndicator={false}
                     extraData={this.state}
-                    keyExtractor={this._keyExtractor}
-                />
+                    keyExtractor={(item, index) => index.toString()}
+            />
+            </View>
                 <ScrollView>
                     <View >
                         {(this.state.selectedDish) &&
@@ -110,7 +116,9 @@ const styles = StyleSheet.create({
     dishCard: {
     },
     dishListContainer: {
-        marginLeft: 10
+        marginLeft: 10,
+        //marginTop:10,
+        //marginBottom:10
     },
     dishName: {
         fontFamily: 'OpenSans-Bold',

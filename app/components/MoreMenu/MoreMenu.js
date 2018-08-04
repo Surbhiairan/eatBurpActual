@@ -203,18 +203,18 @@ class Menu extends React.Component {
                                 style={[
                                     styles.shadowMenuContainer,
                                     shadowMenuContainerStyle,
-                                    style,
+                                    ,
                                 ]}
                             >
                                 <Animated.View
                                     style={[styles.menuContainer, animationStarted && menuSize]}
                                 >
-                                    <View>
-                                        <TouchableHighlight onPress={() => this.props.onPressLike(this.state.dish)} style={[style.container, style]} >
-                                            <LikeIcon width={23.17} height={21.55} fill={'white'} />
+                                    <View style={{backgroundColor:'#ffa000',borderRadius:4}}>
+                                        <TouchableHighlight onPress={() => this.props.onPressLike(this.state.dish)} style={[style.container]} >
+                                            <View style={{margin:10,}}><LikeIcon width={28.17} height={26.55} fill={'white'} /></View>
                                         </TouchableHighlight>
-                                        <TouchableHighlight onPress={() => this.props.onPressReview(this.state.dish)} style={[style.container, style]} >
-                                            <PenIcon width={22.75} height={22.69} fill={'white'} />
+                                        <TouchableHighlight onPress={() => this.props.onPressReview(this.state.dish)} style={[style.container]} >
+                                        <View style={{margin:10}}><PenIcon width={27.75} height={27.69} fill={'white'} /></View>
                                         </TouchableHighlight>
                                     </View>
                                 </Animated.View>

@@ -69,6 +69,7 @@ class SearchResults extends Component {
           <FlatList 
             data = {this.props.dishSearchResults}
             renderItem = {this.renderDish}
+            keyExtractor={(item, index) => index.toString()}
           />
         }
       </View>

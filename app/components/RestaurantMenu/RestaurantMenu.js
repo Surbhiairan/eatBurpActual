@@ -123,7 +123,7 @@ render(){
         <FlatList
           style={styles.list}
           data={this.props.menu}
-          keyExtractor={(item, index) => index}
+          keyExtractor={(item, index) => index.toString()}
           renderItem={this.renderRestaurantDishes}
            />
       </View>

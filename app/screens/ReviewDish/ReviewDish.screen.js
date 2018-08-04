@@ -183,6 +183,7 @@ class ReviewDish extends Component {
         <FlatList
         data = {this.state.searchedRestaurants}
         renderItem = {this.renderRestaurant}
+        keyExtractor={(item, index) => index.toString()}
         />
         }
       <View style={[styles.textBoxView]}>
@@ -197,6 +198,7 @@ class ReviewDish extends Component {
         <FlatList
         data={this.state.searchedDishes}
         renderItem={this.renderDish}
+        keyExtractor={(item, index) => index.toString()}
         />
         }
 

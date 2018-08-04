@@ -4,7 +4,6 @@ import {
     StyleSheet,
     Text,
     View,
-    FlatList,
     ScrollView,
     Image,
     TouchableOpacity,
@@ -29,18 +28,15 @@ hideMenu = () => {
 };
 
 showMenu = (event, dish) => {
-    console.log("event----------", event.nativeEvent)
     this._menu.show((event.nativeEvent.pageX - event.nativeEvent.locationX), (event.nativeEvent.pageY - event.nativeEvent.locationY), dish);
 };
 
 const ListCard = (props) =>{
-    console.log("prop", props);
-
     if (props.type === 'dishRestaurantMapping') { 
     return(
         <TouchableOpacity onPress={props.onPress}>
-
-            <View elevation={5} style={style.restaurantContainer}>
+        <View style={{flexDirection:'column'}}>
+            <View style={style.restaurantContainer}>
                 <View style={style.image}>
                     <Image
                         source={{ uri: props.image[0] }}
@@ -48,10 +44,12 @@ const ListCard = (props) =>{
                     />
                 </View>
                 <View style={style.info}>
-                    <Text style={{ fontFamily: 'OpenSans-Bold', color: '#474040', fontSize: 16 }}>{props.dish_name}</Text>
-                    <Text style={{ fontFamily: 'OpenSans-SemiBold', color: '#474040', fontSize: 13 }}>Rs. {props.price}</Text>
-                    <Text style={{ fontFamily: 'OpenSans-Regular', color: '#474040', fontSize: 13 }}>{props.restaurant_name}</Text>
+                    <Text style={{ fontFamily: 'OpenSans-SemiBold', color: '#474040', fontSize: 16 }}>{props.restaurant_name}</Text>
                     <Text style={{ fontFamily: 'OpenSans-Regular', color: '#474040', fontSize: 13 }}>{props.restaurant_location}</Text>
+                    <View style={{flexDirection:'row'}}> 
+                    <Text style={{ fontFamily: 'OpenSans-Bold', color: '#474040', fontSize: 13 }}>{props.dish_name},</Text>
+                    <Text style={{ fontFamily: 'OpenSans-SemiBold', color: '#474040', fontSize: 13, paddingLeft:5 }}>Rs. {props.price}</Text>
+                    </View>
                     <View style={{ marginTop: 5, backgroundColor: '#ffa000', borderRadius: 6, width: 30, justifyContent: 'center', alignItems: 'center' }}>
                         <Text style={{ fontFamily: 'OpenSans-Bold', color: '#fff', fontSize: 14, padding: 2 }}>{props.dish_rating}</Text>
                     </View>
@@ -59,9 +57,16 @@ const ListCard = (props) =>{
                 <View style={style.moreMenu}>
                     <Menu
                         ref={this.setMenuRef}
-                        button={<TouchableOpacity onPress={(evt) => this.showMenu(evt, props.dish)} style={{ padding: 4 }}>
-                            <Icon style={style.searchIcon} name="md-more" size={25} color="#757575" />
-                        </TouchableOpacity>}
+                        button={
+                        <View >
+                        <TouchableOpacity onPress={(evt) => this.showMenu(evt, props.dish)} 
+                        style={{
+                            paddingLeft: 8,
+                            paddingRight: 8,
+                            paddingBottom:8,
+                            paddingTop:4 }}>
+                        <Icon name="md-more" size={25} color="#757575" />
+                        </TouchableOpacity></View>}
                         style={style.popUpStyle}
                         onPressLike={this.onPressLike}
                         onPressReview={props.onPressReview}
@@ -69,6 +74,12 @@ const ListCard = (props) =>{
                     </Menu>
                 </View>
             </View>
+            <View style={{ 
+                borderBottomWidth: 1,
+                borderBottomColor: '#eeeeee',
+                marginLeft: 19,
+                marginRight: 19,}}></View>
+        </View>
         </TouchableOpacity>
     )
   } else 
@@ -115,7 +126,9 @@ const style = StyleSheet.create({
         borderRadius: 10, 
         marginLeft: 19,
         marginRight: 19,
-        marginTop:15  
+        marginTop:8,
+        marginBottom:8,
+       
     },
     dishContainer: {
         backgroundColor: '#fff',
@@ -131,15 +144,15 @@ const style = StyleSheet.create({
         paddingLeft: 8,
         width: 200
     },
-    dishInfo: {
-        
+    dishInfo: { 
         flexDirection:'row'       
     },
     moreMenu:{
         alignItems: 'flex-end'
     },
     popUpStyle: {
-        backgroundColor: '#FFA000'
+        // padding:1,
+        // backgroundColor: 'green'
     }
     
 })

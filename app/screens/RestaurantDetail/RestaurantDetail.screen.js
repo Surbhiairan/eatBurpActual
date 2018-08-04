@@ -52,7 +52,7 @@ class RestaurantDetail extends Component {
     console.log("props---------", this.props)
     let menuList = <FlatList
       data={this.props.menu}
-      keyExtractor={(item, index) => index}
+      keyExtractor={(item, index) => index.toString()}
       renderItem={this.renderRestaurantMenuCategory} />
     if(this.props.isLoading) (
       menuList = <ActivityIndicator/>
