@@ -1,5 +1,10 @@
 import React from "react";
-import { View, Text, StyleSheet, ImageBackground } from "react-native";
+import { View, 
+        Text, 
+        StyleSheet, 
+        ImageBackground,
+        TouchableOpacity
+    } from "react-native";
 
 import PenIcon from '../SvgIcons/pen.icon';
 import LikeIcon from '../SvgIcons/like.icon';

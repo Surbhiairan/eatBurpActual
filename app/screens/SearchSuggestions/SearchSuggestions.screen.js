@@ -63,7 +63,7 @@ class SearchSuggestions extends Component {
     }
 
     if (this.state.searchFilter === 'place') {
-      this.props.dispatch(searchRestaurant(searchedText));
+      this.props.searchRestaurant(searchedText);
       var searchedPlace = this.props.restaurants.filter(function (place) {
         return place.restaurant_name.toLowerCase().indexOf(searchedText.toLowerCase()) > -1;
       });
@@ -72,7 +72,7 @@ class SearchSuggestions extends Component {
   }
 
   searchFilterButtonPressedHandler = (searchFilter) => {
-    this.setState({ searchFilter: searchFilter, listView: false });
+    this.setState({ searchFilter: searchFilter, listView: false, searchedItems: null });
   }
 
   itemPressHandler = (item, type) => {
@@ -88,7 +88,8 @@ class SearchSuggestions extends Component {
       this.props.fetchDishSearchResults(item.search_tag);
       console.log("item in itemPressHandler", item)
       this.props.navigator.push({
-        screen: "SearchResultScreen"
+        screen: "SearchResultScreen",
+        title: item.search_tag
       });
     }
   }
@@ -109,22 +110,21 @@ class SearchSuggestions extends Component {
     }
     return (
       <View style={styles.container}>
-        <ScrollView>
-          <View style={styles.header}>
-            <TouchableOpacity onPress={this.backIconPress}>
-              <Icon style={styles.backIcon} name="ios-arrow-round-back-outline" size={45} color="#757575" />
-            </TouchableOpacity>
-            <View style={styles.searchbar}>
-              <SearchBar
-                autoFocus={true}
-                onChangeText={(text) => {
-                  setTimeout(() => { this.handleChangeText(text) }, 2000);
-                }
-                }
-              />
-            </View >
-          </View>
-       
+        <View style={styles.header}>
+          <TouchableOpacity onPress={this.backIconPress}>
+            <Icon style={styles.backIcon} name="ios-arrow-round-back-outline" size={45} color="#757575" />
+          </TouchableOpacity>
+          <View style={styles.searchbar}>
+            <SearchBar
+              autoFocus={true}
+              onChangeText={(text) => {
+                setTimeout(() => { this.handleChangeText(text) }, 2000);
+              }
+              }
+            />
+          </View >
+        </View>
+
         <View style={{ flexDirection: 'row', backgroundColor: '#fff', justifyContent: 'space-around', }}>
           <TouchableOpacity onPress={() => this.searchFilterButtonPressedHandler("food")} >
             <Text style={this.state.searchFilter === 'food' ? styles.selectedSearch : styles.unselectedText}>
@@ -137,28 +137,12 @@ class SearchSuggestions extends Component {
             </Text>
           </TouchableOpacity>
         </View>
-        </ScrollView>
+
         {searchList}
       </View>
     );
   }
 }
-const mapStateToProps = (state) => ({
-  restaurants: state.search.searchRestaurants,
-  restaurantsLoading: state.search.searchRestaurantsLoading,
-  restaurantsError: state.search.searchRestaurantsError,
-  dishes: state.search.searchDishes,
-  dishesLoading: state.search.searchDishesLoading,
-  dishesError: state.search.searchDishesError,
-});
-
-const mapDispatchToProps = dispatch => {
-  return {
-    fetchDishSearchResults: (searchTag) => dispatch(fetchDishSearchResults(searchTag)),
-    searchDish: (searchedText) => dispatch(searchDish(searchedText)),
-
-  };
-};
 
 const styles = StyleSheet.create({
   container: {
@@ -229,6 +213,22 @@ const styles = StyleSheet.create({
     fontSize: 18,
     color: '#212121'
   }
+});
+
+const mapDispatchToProps = dispatch => {
+  return {
+    fetchDishSearchResults: (searchTag) => dispatch(fetchDishSearchResults(searchTag)),
+    searchDish: (searchedText) => dispatch(searchDish(searchedText)),
+    searchRestaurant: (searchedText) => dispatch(searchRestaurant(searchedText))
+  };
+};
+const mapStateToProps = (state) => ({
+  restaurants: state.search.searchRestaurants,
+  restaurantsLoading: state.search.searchRestaurantsLoading,
+  restaurantsError: state.search.searchRestaurantsError,
+  dishes: state.search.searchDishes,
+  dishesLoading: state.search.searchDishesLoading,
+  dishesError: state.search.searchDishesError,
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SearchSuggestions);

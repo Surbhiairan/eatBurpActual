@@ -31,30 +31,31 @@ constructor(props) {
     };  
 }
 
-/* renderMenuCategory = (menu) => {
-  return (
-    <View>
-      <Text         
-        onPress={() => this._handlePressDishCategory(menu)} >
-      {menu.item.category}</Text>
-    </View>
-  );
-};
-
-_handlePressDishCategory = (menu) => {
-  this.setState({selectedDishCategory: menu.item.dishes});
-} */
-
   renderRestaurantDishes = (category) => {
-    //console.log(category)
+    console.log(category)
+    let CustomImage = (
+      <View>
+        <Image
+          source={DEFAULT_IMAGE}
+          style={styles.imageStyle}
+        />
+      </View>
+    )
+    if(category.item.images.length> 0) {
+      CustomImage = (
+        <View >
+          <Image
+            source={{ uri: category.item.images[0] }}
+            style={styles.imageStyle}
+          />
+        </View>
+      )
+    }
     return (
       <View>
         <TouchableHighlight onPress={() => this.props.onDishPressed(category.item)}>
         <View style={{marginLeft: 6,marginTop: 4,}}>
-          <Image 
-            source={DEFAULT_IMAGE}
-            style={styles.imageStyle}
-          />
+          {CustomImage}
           <View style={styles.dishNameStyle}>
             <Text style={styles.dishNameText}> 
               {category.item.dish_name}

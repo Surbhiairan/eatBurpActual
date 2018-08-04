@@ -100,7 +100,7 @@ class Menu extends React.Component {
             menuState: STATES.SHOWN, top, left
         });
         this.setState({
-            dish:dish
+            dish: dish
         })
     };
 
@@ -177,7 +177,7 @@ class Menu extends React.Component {
         const animationStarted = menuState === STATES.ANIMATING;
         const modalVisible = menuState === STATES.SHOWN || animationStarted;
 
-        const { testID, button, style} = this.props;
+        const { testID, button, style } = this.props;
 
         return (
             <View ref={this._setContainerRef} collapsable={false} testID={testID}>
@@ -209,14 +209,14 @@ class Menu extends React.Component {
                                 <Animated.View
                                     style={[styles.menuContainer, animationStarted && menuSize]}
                                 >
-                                <View>
-                    <TouchableHighlight onPress={()=>this.props.onPressLike(this.state.dish)} style={[style.container, style]} >
-                      <LikeIcon width={23.17} height={21.55} fill= {'white'}/>
-                    </TouchableHighlight>
-                    <TouchableHighlight onPress={()=>this.props.onPressReview(this.state.dish)} style={[style.container, style]} >
-                      <PenIcon width={22.75} height={22.69} fill={'white'}/>
-                    </TouchableHighlight>
-                  </View>
+                                    <View>
+                                        <TouchableHighlight onPress={() => this.props.onPressLike(this.state.dish)} style={[style.container, style]} >
+                                            <LikeIcon width={23.17} height={21.55} fill={'white'} />
+                                        </TouchableHighlight>
+                                        <TouchableHighlight onPress={() => this.props.onPressReview(this.state.dish)} style={[style.container, style]} >
+                                            <PenIcon width={22.75} height={22.69} fill={'white'} />
+                                        </TouchableHighlight>
+                                    </View>
                                 </Animated.View>
                             </Animated.View>
                         </View>
@@ -237,6 +237,12 @@ Menu.propTypes = {
 };
 
 const styles = StyleSheet.create({
+    container: {
+        height: 48,
+        justifyContent: 'center',
+        maxWidth: 200,
+        minWidth: 35,
+    },
     shadowMenuContainer: {
         position: 'absolute',
         backgroundColor: 'white',
