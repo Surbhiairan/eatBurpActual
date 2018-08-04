@@ -94,9 +94,6 @@ class Home extends Component {
   }
 
   mealHandler = () => {
-    console.log(" time-------", this.state.time);
-    /* let hour = this.state.time.getHours();
-    console.log("hours---------", hour) */
     let selectedMeal = null;
     if(this.state.time < 11 && this.state.time > 6) {
       selectedMeal = 'breakfast';
@@ -144,10 +141,10 @@ class Home extends Component {
           <SearchBar 
             onSearchBarPressed={this.searchBarPressHandler} />
         </View>
-        <View elevation = {5} style={styles.mainIconsView}>
+        <View style={styles.mainIconsView}>
           <TouchableOpacity onPress={this.topTenDishesHandler}>
             <View>
-              <View elevation={5} style={styles.topTenIconView} >
+              <View style={styles.topTenIconView} >
                 <TopTenIcon />
               </View>
               <Text style={styles.topTenTextView}>
@@ -176,8 +173,8 @@ class Home extends Component {
           </View>
           </TouchableOpacity>
         </View>
-        <View>
-          <View style={styles.locationView}>
+        <View style={styles.locationView}>
+          <View >
             <LocationIcon />
           </View>
           {(this.state.location === null ? <ActivityIndicator /> : (<Text style={styles.locationText}>
@@ -192,38 +189,52 @@ class Home extends Component {
 const styles = StyleSheet.create({
   mainContainer:{
     flex:1,
-    backgroundColor:'#fff'
+    //backgroundColor:'#000',
+    flexDirection:'column'
+  },
+  donutTextView: {
+    flex:3,
+    flexDirection: 'row',
   },
   donutView: {
-    marginLeft: 105,
+    justifyContent:'flex-start',
+    alignItems:'flex-start',
+
+    //paddingRight:5,
+    //marginRight:10
+    //flex:3,
+    marginLeft: '30%',
     position: 'absolute'
+  },
+  textView: {
+    //marginTop: 170,
+    marginTop:'45%',
+    marginLeft: '8%',
+    //flexDirection: 'column',
   },
   textStyle:{
     fontFamily: 'OpenSans-ExtraBold',
     fontSize: 30,
   },
-  textView: {
-    marginTop: 170,
-    marginLeft: 31,
-    flexDirection: 'column',
-  },
-  donutTextView: {
-    flexDirection: 'row',
-  },
   searchBarView: {
+    flex:1/3,
     borderBottomColor: '#BDBDBD',
     borderColor: 'transparent',
     borderWidth: 1,
-    marginTop: 55,
-    marginLeft: 35,
-    marginRight: 35,
+    marginLeft: '8%',    
+    //marginTop: 55,
+    //marginLeft: 35,
+    marginRight: '8%',
   },
   mainIconsView: {
-    marginTop: 25,
+    flex:1, 
+    //marginTop: 25,
+    paddingTop:'5%',
     flexDirection: 'row',
     justifyContent: 'space-evenly'
   },
   topTenIconView: {
+    alignItems:'center',
     //marginLeft: 60,
   },
   topTenTextView: {
@@ -232,10 +243,11 @@ const styles = StyleSheet.create({
     color: "#757575",
     marginTop: 4,
     textAlign: 'center',
-    backgroundColor: 'blue'
+    //backgroundColor: 'blue'
     //marginLeft: 54,
   },
   citySpecialView: {
+    alignItems:'center',    
     //marginLeft: 50
   },
   citySpecialTextView: {
@@ -253,10 +265,12 @@ const styles = StyleSheet.create({
     //marginLeft: 36,
   },
   mealView: {
+    alignItems:'center',    
     //marginLeft: 40,
   },
   locationView: {
-    marginTop: 44,
+    flex:1, 
+    //marginTop: 44,
     alignItems: 'center',
     //marginLeft: 168,
   },
