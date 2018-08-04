@@ -80,7 +80,8 @@ class SearchSuggestions extends Component {
         screen: "RestaurantDetailScreen",
         title: item.restaurant_name,
         passProps: {
-          selectedRestaurant: item
+          searchedRestaurant: item,
+          searchRestaurantLoading: false,
         }
       });
     } else if (type === 'food') {

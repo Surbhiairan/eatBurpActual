@@ -14,6 +14,7 @@ import SearchBar from '../../components/SearchBar/SearchBar';
 import dishes from '../../data/data';
 import { connect } from 'react-redux';
 import { fetchTopDishes, recommendDishDispatch } from '../../actions/dish.action';
+import { fetchSelectedRestaurant } from '../../actions/restaurant.action';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 class TopTenDish extends Component {
@@ -85,6 +86,16 @@ class TopTenDish extends Component {
         this.props.navigator.pop();
     }
 
+    restaurantPressedHandler = (restaurantId) => {
+        this.props.fetchSelectedRestaurant(restaurantId);
+        this.props.navigator.push({
+            screen: "RestaurantDetailScreen",
+            passProps: {
+                id: restaurantId
+            }
+        });
+    }
+
     render() {
         return (
             <View style={{ backgroundColor: '#fff', flex: 1 }}>
@@ -109,7 +120,9 @@ class TopTenDish extends Component {
                         onRecommendButtonPressed={this.recommendButtonPressHandler}
                         onReviewButtonPressed={this.reviewButtonPressHandler}
                         onDishCardPressed={this.dishCardPressedHandler}
-                    />)
+                        onRestaurantPressed={this.restaurantPressedHandler}
+                    />
+
                     }
                 </View>
             </View>
@@ -164,7 +177,7 @@ const mapDispatchToProps = dispatch => {
     return {
         fetchTopDishes: () => dispatch(fetchTopDishes()),
         recommendDishDispatch: (dish_id) => dispatch(recommendDishDispatch(dish_id)),
-        //reviewDishDispatch: (dish_id) => dispatch(reviewDishDispatch(dish_id)),
+        fetchSelectedRestaurant: (restaurantId) => dispatch(fetchSelectedRestaurant(restaurantId))
     };
 };
 
