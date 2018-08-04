@@ -4,17 +4,12 @@ import {
   Text,
   StyleSheet,
   TouchableOpacity,
-  Image,
-  Button,
-  ScrollView,
   ImageBackground,
   FlatList
 } from 'react-native';
 
 import LikeIcon from '../../components/SvgIcons/like.icon';
 import PenIcon from '../../components/SvgIcons/pen.icon';
-import StarIcon from '../../components/SvgIcons/star.icon';
-
 
 const DEFAULT_IMAGE = require('../../data/images/sandwich.jpg');
 
@@ -51,11 +46,11 @@ const CustomImage = (props) => {
     )
 }
 
+
+
 const dishCard = (props) => {
   console.log("inside dishcard", props)
   return (
-
-
     <View elevation={5} style={styles.dishCard} >
       <Text style={{ color: '#212121', fontFamily: 'OpenSans-SemiBold', fontSize: 16, marginLeft: 16 }}>{props.recommended} people recommended this</Text>
       <View style={{ padding: 5, alignItems: 'center' }}>
@@ -75,18 +70,15 @@ const dishCard = (props) => {
         <Text style={{ color: '#757575', fontFamily: 'OpenSans-SemiBold', fontSize: 18, marginLeft: 10 }}>
           {props.dish_name}
         </Text>
-        <Text style={{ color: '#757575', fontFamily: 'OpenSans-SemiBold', fontSize: 18, paddingLeft: 10, }}>
+        <Text style={{ color: '#212121', fontFamily: 'OpenSans-SemiBold', fontSize: 16, marginLeft: 'auto',marginRight: 'auto' }}>
           {props.price}/-
         </Text>
       </View>
-      
+      <TouchableOpacity onPress={props.onRestaurantPressed}>
       <Text style={{ color: '#212121', fontFamily: 'OpenSans-Bold', fontSize: 16, marginLeft: 10, paddingTop: 5, paddingBottom: 5,}}>
-        {props.restaurant_name}
+        {props.restaurant_name}, {props.locality}
       </Text>
-      <Text style={{ color: '#757575', fontFamily: 'OpenSans-SemiBold', fontSize: 12, marginLeft: 10, }}>
-        Rs. {props.price}
-      </Text>
-      
+      </TouchableOpacity>
       <Text style={{ color: '#212121', fontFamily: 'OpenSans-Bold', fontSize: 18, marginLeft: 10, marginTop: 5, marginBottom: 2 }}>
         Reviews
       </Text>
@@ -94,7 +86,7 @@ const dishCard = (props) => {
         data={props.reviews}
         renderItem={(item) => {
           return (
-            <View elevation={2} style={{ backgroundColor: '#fff', marginLeft: 8, marginRight: 8, borderRadius: 8 }}>
+            <View style={{ marginLeft: 8, marginRight: 8, borderRadius: 8 }}>
               <View style={{ flexDirection: 'row', margin: 4 }}>
                 <Text style={{ color: '#212121', fontFamily: 'OpenSans-Bold', fontSize: 15, paddingLeft: 4 }}>{item.item.user.first_name}</Text>
                 <Text style={{ color: '#212121', fontFamily: 'OpenSans-Bold', fontSize: 15, paddingLeft: 4 }}>{item.item.user.last_name}</Text>

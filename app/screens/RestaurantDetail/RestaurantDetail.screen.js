@@ -21,8 +21,9 @@ import RestaurantCard from '../../components/RestaurantCard/RestaurantCard';
 class RestaurantDetail extends Component {
 
   componentDidMount() {
-    console.log("selected restaurant",this.props.selectedRestaurant._id);
-    this.props.dispatch(fetchMenu(this.props.selectedRestaurant._id));        
+    console.log("selected restaurant",this.props.id);
+    let restaurantId = this.props.id || this.props.searchedRestaurant._id;
+    this.props.dispatch(fetchMenu(restaurantId));        
   }
 
   /* static navigatorStyle = {
@@ -56,25 +57,31 @@ class RestaurantDetail extends Component {
     if(this.props.isLoading) (
       menuList = <ActivityIndicator/>
     )
+    let restaurantDetail = this.props.searchedRestaurant || this.props.selectedRestaurant
     return(
       <View>
         <ScrollView>
           <View>
-          <RestaurantCard 
-              restaurantName={this.props.selectedRestaurant.restaurant_name}
-              restaurantLocality={this.props.selectedRestaurant.address.locality}
-              restaurantCuisines= {this.props.selectedRestaurant.cuisines}
-              restaurantBuilding={this.props.selectedRestaurant.address.building}
-              restaurantStreet={this.props.selectedRestaurant.address.street}
-              restaurantFamousDishes={this.props.selectedRestaurant.famous_dishes}
-              restaurantOpenTime={this.props.selectedRestaurant.open_time}
-              restaurantCloseTime={this.props.selectedRestaurant.close_time}
-              restaurantAverageCost={this.props.selectedRestaurant.average_cost_for_two}
-              restaurantCategory={this.props.selectedRestaurant.category}
-              restaurantImage={this.props.selectedRestaurant.images}
-              restaurantRating={this.props.selectedRestaurant.average_rating}
-              restaurantContact={this.props.selectedRestaurant.phone_number}
-          />
+            {
+              (this.props.selectedRestaurantLoading) ? <ActivityIndicator/> : (
+                <RestaurantCard
+                  restaurantName={restaurantDetail.restaurant_name}
+                  restaurantCuisines={restaurantDetail.cuisines}
+                  restaurantBuilding={restaurantDetail.address.building}
+                  restaurantStreet={restaurantDetail.address.street}
+                  restaurantLocality={restaurantDetail.address.locality}
+                  restaurantFamousDishes={restaurantDetail.famous_dishes}
+                  restaurantOpenTime={restaurantDetail.open_time}
+                  restaurantCloseTime={restaurantDetail.close_time}
+                  restaurantAverageCost={restaurantDetail.average_cost_for_two}
+                  restaurantCategory={restaurantDetail.category}
+                  restaurantImage={restaurantDetail.images}
+                  restaurantRating={restaurantDetail.average_rating}
+                  restaurantContact={restaurantDetail.phone_number}
+                />
+              )
+            }
+          
           </View>
           <View elevation={5} style={styles.menuContainer}>
             {menuList}
@@ -99,7 +106,10 @@ const mapStateToProps = (state) => ({
     menu: state.menu.menu,
     menuLoading: state.menu.menuLoading,
     menuError: state.menu.menuError,
-    isLoading: state.ui.isLoading
+    isLoading: state.ui.isLoading,
+    selectedRestaurant: state.restaurant.selectedRestaurant,
+  selectedRestaurantLoading: state.restaurant.selectedRestaurantLoading,
+  selectedRestaurantError: state.restaurant.selectedRestaurantError
 })
 
 export default connect(mapStateToProps)(RestaurantDetail) ;
