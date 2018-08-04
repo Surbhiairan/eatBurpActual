@@ -9,7 +9,8 @@ import {
   NativeModules,
   TouchableOpacity,
   ScrollView,
-  Image
+  Image,
+  ActivityIndicator
 } from 'react-native';
 
 import { connect } from 'react-redux';
@@ -31,7 +32,7 @@ class SearchResults extends Component {
     this.props.navigator.push({
         screen: "DishDetailScreen",
         passProps: {
-            selectedDish: item.item
+            selectedDish: item
         }
     })
   }
@@ -48,7 +49,7 @@ class SearchResults extends Component {
         dish_rating = {dish.item.average_rating}
         restaurant_type = {dish.item.restaurant_type}
         image = {dish.item.images} 
-        onPress={() => this.listCardPressedHandler(item)}
+        onPress={() => this.listCardPressedHandler(dish.item)}
         onPressLike={this.recommendDishHandler}
         onPressRating={this.ratingDishHandler}
         onPressReview={this.reviewDishHandler}
@@ -59,18 +60,32 @@ class SearchResults extends Component {
   render(){
     return(
       <View>
+        <Text style={styles.heading}>
+          Search Result
+        </Text>
         {this.props.dishSearchResultsLoading ? 
-            <Text>Loading...</Text>
+           <ActivityIndicator/>
             : 
           <FlatList 
             data = {this.props.dishSearchResults}
             renderItem = {this.renderDish}
+            keyExtractor={(item, index) => index.toString()}
           />
         }
       </View>
     )
   }
 }
+
+const styles = StyleSheet.create({
+  heading: {
+    fontFamily: 'OpenSans-ExtraBold',
+    fontSize: 22,
+    color: '#212121',
+    marginLeft: 19,
+    marginTop: 7,
+  }
+})
 
 const mapStateToProps = state => {
   return {

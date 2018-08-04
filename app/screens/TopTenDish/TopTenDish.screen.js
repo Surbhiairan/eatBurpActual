@@ -4,9 +4,9 @@ import {
     StyleSheet,
     Text,
     View,
-    FlatList,
     ScrollView,
-    TouchableOpacity
+    TouchableOpacity,
+    ActivityIndicator
 } from 'react-native';
 
 import DishList from '../../components/DishList/DishList';
@@ -98,14 +98,18 @@ class TopTenDish extends Component {
                         />
                     </View >
                 </View>
-                <Text style={style.topTen}>Top Ten{this.props.topDishesError}</Text>
+                <View>
+                <Text style={style.topTen}>Top Ten Dishes{this.props.topDishesError}</Text>
+                </View>
                 <View style={style.container}>
-                    {(this.props.topDishes) && <DishList
+                    {
+                        this.props.topDishesLoading? <ActivityIndicator/>:
+                        (<DishList
                         dishes={this.props.topDishes}
                         onRecommendButtonPressed={this.recommendButtonPressHandler}
                         onReviewButtonPressed={this.reviewButtonPressHandler}
                         onDishCardPressed={this.dishCardPressedHandler}
-                    />
+                    />)
                     }
                 </View>
             </View>

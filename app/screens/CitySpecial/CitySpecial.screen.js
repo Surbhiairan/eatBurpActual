@@ -118,7 +118,6 @@ class CitySpecial extends Component {
     }
 
     render() {
-
         return (
             <View style={{ backgroundColor: '#fff', flex: 1 }}>
                 <View style={style.header}>
@@ -145,13 +144,15 @@ class CitySpecial extends Component {
                     </TouchableOpacity>
                 </View>
 
-                <View style={{ flex: 1 }}>
+                <View style={{ flex: 1}}>
                     {
                         (this.state.restaurant) &&
                         (
-                            this.props.citySpecialLoading ? <ActivityIndicator /> : (<FlatList
+                            this.props.citySpecialLoading ? <ActivityIndicator /> : (
+                            <FlatList
                                 data={this.props.citySpecial[0].city_special_restaurant_dish}
                                 renderItem={this.renderListComponent}
+                                keyExtractor={(item, index) => index.toString()}
                             />)
                         )
                     }
@@ -161,6 +162,7 @@ class CitySpecial extends Component {
                             numColumns={2}
                             data={this.props.citySpecial[0].city_special_dishes}
                             renderItem={this.renderListComponent}
+                            keyExtractor={(item, index) => index.toString()}
                         />
                     }
                 </View>
@@ -193,7 +195,6 @@ const style = StyleSheet.create({
         margin: 5,
     },
     tab: {
-
         paddingLeft: 10,
         paddingRight: 10,
         backgroundColor: '#fff',
@@ -221,7 +222,6 @@ const style = StyleSheet.create({
     },
     backIcon: {
         paddingLeft: 10,
-
     },
     searchbar: {
         paddingLeft: 10,

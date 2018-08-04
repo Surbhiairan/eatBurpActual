@@ -9,24 +9,48 @@ import {
   ScrollView
 } from "react-native";
 import { connect } from "react-redux";
+import SearchBar from '../../components/SearchBar/SearchBar';
 
 import DishCard from '../../components/DishCard/DishCard';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 //import Icon from "react-native-vector-icons/Ionicons";
 //import { deletePlace } from "../../store/actions/index";
 
 class DishDetail extends Component {
 
-
+  static navigatorStyle = {
+    navBarHidden: true
+  };
 
   placeDeletedHandler = () => {
     this.props.onDeletePlace(this.props.selectedPlace.key);
     this.props.navigator.pop();
   }
 
+  backIconPress = () => {
+    this.props.navigator.pop();
+  }
+  searchBarPressHandler = () => {
+    //navigate to search suggestion screen
+    this.props.navigator.push({
+      screen: "SearchSuggestionScreen",
+    });
+  }
+
   render() {
     return (
       <View style={styles.container}>
+        <View style={styles.header}>
+          <TouchableOpacity onPress={this.backIconPress}>
+            <Icon style={styles.backIcon} name="ios-arrow-round-back-outline" size={45} color="#757575" />
+          </TouchableOpacity>
+          <View style={styles.searchbar}>
+            <SearchBar
+              onSearchBarPressed={this.searchBarPressHandler}
+            />
+          </View >
+        </View>
         <View>
           <ScrollView>
           <DishCard 
@@ -68,7 +92,29 @@ const styles = StyleSheet.create({
   },
   deleteButton: {
     alignItems: "center"
-  }
+  },
+  header: {
+    paddingTop: 10,
+    paddingBottom: 6,
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#fff'
+  },
+  backIcon: {
+    paddingLeft: 10,
+
+  },
+  searchbar: {
+    paddingLeft: 10,
+    borderColor: '#BDBDBD',
+    borderWidth: 1,
+    alignItems: 'center',
+    borderTopLeftRadius: 15,
+    borderTopRightRadius: 15,
+    borderBottomLeftRadius: 15,
+    borderBottomRightRadius: 15,
+    marginLeft: 10,
+  },
 });
 
 // const mapDispatchToProps = dispatch => {

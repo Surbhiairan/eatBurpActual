@@ -9,14 +9,13 @@ import {
 } from 'react-native';
 import { connect } from 'react-redux';
 import Geocoder from 'react-native-geocoder';
-
-import SearchBar from '../../components/SearchBar/SearchBar';
 import { fetchTopDishes, fetchCitySpecial, fetchMeal } from '../../actions/dish.action';
 import MealIcon from '../../components/SvgIcons/clock.icon';
 import CitySpecialIcon from '../../components/SvgIcons/citySpecial.icon';
 import DonutIcon from '../../components/SvgIcons/donut.icon';
 import TopTenIcon from '../../components/SvgIcons/topTen.icon';
 import LocationIcon from '../../components/SvgIcons/location.icon';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 class Home extends Component {
 
@@ -137,10 +136,21 @@ class Home extends Component {
             <DonutIcon />
           </View>
         </View>
-        <View style={styles.searchBarView}>
-          <SearchBar 
-            onSearchBarPressed={this.searchBarPressHandler} />
-        </View>
+      <View style={{flex:1/3}}>
+        <TouchableOpacity onPress={this.searchBarPressHandler}>
+          <View style={{
+            marginTop:'4%',
+            borderBottomColor: '#BDBDBD',
+            borderColor: 'transparent',
+            borderWidth: 1,
+            marginLeft: '8%',    
+            marginRight: '8%',
+            flexDirection: 'row'}}>
+          <Icon name="md-search" size={21.5} color="#757575" />
+          <Text style={{fontFamily: 'OpenSans-Regular', fontSize: 15, paddingLeft:10}}>Search</Text>
+          </View>
+        </TouchableOpacity>
+      </View>
         <View style={styles.mainIconsView}>
           <TouchableOpacity onPress={this.topTenDishesHandler}>
             <View>
@@ -229,7 +239,7 @@ const styles = StyleSheet.create({
   mainIconsView: {
     flex:1, 
     //marginTop: 25,
-    paddingTop:'5%',
+    paddingTop:'8%',
     flexDirection: 'row',
     justifyContent: 'space-evenly'
   },

@@ -131,13 +131,15 @@ class UserProfile extends Component {
                   {(this.state.reviews) && (this.props.reviewsLoading ? <ActivityIndicator /> :
                     <FlatList
                       data={this.props.reviews}
-                      renderItem={this.renderReview} />)}
+                      renderItem={this.renderReview}
+                      keyExtractor={(item, index) => index.toString()}
+                    />)}
 
                   {(this.state.recommendations) && (this.props.recommendationsLoading ? <ActivityIndicator /> :
                       <FlatList
                         numColumns={3}
                         style={style.recommendationList}
-                        keyExtractor={(item, index) => index}
+                        keyExtractor={(item, index) => index.toString()}
                         data={this.props.recommendations}
                         renderItem={this.renderRecommendation} />
                   )

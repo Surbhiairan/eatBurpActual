@@ -73,10 +73,24 @@ class Meals extends Component {
         })
     }
 
+
+    reviewDishHandler = (dish) => {
+        console.log("reviewDishHandler", dish)
+        this.props.navigator.push({
+            screen: "ReviewDishScreen",
+            // title: dish.item.dish_name,
+            passProps: {
+                selectedDish: dish
+            }
+        });
+        alert("reviewed");
+    }
+
     renderListComponent = (item) => {
         return(
             <ListCard 
                 type = "dishRestaurantMapping"
+                dish={item.item}
                 dish_name = {item.item.dish_name}
                 price = {item.item.price}
                 restaurant_name = {item.item.restaurant_name}
@@ -84,6 +98,8 @@ class Meals extends Component {
                 dish_rating = {item.item.average_rating}
                 image = {item.item.images}
                 onPress = {() => this.listCardPressedHandler(item)}
+                onPressReview={this.reviewDishHandler}
+
             />
         )
     }
@@ -144,6 +160,7 @@ class Meals extends Component {
                             (<FlatList 
                                 data = {this.props.meal}
                                 renderItem = {this.renderListComponent}
+                                keyExtractor={(item, index) => index.toString()}
                             />)
                         )
                     }
@@ -154,6 +171,7 @@ class Meals extends Component {
                             (<FlatList
                                 data={this.props.meal}
                                 renderItem={this.renderListComponent}
+                                keyExtractor={(item, index) => index.toString()}
                             />)
                         )
                     }
@@ -163,6 +181,7 @@ class Meals extends Component {
                             (<FlatList
                                 data={this.props.meal}
                                 renderItem={this.renderListComponent}
+                                keyExtractor={(item, index) => index.toString()}
                             />)
                         )
                     }

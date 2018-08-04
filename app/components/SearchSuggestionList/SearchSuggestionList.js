@@ -13,7 +13,7 @@ const searchSuggestionList = (props) => {
       searchSuggestion = ({item}) => (
         <SearchSuggestionItem 
         item_name = {item.restaurant_name}
-        address = {item.address.locality}
+        address={item.address.locality}
         onItemPressed={() => props.onItemPressed(item, props.type)}
       />
       )
@@ -21,6 +21,7 @@ const searchSuggestionList = (props) => {
     return (       
       <View>
       <FlatList
+          keyExtractor={(item, index) => index.toString()}
           data = { props.suggestions }
           renderItem = {this.searchSuggestion} />
       </View>
