@@ -13,7 +13,7 @@ const searchSuggestionList = (props) => {
       searchSuggestion = ({item}) => (
         <SearchSuggestionItem 
         item_name = {item.restaurant_name}
-        address = {item.address.locality}
+        address={item.address.locality}
         onItemPressed={() => props.onItemPressed(item, props.type)}
       />
       )

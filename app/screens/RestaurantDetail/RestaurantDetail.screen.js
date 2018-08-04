@@ -21,8 +21,8 @@ import RestaurantCard from '../../components/RestaurantCard/RestaurantCard';
 class RestaurantDetail extends Component {
 
   componentDidMount() {
-        //console.log("selected restaurant",this.props.selectedRestaurant._id);
-      this.props.dispatch(fetchMenu('5b457350a87d230004c20ae5'));        
+    console.log("selected restaurant",this.props.selectedRestaurant._id);
+    this.props.dispatch(fetchMenu(this.props.selectedRestaurant._id));        
   }
 
   /* static navigatorStyle = {
