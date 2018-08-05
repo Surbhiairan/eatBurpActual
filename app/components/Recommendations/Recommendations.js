@@ -6,19 +6,35 @@ import {
     View,
     TouchableOpacity,
     Image,
-    TouchableHighlight
   } from 'react-native';
   
 const DEFAULT_IMAGE = require('../../data/images/sandwich.jpg');
   
-const recommendations = (props) => (
+const recommendations = (props) => {
+  let CustomImage = (
+    <View>
+      <Image
+        source={DEFAULT_IMAGE}
+        style={styles.imageStyle}
+      />
+    </View>
+  )
+  if(props.recommendation.images.length> 0) {
+    CustomImage = (
+      <View >
+        <Image
+          source={{ uri: props.recommendation.images[0] }}
+          style={styles.imageStyle}
+        />
+      </View>
+    )
+  }
+  
+return(
   <View>
-  <TouchableHighlight onPress={props.onDishPressed}>
+  <TouchableOpacity onPress={props.onDishPressed}>
   <View style={{marginLeft: 6,marginTop: 4,}}>
-    <Image 
-      source={DEFAULT_IMAGE}
-      style={styles.imageStyle}
-    />
+      {CustomImage}
     <View style={styles.dishNameStyle}>
       <Text style={styles.dishNameText}> 
         {props.recommendation.dish_name}
@@ -28,8 +44,9 @@ const recommendations = (props) => (
      {props.recommendation.restaurant_name}
     </Text>
   </View>
-  </TouchableHighlight>
+  </TouchableOpacity>
 </View>
+)
 
     // <View>
     //   <Text>{props.recommendation.dish_name}</Text>
@@ -40,42 +57,10 @@ const recommendations = (props) => (
     //     style={{width: 400, height: 400}}
     //   />
     // </View>
-);
+}
 
 var styles = StyleSheet.create({
-  list: {
-    flexDirection: 'row',
-    flexWrap: 'wrap'
-  },
-  container: {
-    backgroundColor: '#fff',
-    margin: 10,
-    overflow: 'hidden'
-  },
-  titleContainer: {
-    flexDirection: 'row'
-  },
-  title: {
-    flex: 1,
-    padding: 10,
-    color: '#2a2f43',
-    fontWeight: 'bold'
-  },
-  button: {
-  },
-  buttonImage: {
-    width: 30,
-    height: 25
-  },
-  body: {
-    //padding: 10,
-    paddingTop: 0
-  },
-  item: {
-    backgroundColor: 'red',
-    margin: 3,
-    width: 100
-  },
+
   imageStyle: {
     width: 96, 
     height: 96

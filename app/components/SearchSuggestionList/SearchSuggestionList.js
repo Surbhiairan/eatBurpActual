@@ -19,7 +19,7 @@ const searchSuggestionList = (props) => {
       )
     }
     return (       
-      <View>
+      <View style={{marginTop:10}}>
       <FlatList
           keyExtractor={(item, index) => index.toString()}
           data = { props.suggestions }

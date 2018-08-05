@@ -51,7 +51,7 @@ class UserProfile extends Component {
     return (
       <Recommendations
         recommendation={recommendation.item}
-      //onDishPressed={this.dishPressedHandler(recommendation.item)}  
+        onDishPressed={()=> this.dishPressedHandler(recommendation.item)}  
       />
     )
   }

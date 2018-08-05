@@ -37,21 +37,31 @@ class SearchResults extends Component {
     })
   }
 
+  reviewDishHandler = (dish) => {
+    this.props.navigator.push({
+        screen: "ReviewDishScreen",
+        title: 'Add Review',        
+        passProps: {
+            selectedDish: dish
+        }
+    });
+    alert("reviewed");
+  }
+
   renderDish = (dish) => {
     console.log("in render", dish);
     return(
       <ListCard
         type = "dishRestaurantMapping"
+        dish = {dish.item}
         dish_name = {dish.item.dish_name}
         price = {dish.item.price}
         restaurant_name = {dish.item.restaurant_name}
-        restaurant_location = {dish.item.restaurant_location}
+        locality = {dish.item.locality}
         dish_rating = {dish.item.average_rating}
         restaurant_type = {dish.item.restaurant_type}
         image = {dish.item.images} 
         onPress={() => this.listCardPressedHandler(dish.item)}
-        onPressLike={this.recommendDishHandler}
-        onPressRating={this.ratingDishHandler}
         onPressReview={this.reviewDishHandler}
       />   
     );

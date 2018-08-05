@@ -13,7 +13,7 @@ import {
 import Icon from 'react-native-vector-icons/Ionicons';
 import { connect } from 'react-redux';
 import Menu, { MenuItem, MenuDivider } from 'react-native-material-menu';
-
+import { fetchDishSearchResults } from '../../actions/dish.action';
 import SearchBar from '../../components/SearchBar/SearchBar';
 import { fetchTopDishes } from '../../actions/dish.action';
 import ListCard from '../../components/ListCard/ListCard';
@@ -54,12 +54,12 @@ class CitySpecial extends Component {
                 }
             })
         } else {
+            this.props.fetchDishSearchResults(item.search_tag);
+            console.log("item in itemPressHandler", item)
             this.props.navigator.push({
-                screen: "SearchResultScreen",
-                passProps: {
-                    dish_id: item.item._id
-                }
-            })
+              screen: "SearchResultScreen",
+              title: item.search_tag
+            });
         }
     }
 
@@ -70,7 +70,7 @@ class CitySpecial extends Component {
                 dish = {item.item}
                 type= "dishRestaurantMapping"
                 restaurant_name = {item.item.restaurant_name}
-                restaurant_location = {item.item.locality}
+                locality = {item.item.locality}
                 dish_rating={item.item.average_rating}
                 dish_name={item.item.dish_name}
                 price={item.item.price}
@@ -91,11 +91,10 @@ class CitySpecial extends Component {
         )
     }
 
-    reviewDishHandler = (dish) => {
-        
+    reviewDishHandler = (dish) => { 
         this.props.navigator.push({
             screen: "ReviewDishScreen",
-            // title: dish.item.dish_name,
+            title: 'Add Review',
             passProps: {
                 selectedDish: dish
             }
@@ -254,6 +253,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
+        fetchDishSearchResults: (searchTag) => dispatch(fetchDishSearchResults(searchTag)),        
         fetchTopDishes: () => dispatch(fetchTopDishes()),
         recommendDishDispatch: (dish_id) => dispatch(recommendDishDispatch(dish_id)),
         //reviewDishDispatch: (dish_id) => dispatch(reviewDishDispatch(dish_id)),

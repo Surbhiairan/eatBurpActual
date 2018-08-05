@@ -3,21 +3,18 @@ import { View, Text, StyleSheet, TouchableOpacity, Image, Button } from 'react-n
 
 const searchSuggestionItem = (props) => (
     <TouchableOpacity onPress={props.onItemPressed}>
-    <View style={styles.dishCard}>
-      <Text style={{color: '#000'}}>{props.item_name}</Text>
-      <Text style={{color: '#000'}}>{props.address}</Text>
+    <View style={styles.container}>
+      <Text style={{color: '#212121', fontFamily: 'OpenSans-SemiBold', fontSize: 16}}>{props.item_name}</Text>
+      <Text style={{color: '#757575', fontFamily: 'OpenSans-Regular', fontSize: 12}}>{props.address}</Text>
 
     </View>
   </TouchableOpacity>
 );
 
 const styles = StyleSheet.create({
-    dishCard: {
-        flex: 1,
+    container: {
         backgroundColor: '#fff',
-        borderRadius: 10,
-        borderColor:'#fff',
-        borderWidth:2,
+        marginLeft:30,
         paddingLeft: 5,
         paddingRight: 5,
         paddingBottom: 5,

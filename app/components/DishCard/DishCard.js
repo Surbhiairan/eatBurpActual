@@ -89,6 +89,7 @@ const Reviews = (props) => {
                 <Text style={{ color: '#212121', fontFamily: 'OpenSans-Bold', fontSize: 15, paddingLeft: 4 }}>{item.item.user.first_name}</Text>
                 <Text style={{ color: '#212121', fontFamily: 'OpenSans-Bold', fontSize: 15, paddingLeft: 4 }}>{item.item.user.last_name}</Text>
               </View>
+              <Text style={{ color: '#ffa000', fontFamily: 'OpenSans-SemiBold', fontSize: 14, marginLeft:4, paddingLeft: 4}}>Rating {item.item.rating}</Text>
               <Text style={{ color: '#212121', fontFamily: 'OpenSans-Regular', fontSize: 14, padding: 4, margin: 4 }}>{item.item.review}</Text>
               <FlatList
                 keyExtractor={(item, index) => index.toString()}

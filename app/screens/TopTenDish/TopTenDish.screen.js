@@ -42,17 +42,6 @@ class TopTenDish extends Component {
         dishes: dishes
     }
 
-    dishCardPressedHandler = dish => {
-        console.log("pressed dish", dish);
-        this.props.navigator.push({
-            screen: "DishDetailScreen",
-            title: dish.item.dish_name,
-            passProps: {
-                selectedDish: dish.item
-            }
-        });
-    }
-
     recommendButtonPressHandler = dish => {
         // console.log("recommend", dish);
         //dispatch action to increase recommendation count, pass dish_restaurant_mapping id
@@ -62,7 +51,7 @@ class TopTenDish extends Component {
     reviewButtonPressHandler = dish => {
         this.props.navigator.push({
             screen: "ReviewDishScreen",
-            title: "Review",
+            title: 'Add Review',
             passProps: {
                 selectedDish: dish
             }
@@ -119,7 +108,6 @@ class TopTenDish extends Component {
                         dishes={this.props.topDishes}
                         onRecommendButtonPressed={this.recommendButtonPressHandler}
                         onReviewButtonPressed={this.reviewButtonPressHandler}
-                        onDishCardPressed={this.dishCardPressedHandler}
                         onRestaurantPressed={this.restaurantPressedHandler}
                     />)
 
