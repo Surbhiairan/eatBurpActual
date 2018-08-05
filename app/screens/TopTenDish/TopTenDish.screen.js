@@ -62,7 +62,7 @@ class TopTenDish extends Component {
     reviewButtonPressHandler = dish => {
         this.props.navigator.push({
             screen: "ReviewDishScreen",
-            // title: dish.item.dish_name,
+            title: "Review",
             passProps: {
                 selectedDish: dish
             }

@@ -93,7 +93,7 @@ class UserProfile extends Component {
                       {this.state.recommendations ? 
                       <View style={{flexDirection: 'row'}}>
                       <LikeFilledIcon fill={'#ffa000'} height={26} width={26} />
-                      <Text style={{fontFamily: 'OpenSans-Regular', fontSize: 15, color: '#ffa000'}}>Recommendations</Text>
+                      <Text style={{fontFamily: 'OpenSans-Regular', fontSize: 15, color: '#ffa000',}}>Recommendations</Text>
                       </View> 
                         : 
                       <View style={{flexDirection: 'row'}}>
