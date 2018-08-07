@@ -6,6 +6,7 @@ import {
     View,
     ScrollView,
     TouchableOpacity,
+    Alert,
     ActivityIndicator
 } from 'react-native';
 
@@ -43,8 +44,6 @@ class TopTenDish extends Component {
     }
 
     recommendButtonPressHandler = dish => {
-        // console.log("recommend", dish);
-        //dispatch action to increase recommendation count, pass dish_restaurant_mapping id
         this.props.recommendDishDispatch(dish._id);
     }
 
@@ -56,18 +55,11 @@ class TopTenDish extends Component {
                 selectedDish: dish
             }
         });
-        //this.props.reviewDishDispatch(dish.item._id);        
     }
 
     searchBarPressHandler = () => {
-        //navigate to search suggestion screen
-        console.log("pressed search bar");
         this.props.navigator.push({
             screen: "SearchSuggestionScreen",
-            // title: dish.item.dish_name,
-            // passProps: {
-            //   selectedDish: dish.item
-            // }
         });
     }
 
@@ -89,9 +81,10 @@ class TopTenDish extends Component {
         return (
             <View style={{ backgroundColor: '#fff', flex: 1 }}>
                 <View style={style.header}>
+                <View style={style.backIconContainer}>
                     <TouchableOpacity onPress={this.backIconPress}>
-                        <Icon style={style.backIcon} name="ios-arrow-round-back-outline" size={45} color="#757575" />
-                    </TouchableOpacity>
+                        <Icon name="ios-arrow-round-back-outline" size={45} color="#757575" />
+                    </TouchableOpacity></View>
                     <View style={style.searchbar}>
                         <SearchBar
                             onSearchBarPressed={this.searchBarPressHandler}
@@ -99,9 +92,20 @@ class TopTenDish extends Component {
                     </View >
                 </View>
                 <View>
-                <Text style={style.topTen}>Top Ten Dishes{this.props.topDishesError}</Text>
+                <Text style={style.topTen}>Top Ten Dishes</Text>
                 </View>
-                <View style={style.container}>
+
+                {this.props.topDishesError ? 
+                (Alert.alert(
+                  'Oops!',
+                  'Please refresh!',
+                  [
+                    {text: 'OK', onPress: () => console.log('OK Pressed')},
+                  ],
+                  { cancelable: false }
+                )
+                ):
+                (<View style={style.container}>
                     {
                         this.props.topDishesLoading? <ActivityIndicator/>:
                         (<DishList
@@ -112,7 +116,7 @@ class TopTenDish extends Component {
                     />)
 
                     }
-                </View>
+                </View>)}
             </View>
         );
     }
@@ -123,30 +127,26 @@ const style = StyleSheet.create({
         flex: 1
     },
     header: {
-        paddingTop: 10,
-        paddingBottom: 6,
         flexDirection: 'row',
         alignItems: 'center',
-        backgroundColor: '#fff'
     },
-    backIcon: {
-        paddingLeft: 10,
-
+    backIconContainer:{
+        marginTop: '5%',
+        marginLeft: '5%',
     },
     searchbar: {
-        paddingLeft: 10,
+        flex:1,
         borderColor: '#BDBDBD',
         borderWidth: 1,
         alignItems: 'center',
-        borderTopLeftRadius: 15,
-        borderTopRightRadius: 15,
-        borderBottomLeftRadius: 15,
-        borderBottomRightRadius: 15,
-        marginLeft: 10,
+        borderRadius:15,
+        marginTop: '5%',
+        marginLeft: '5%',
+        marginRight:'5%'
     },
     topTen: {
-        paddingLeft: 25,
-        paddingTop: 5,
+        paddingLeft: '5%',
+        paddingTop: '2%',
         fontFamily: 'OpenSans-ExtraBold',
         fontSize: 22,
         color: '#212121'

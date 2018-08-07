@@ -5,13 +5,15 @@ import {
   StyleSheet,
   TouchableOpacity,
   ImageBackground,
-  FlatList
+  FlatList,
+  Dimensions
 } from 'react-native';
 
 import LikeIcon from '../../components/SvgIcons/like.icon';
 import PenIcon from '../../components/SvgIcons/pen.icon';
 
 const DEFAULT_IMAGE = require('../../data/images/sandwich.jpg');
+const win = Dimensions.get('window');
 
 const CustomImage = (props) => {
   console.log(props, "propsssssssssssssssss");
@@ -21,7 +23,7 @@ const CustomImage = (props) => {
         <ImageBackground
           //resizeMode="contain"
           imageStyle={{ borderRadius: 10 }}
-          style={{ width: 316, height: 316, borderRadius: 10 }}
+          style={{borderRadius: 10, width: win.width*.9, height: win.height * .6, }}
           source={{ uri: props.dishImages[0] }} >
           <View style={styles.textOnImageContainer}>
             <Text style={styles.textOnImage}>{props.average_rating}</Text>
@@ -37,7 +39,7 @@ const CustomImage = (props) => {
           //resizeMode="contain"
           imageStyle={{ borderRadius: 10 }}
           source={DEFAULT_IMAGE}
-          style={{ width: 316, height: 316, borderRadius: 10 }} >
+          style={{  borderRadius: 10, width: win.width , height: win.height * .6, }} >
           <View style={styles.textOnImageContainer}>
             <Text style={styles.textOnImage}>{props.average_rating}</Text>
           </View>
@@ -49,16 +51,22 @@ const CustomImage = (props) => {
 
 
 const dishCard = (props) => {
-  console.log("inside dishcard", props)
+  if(props.recommended===0){
+    recommendMessage = "Start Recommending"
+  }
+  else{
+    recommendMessage = props.recommended+" people recommended this"
+  }
   return (
-    <View elevation={5} style={styles.dishCard} >
-      <Text style={{ color: '#212121', fontFamily: 'OpenSans-SemiBold', fontSize: 16, marginLeft: 16 }}>{props.recommended} people recommended this</Text>
-      <View style={{ padding: 5, alignItems: 'center' }}>
+    <View elevation={3} style={styles.dishCard} >
+      <View style={{margin:'1%'}}>
+      <Text style={{ color: '#212121', fontFamily: 'OpenSans-SemiBold', fontSize: 16, marginLeft: 16 }}>{this.recommendMessage} </Text>
+      </View>   
+       <View style={{alignItems:'center', }}>
         <CustomImage
           average_rating={props.average_rating}
-          dishImages={props.dish_images} />
-      </View>
-      <View style={{ flexDirection: 'row', marginLeft: 10 }}>
+          dishImages={props.dish_images} /></View>
+      <View style={{ flexDirection: 'row', marginLeft: '3%' }}>
         <TouchableOpacity onPress={props.onRecommendButtonPressed} style={{ padding: 4 }}>
           <LikeIcon fill={'#ffa000'} height={26} width={26} />
         </TouchableOpacity>
@@ -66,13 +74,15 @@ const dishCard = (props) => {
           <PenIcon fill={'#ffa000'} height={26} width={26} />
         </TouchableOpacity>
       </View>
-      <View style={{flexDirection: 'row',}}>
-        <Text style={{ color: '#757575', fontFamily: 'OpenSans-SemiBold', fontSize: 18, marginLeft: 10 }}>
+      <View style={{flexDirection: 'row',marginLeft:'3%', marginRight:'3%'}}>
+      <View style={{flex:3}}>
+        <Text style={{color: '#212121', fontFamily: 'OpenSans-SemiBold', fontSize: 18}}>
           {props.dish_name}
-        </Text>
-        <Text style={{ color: '#212121', fontFamily: 'OpenSans-SemiBold', fontSize: 16, marginLeft: 'auto',marginRight: 'auto' }}>
+        </Text></View>
+        <View style={{flex:1,alignItems:'flex-end'}}>
+        <Text style={{color: '#212121', fontFamily: 'OpenSans-SemiBold', fontSize: 18}}>
           {props.price}/-
-        </Text>
+        </Text></View>
       </View>
       <TouchableOpacity onPress={props.onRestaurantPressed}>
       <Text style={{ color: '#212121', fontFamily: 'OpenSans-Bold', fontSize: 16, marginLeft: 10, paddingTop: 5, paddingBottom: 5,}}>
@@ -107,13 +117,13 @@ const dishCard = (props) => {
 const styles = StyleSheet.create({
   dishCard: {
     flex: 1,
-    backgroundColor: '#fff',
+    //backgroundColor: '#ffa000',
     borderRadius: 10,
     paddingLeft: 5,
     paddingRight: 5,
     paddingBottom: 5,
     paddingTop: 5,
-    margin: 8
+    margin:'2%'
   },
   textOnImageContainer: {
     justifyContent: 'center',

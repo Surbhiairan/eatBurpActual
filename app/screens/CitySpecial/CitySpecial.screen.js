@@ -8,7 +8,8 @@ import {
     ScrollView,
     Image,
     TouchableOpacity,
-    ActivityIndicator
+    ActivityIndicator,
+    Alert
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { connect } from 'react-redux';
@@ -81,13 +82,15 @@ class CitySpecial extends Component {
             )
         else
         return(
+            <View style={{flex:1}}>   
+            {/* this is added so that columns would take equal spaces */}
             <ListCard 
                 dish = {item.item}
                 type = "dish"
                 dish_name = {item.item.dish_name}
                 image = {item.item.images}
                 onPress = {() => this.listCardPressedHandler(item)}
-            />
+            /></View>
         )
     }
 
@@ -120,9 +123,10 @@ class CitySpecial extends Component {
         return (
             <View style={{ backgroundColor: '#fff', flex: 1 }}>
                 <View style={style.header}>
+                <View style={style.backIconContainer}>
                     <TouchableOpacity onPress={this.backIconPress}>
-                        <Icon style={style.backIcon} name="ios-arrow-round-back-outline" size={45} color="#757575" />
-                    </TouchableOpacity>
+                        <Icon name="ios-arrow-round-back-outline" size={45} color="#757575" />
+                    </TouchableOpacity></View>
                     <View style={style.searchbar}>
                         <SearchBar
                             onSearchBarPressed={this.searchBarPressHandler}
@@ -143,7 +147,17 @@ class CitySpecial extends Component {
                     </TouchableOpacity>
                 </View>
 
-                <View style={{ flex: 1}}>
+                {this.props.citySpecialError ? 
+                    (Alert.alert(
+                      'Oops!',
+                      'Please refresh!',
+                      [
+                        {text: 'OK', onPress: () => console.log('OK Pressed')},
+                      ],
+                      { cancelable: false }
+                    )
+                    ):
+                (<View style={{ flex: 1}}>
                     {
                         (this.state.restaurant) &&
                         (
@@ -157,14 +171,15 @@ class CitySpecial extends Component {
                     }
                     {
                         (this.state.dishes) &&
-                        <FlatList
+                        
+                        <FlatList 
                             numColumns={2}
                             data={this.props.citySpecial[0].city_special_dishes}
                             renderItem={this.renderListComponent}
                             keyExtractor={(item, index) => index.toString()}
                         />
                     }
-                </View>
+                </View>)}
 
             </View>
         );
@@ -172,19 +187,16 @@ class CitySpecial extends Component {
 }
 
 const style = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: '#fff',
-        flexDirection: 'row',
-        borderRadius: 10,
-        marginLeft: 19,
-        marginRight: 19,
-        marginTop: 15
+    topTen: {
+        paddingLeft: 25,
+        paddingTop: 5,
+        fontFamily: 'OpenSans-ExtraBold',
+        fontSize: 22,
+        color: '#212121'
     },
     tabBar: {
         flexDirection: 'row',
         paddingLeft: 15,
-        // marginLeft: 20,
     },
     selectedTab: {
         paddingLeft: 10,
@@ -219,26 +231,19 @@ const style = StyleSheet.create({
         alignItems: 'center',
         backgroundColor: '#fff'
     },
-    backIcon: {
-        paddingLeft: 10,
+    backIconContainer:{
+        marginTop: '5%',
+        marginLeft: '5%',
     },
     searchbar: {
-        paddingLeft: 10,
+        flex:1,
         borderColor: '#BDBDBD',
         borderWidth: 1,
         alignItems: 'center',
-        borderTopLeftRadius: 15,
-        borderTopRightRadius: 15,
-        borderBottomLeftRadius: 15,
-        borderBottomRightRadius: 15,
-        marginLeft: 10,
-    },
-    topTen: {
-        paddingLeft: 25,
-        paddingTop: 5,
-        fontFamily: 'OpenSans-ExtraBold',
-        fontSize: 22,
-        color: '#212121'
+        borderRadius:15,
+        marginTop: '5%',
+        marginLeft: '5%',
+        marginRight:'5%'
     }
 })
 

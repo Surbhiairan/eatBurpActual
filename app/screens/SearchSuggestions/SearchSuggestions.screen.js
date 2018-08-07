@@ -111,9 +111,10 @@ class SearchSuggestions extends Component {
     return (
       <View style={styles.container}>
         <View style={styles.header}>
+        <View style={styles.backIconContainer}>
           <TouchableOpacity onPress={this.backIconPress}>
             <Icon style={styles.backIcon} name="ios-arrow-round-back-outline" size={45} color="#757575" />
-          </TouchableOpacity>
+          </TouchableOpacity></View>
           <View style={styles.searchbar}>
             <SearchBar
               autoFocus={true}
@@ -185,20 +186,19 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#fff'
   },
-  backIcon: {
-    paddingLeft: 10,
+  backIconContainer:{
+    marginTop: '5%',
+    marginLeft: '5%',
   },
   searchbar: {
-    paddingLeft: 10,
+    flex:1,
     borderColor: '#BDBDBD',
     borderWidth: 1,
     alignItems: 'center',
-    borderTopLeftRadius: 15,
-    borderTopRightRadius: 15,
-    borderBottomLeftRadius: 15,
-    borderBottomRightRadius: 15,
-    marginLeft: 10,
-    marginTop:10,
+    borderRadius:15,
+    marginTop: '5%',
+    marginLeft: '5%',
+    marginRight:'5%'
   },
   unselectedText: {
     fontFamily: 'OpenSans-Regular',

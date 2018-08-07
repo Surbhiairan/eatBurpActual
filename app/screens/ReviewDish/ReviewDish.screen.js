@@ -100,7 +100,6 @@ class ReviewDish extends Component {
   }
 
   handleRestaurant = (text) => {
-    console.log("this.props.restaurants=============",this.props.restaurants);
     var searchedRestaurants = this.props.restaurants.filter(function(restaurant) {
         return restaurant.restaurant_name.toLowerCase().indexOf(text.toLowerCase()) > -1;
       });
@@ -111,7 +110,6 @@ class ReviewDish extends Component {
   handleDish = (text) => {
     if(this.props.dishMappings){
     var searchedDishes = this.props.dishMappings.filter(function(dish) {
-        //console.log('foooooooo************************dddddddddddd',food);
         if(dish.dish_name)
         return dish.dish_name.toLowerCase().indexOf(text.toLowerCase()) > -1;
       });
@@ -125,15 +123,12 @@ class ReviewDish extends Component {
     this.setState ( { selectedRestaurantId: restaurant._id});      
     this.setState ( { searchedRestaurants: []});
     this.props.fetchDishMappings(restaurant._id);     
-    
-    //console.log("in handle press restaurant", this.state.restoName);
   }
 
   _handlePressFood = (dish) => {
     this.setState ( { selectedDishName: dish.dish_name});
     this.setState ( { selectedDishId: dish._id })        
     this.setState ( { searchedDishes: []});
-    //console.log("in handle press food item", this.state.itemName);       
   }
 
   renderRestaurant = (restaurant) => {

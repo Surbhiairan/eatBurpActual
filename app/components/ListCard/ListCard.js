@@ -32,6 +32,11 @@ showMenu = (event, dish) => {
 };
 
 const ListCard = (props) =>{
+    if(props.dish_rating===0){
+        rating='New'
+    }else{
+        rating=props.dish_rating;
+    }
     if (props.type === 'dishRestaurantMapping') { 
     return(
         <TouchableOpacity onPress={props.onPress}>
@@ -40,18 +45,20 @@ const ListCard = (props) =>{
                 <View style={style.image}>
                     <Image
                         source={{ uri: props.image[0] }}
-                        style={{ width: 100, height: 100, borderRadius: 7, paddingBottom: 5, }}
+                        style={{flex:1,height: undefined, width: undefined }}
+                        //resizeMode="contain"
                     />
                 </View>
                 <View style={style.info}>
                     <Text style={{ fontFamily: 'OpenSans-SemiBold', color: '#474040', fontSize: 16 }}>{props.restaurant_name}</Text>
                     <Text style={{ fontFamily: 'OpenSans-Regular', color: '#474040', fontSize: 13 }}>{props.locality}</Text>
                     <View style={{flexDirection:'row'}}> 
-                    <Text style={{ fontFamily: 'OpenSans-Bold', color: '#474040', fontSize: 13 }}>{props.dish_name},</Text>
-                    <Text style={{ fontFamily: 'OpenSans-SemiBold', color: '#474040', fontSize: 13, paddingLeft:5 }}>Rs. {props.price}</Text>
+                    <View style={{flex:3}}>
+                        <Text style={{ fontFamily: 'OpenSans-Bold', color: '#474040', fontSize: 13 }}>{props.dish_name}</Text></View>
+                        <View style={{flex:1,alignItems:'flex-end'}}><Text style={{ fontFamily: 'OpenSans-SemiBold', color: '#474040', fontSize: 13, paddingLeft:5 }}>{props.price}/-</Text></View>
                     </View>
-                    <View style={{ marginTop: 5, backgroundColor: '#ffa000', borderRadius: 6, width: 30, justifyContent: 'center', alignItems: 'center' }}>
-                        <Text style={{ fontFamily: 'OpenSans-Bold', color: '#fff', fontSize: 14, padding: 2 }}>{props.dish_rating}</Text>
+                    <View style={{ marginTop: 5,   alignItems: 'flex-start' }}>
+                        <Text style={{ justifyContent: 'center', textAlign:'center',alignContent:'center',width:45,borderRadius: 6,backgroundColor: '#ffa000',fontFamily: 'OpenSans-Bold', color: '#fff', fontSize: 14, paddingTop:2, paddingBottom:2, paddingLeft:5, paddingRight:5 }}>{this.rating}</Text>
                     </View>
                 </View>
                 <View style={style.moreMenu}>
@@ -77,30 +84,26 @@ const ListCard = (props) =>{
             <View style={{ 
                 borderBottomWidth: 1,
                 borderBottomColor: '#eeeeee',
-                marginLeft: 19,
-                marginRight: 19,}}></View>
+                marginTop:5
+                }}></View>
         </View>
         </TouchableOpacity>
     )
   } else 
      return (
          <TouchableOpacity onPress={props.onPress}>
-
              <View elevation={5} style={style.dishContainer}>
-                 <View style={style.image}>
+                 <View style={style.dishImage}>
                      <Image
                          source={{ uri: props.image[0] }}
-                         style={{ width: 150, height: 150, borderRadius: 7, paddingBottom: 5, }}
+                         style={{ width: 150, height: 150, paddingBottom: 5, paddingTop: 5 }}
                      />
                  </View>
                  <View style={style.dishInfo}>
                      <View style={{flex:1,flexWrap: 'wrap'}}>
                          <Text style={style.dishTextStyle}>{props.dish_name}</Text>
                      </View>
-                     <View style={{alignItems: 'flex-end'}}>
-                 </View>
-                 </View>
-                 
+                 </View>  
              </View>
          </TouchableOpacity>
      )
@@ -112,43 +115,50 @@ onPressLike = (dish) => {
 }
 
 const style = StyleSheet.create({
-
+    restaurantContainer: {
+        flex:1,
+        flexDirection:'row',
+        //backgroundColor: 'red', 
+        flexDirection:'row',
+        //borderRadius: 10, 
+        marginLeft: '4%',
+        marginRight:'4%',
+        marginTop:'2%',
+        marginBottom:'2%', 
+    },
+    dishContainer: {
+        flex:1,
+        //backgroundColor: '#fff',
+        alignItems:'center',
+        //borderRadius: 10,
+        margin:10,
+        padding:5,       
+    },
+    dishInfo: { 
+        flexDirection:'row'       
+    },
     dishTextStyle: {
         fontFamily: 'OpenSans-Bold', 
         color: '#474040', 
         fontSize: 14,
         textAlign: 'center'
     },
-    restaurantContainer: {
-        flex:1,
-        backgroundColor: '#fff', 
-        flexDirection:'row',
-        borderRadius: 10, 
-        marginLeft: 19,
-        marginRight: 19,
-        marginTop:8,
-        marginBottom:8,
-       
-    },
-    dishContainer: {
-        backgroundColor: '#fff',
-        borderRadius: 10,
-        margin:10,
-        padding:5,
-        
+    dishImage:{
+
     },
     image: {
-       
+       flex:3
     },
     info:{
-        paddingLeft: 8,
-        width: 200
-    },
-    dishInfo: { 
-        flexDirection:'row'       
+        //backgroundColor:'blue',
+        flex:5,
+        paddingLeft: '2%',
     },
     moreMenu:{
-        alignItems: 'flex-end'
+        flex:1,
+        //backgroundColor:'green',
+        alignItems:'flex-end'
+        //alignSelf: 'flex-end'
     },
     popUpStyle: {
         // padding:1,
