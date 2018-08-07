@@ -21,7 +21,7 @@ const reviews = (props) => {
       <Text style={{color:"#212121", fontFamily: "OpenSans-Regular", fontSize: 14}}>{props.review.review.review}</Text>
       <FlatList
         keyExtractor={(item, index) => index.toString()}
-        numColumns = {4}
+        numColumns = {3}
         data={props.review.review.images}
         renderItem = {({item})=>
          <Image 
