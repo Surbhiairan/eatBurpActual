@@ -8,7 +8,8 @@ import {
     ScrollView,
     Image,
     TouchableOpacity,
-    ActivityIndicator
+    ActivityIndicator,
+    Alert
 } from 'react-native';
 
 import Icon from 'react-native-vector-icons/Ionicons';
@@ -120,9 +121,10 @@ class Meals extends Component {
         return (
             <View style = {{ backgroundColor: '#fff', flex:1 }}>
                 <View style = {style.header}>
+                <View style={style.backIconContainer}>
                     <TouchableOpacity onPress={this.backIconPress}>
-                        <Icon style = {style.backIcon} name="ios-arrow-round-back-outline" size={45} color="#757575" />
-                    </TouchableOpacity>
+                        <Icon name="ios-arrow-round-back-outline" size={45} color="#757575" />
+                    </TouchableOpacity></View>
                     <View style = {style.searchbar}>
                         <SearchBar
                             onSearchBarPressed={this.searchBarPressHandler}
@@ -148,7 +150,18 @@ class Meals extends Component {
                         </View>
                     </TouchableOpacity>
                 </View>
-                <View>
+                
+                {this.props.mealError ? 
+                    (Alert.alert(
+                      'Oops!',
+                      'Please refresh!',
+                      [
+                        {text: 'OK', onPress: () => console.log('OK Pressed')},
+                      ],
+                      { cancelable: false }
+                    )
+                    ):
+                (<View style={{flex:1}}>
                     {
                         (this.state.snacks) 
                             && 
@@ -182,7 +195,7 @@ class Meals extends Component {
                             />)
                         )
                     }
-                </View>
+                </View>)}
             </View>
         );
     }
@@ -246,22 +259,20 @@ const style = StyleSheet.create({
         alignItems: 'center',
         backgroundColor: '#fff'
     },
-    backIcon :{
-        paddingLeft:10,
-
+    backIconContainer:{
+        marginTop: '5%',
+        marginLeft: '5%',
     },
     searchbar: {
-        paddingLeft: 10,
+        flex:1,
         borderColor: '#BDBDBD',
         borderWidth: 1,
         alignItems: 'center',
-        borderTopLeftRadius: 15,
-        borderTopRightRadius: 15,
-        borderBottomLeftRadius: 15,
-        borderBottomRightRadius: 15,
-        marginLeft: 10,
+        borderRadius:15,
+        marginTop: '5%',
+        marginLeft: '5%',
+        marginRight:'5%'
     },
-
     meals:{
         paddingLeft:25,
         paddingTop:5,
