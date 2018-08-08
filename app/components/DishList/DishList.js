@@ -86,7 +86,7 @@ export default class DishList extends Component {
                                 locality={this.state.selectedDish.locality}
                                 onRecommendButtonPressed={() => this.props.onRecommendButtonPressed(this.state.selectedDish)}
                                 onReviewButtonPressed={() => this.props.onReviewButtonPressed(this.state.selectedDish)}
-                                onRestaurantPressed={() => this.props.onRestaurantPressed(this.state.selectedDish.restaurant_id[0])}
+                                onRestaurantPressed={() => this.props.onRestaurantPressed(this.state.selectedDish)}
                             />
                         }
                     </View>

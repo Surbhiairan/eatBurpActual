@@ -1,15 +1,14 @@
 import React from 'react';
 import {
-    Platform,
     StyleSheet,
     Text,
     View,
     FlatList,
-    TouchableOpacity,
     Image,
   } from 'react-native';
     
 const reviews = (props) => {
+  console.log("props on review page--------", props)
     return(
     <View style ={{padding:10,borderRadius:5, margin: 3,backgroundColor : "#fff"}}>
       <Text style={{color:"#212121", fontFamily: "OpenSans-SemiBold", fontSize: 16}}>{props.review.dish_detail.dish_name}</Text>

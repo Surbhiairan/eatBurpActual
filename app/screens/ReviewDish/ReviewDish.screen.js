@@ -30,11 +30,11 @@ class ReviewDish extends Component {
         review: '',   
         searchedRestaurants: [],
         searchedDishes: [],     
-        selectedRestaurantName: this.props.selectedDish.restaurant_name,
-        selectedRestaurantId: this.props.selectedDish.restaurant_id,
-        selectedDishName: this.props.selectedDish.dish_name,
-        selectedDishId: this.props.selectedDish._id,
-        rating: '',
+        selectedRestaurantName: (this.props.selectedDish && this.props.selectedDish.restaurant_name) || this.props.selectedRestaurant.restaurant_name,
+        selectedRestaurantId: (this.props.selectedDish && this.props.selectedDish.restaurant_id) || this.props.selectedRestaurant._id,
+        selectedDishName: (this.props.selectedDish && this.props.selectedDish.dish_name),
+        selectedDishId: (this.props.selectedDish && this.props.selectedDish._id),
+        rating: null,
       };
   }
 
@@ -69,29 +69,30 @@ class ReviewDish extends Component {
 
   addReview() {
     let formData = new FormData();
-    imageDetails = this.state.images;
+    let imageDetails = this.state.images;
     var photo = [];
     var i=0;
     var item;
-    for(i=0; i<imageDetails.length; i++){
-      photo[i] = {
-        mime : imageDetails[i].mime,
-        name : 'test',
-        uri: imageDetails[i].uri,
-      }
-    }
-
-    photo.forEach((photo) => {
-      formData.append('photo', {
-        uri: photo.uri,
-        type: 'image/jpeg', // or photo.type
-        name: photo.name
-      });
-    });
-    formData.append('mapping_id',this.state.selectedDishId);
-    formData.append('restaurant_id',this.state.selectedRestaurantId);
+    formData.append('mapping_id', this.state.selectedDishId);
+    formData.append('restaurant_id', this.state.selectedRestaurantId);
     formData.append('review', this.state.review);
     formData.append('rating', this.state.rating);
+    if(imageDetails !== null) {
+      for (i = 0; i < imageDetails.length; i++) {
+        photo[i] = {
+          mime: imageDetails[i].mime,
+          name: 'test',
+          uri: imageDetails[i].uri,
+        }
+      }
+      photo.forEach((photo) => {
+        formData.append('photo', {
+          uri: photo.uri,
+          type: 'image/jpeg', // or photo.type
+          name: photo.name
+        });
+      });
+    }
     this.props.addReview(formData);
   }
 
@@ -119,16 +120,17 @@ class ReviewDish extends Component {
   }
 
   _handlePressRestaurant = (restaurant) => {
-    this.setState ( { selectedRestaurantName: restaurant.restaurant_name});
-    this.setState ( { selectedRestaurantId: restaurant._id});      
-    this.setState ( { searchedRestaurants: []});
+    this.setState({ selectedRestaurantName: restaurant.restaurant_name, selectedRestaurantId: restaurant._id, searchedRestaurants: []});
+   // this.setState ( { selectedRestaurantId: restaurant._id});      
+   // this.setState ( { searchedRestaurants: []});
     this.props.fetchDishMappings(restaurant._id);     
   }
 
   _handlePressFood = (dish) => {
-    this.setState ( { selectedDishName: dish.dish_name});
-    this.setState ( { selectedDishId: dish._id })        
-    this.setState ( { searchedDishes: []});
+    this.setState({ selectedDishName: dish.dish_name, selectedDishId: dish._id, searchedDishes: []});
+   /*  this.setState ( { selectedDishId: dish._id })        
+    this.setState ( { searchedDishes: []}); */
+    //console.log("in handle press food item", this.state.itemName);       
   }
 
   renderRestaurant = (restaurant) => {
@@ -181,12 +183,16 @@ class ReviewDish extends Component {
         keyExtractor={(item, index) => index.toString()}
         />
         }
-      <View style={[styles.textBoxView]}>
-        <TextInput style = {[styles.textBox]}
-        placeholder = "Dish"
-        underlineColorAndroid='transparent'
-        value = {this.state.selectedDishName}
-        onChangeText = {this.handleDish}/></View>
+
+          {this.state.selectedDishName ? (
+            <View style={[styles.textBoxView]}>
+              <TextInput style={[styles.textBox]}
+                placeholder="Dish"
+                underlineColorAndroid='transparent'
+                value={this.state.selectedDishName}
+                onChangeText={this.handleDish} />
+            </View>
+          ) : null}
 
         {this.props.dishMappingsLoading ? <Text>Loading...</Text>
              :

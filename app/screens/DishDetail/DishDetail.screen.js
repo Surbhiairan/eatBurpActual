@@ -6,11 +6,13 @@ import {
   Button,
   StyleSheet,
   TouchableOpacity,
-  ScrollView
+  ScrollView,
+  Alert
 } from "react-native";
 import { connect } from "react-redux";
-import SearchBar from '../../components/SearchBar/SearchBar';
 
+import SearchBar from '../../components/SearchBar/SearchBar';
+import { recommendDishDispatch } from '../../actions/dish.action';
 import DishCard from '../../components/DishCard/DishCard';
 import Icon from 'react-native-vector-icons/Ionicons';
 
@@ -40,57 +42,68 @@ class DishDetail extends Component {
 
   reviewDishHandler = (dish) => {
     this.props.navigator.push({
-        screen: "ReviewDishScreen",
-        title: 'Add Review',
-        passProps: {
-            selectedDish: dish
-        }
+      screen: "ReviewDishScreen",
+      title: 'Add Review',
+      passProps: {
+        selectedDish: dish
+      }
     });
     alert("reviewed");
   }
-  
+
   recommendButtonPressHandler = dish => {
-    alert('recommended');
-    console.log("recommend", dish);
+    let alreadyRecommended = false;
     //dispatch action to increase recommendation count, pass dish_restaurant_mapping id
-    //this.props.recommendDishDispatch(dish._id);
-}
+    console.log(" user recommendations", this.props.recommendations)
+    for (let i = 0; i < this.props.recommendations.length; i++) {
+      if (this.props.recommendations[i].dish_id[0] === dish.dish_id[0]) {
+        console.log("you have already recommended this dish");
+        alreadyRecommended = true;
+        Alert.alert(
+          '',
+          'you have already recommended this dish',
+          [
+            { text: 'OK', onPress: () => console.log('OK Pressed') },
+          ],
+          { cancelable: false }
+        )
+        break;
+      }
+    }
+    if (alreadyRecommended === false) {
+      this.props.recommendDishDispatch(dish._id);
+    }
+  }
   render() {
     return (
       <View style={styles.container}>
         <View style={styles.header}>
-        <View style={styles.backIconContainer}>
-          <TouchableOpacity onPress={this.backIconPress}>
-            <Icon name="ios-arrow-round-back-outline" size={45} color="#757575" />
-          </TouchableOpacity></View>
+          <View style={styles.backIconContainer}>
+            <TouchableOpacity onPress={this.backIconPress}>
+              <Icon name="ios-arrow-round-back-outline" size={45} color="#757575" />
+            </TouchableOpacity></View>
           <View style={styles.searchbar}>
             <SearchBar
               onSearchBarPressed={this.searchBarPressHandler}
             />
           </View >
         </View>
-          <ScrollView>
-            <View>
-          <DishCard 
-            dish_name = {this.props.selectedDish.dish_name}
-            price = {this.props.selectedDish.price}
-            restaurant_name = {this.props.selectedDish.restaurant_name}
-            recommended = {this.props.selectedDish.recommended}
-            dish_images = {this.props.selectedDish.images}
-            locality = {this.props.selectedDish.locality}
-            reviews = {this.props.selectedDish.reviews}
-            average_rating = {this.props.selectedDish.average_rating}               
-            onRecommendButtonPressed={() => this.recommendButtonPressHandler(this.props.selectedDish)}
-            onReviewButtonPressed={() => this.reviewDishHandler(this.props.selectedDish)}
-          /></View>
-          </ScrollView>
-        {/* <View>
-          <TouchableOpacity onPress={this.placeDeletedHandler}>
-            <View style={styles.deleteButton}>
-              <Icon size={30} name="ios-trash" color="red" />
-            </View>
-          </TouchableOpacity>
-        </View> */}
+        <ScrollView>
+          <View>
+            <DishCard
+              dish_name={this.props.selectedDish.dish_name}
+              price={this.props.selectedDish.price}
+              restaurant_name={this.props.selectedDish.restaurant_name}
+              recommended={this.props.selectedDish.recommended}
+              dish_images={this.props.selectedDish.images}
+              locality={this.props.selectedDish.locality}
+              reviews={this.props.selectedDish.reviews}
+              average_rating={this.props.selectedDish.average_rating}
+              onRecommendButtonPressed={() => this.recommendButtonPressHandler(this.props.selectedDish)}
+              onReviewButtonPressed={() => this.reviewDishHandler(this.props.selectedDish)}
+            />
+          </View>
+        </ScrollView>
       </View>
     );
   }
@@ -98,7 +111,7 @@ class DishDetail extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex:1
+    flex: 1
   },
   placeImage: {
     width: "100%",
@@ -119,26 +132,38 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#fff'
   },
-  backIconContainer:{
+  backIconContainer: {
     marginTop: '5%',
     marginLeft: '5%',
-},
-searchbar: {
-    flex:1,
+  },
+  searchbar: {
+    flex: 1,
     borderColor: '#BDBDBD',
     borderWidth: 1,
     alignItems: 'center',
-    borderRadius:15,
+    borderRadius: 15,
     marginTop: '5%',
     marginLeft: '5%',
-    marginRight:'5%'
-}
+    marginRight: '5%'
+  }
 });
 
-// const mapDispatchToProps = dispatch => {
-// //   return {
-// //     onDeletePlace: key => dispatch(deletePlace(key))
-// //   };
-// };
+const mapStateToProps = state => {
+  return {
+    reviews: state.reviews.reviews,
+    reviewsError: state.reviews.reviewsError,
+    reviewsLoading: state.reviews.reviewsLoading,
+    recommendations: state.reviews.recommendations,
+    recommendationsError: state.reviews.recommendationsError,
+    recommendationsLoading: state.reviews.recommendationsLoading
+  };
+};
 
-export default (DishDetail);
+const mapDispatchToProps = dispatch => {
+  return {
+    recommendDishDispatch: (dish_id) => dispatch(recommendDishDispatch(dish_id)),
+  };
+};
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(DishDetail);
