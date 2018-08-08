@@ -1,9 +1,7 @@
 import React, { Component } from "react";
 import {
   View,
-  Image,
   Text,
-  Button,
   StyleSheet,
   TouchableOpacity,
   FlatList,
@@ -93,12 +91,12 @@ class UserProfile extends Component {
                       {this.state.recommendations ? 
                       <View style={{flexDirection: 'row'}}>
                       <LikeFilledIcon fill={'#ffa000'} height={26} width={26} />
-                      <Text style={{fontFamily: 'OpenSans-Regular', fontSize: 15, color: '#ffa000',}}>Recommendations</Text>
+                      <Text style={{fontFamily: 'OpenSans-Regular', fontSize: 15, color: '#ffa000',}}> Recommendations</Text>
                       </View> 
                         : 
                       <View style={{flexDirection: 'row'}}>
                       <LikeIcon fill={'#757575'} height={26} width={26} />
-                      <Text style={{fontFamily: 'OpenSans-Regular', fontSize: 15, color: '#757575'}}>Recommendations</Text>
+                      <Text style={{fontFamily: 'OpenSans-Regular', fontSize: 15, color: '#757575'}}> Recommendations</Text>
                       </View> 
                       }
                     </View>
@@ -115,12 +113,12 @@ class UserProfile extends Component {
                       {this.state.reviews ? 
                       <View style={{flexDirection: 'row'}}>
                       <PenIcon fill={'#ffa000'} height={26} width={26} />
-                      <Text style={{fontFamily: 'OpenSans-Regular', fontSize: 15, color: '#ffa000'}}>Reviews</Text>
+                      <Text style={{fontFamily: 'OpenSans-Regular', fontSize: 15, color: '#ffa000'}}> Reviews</Text>
                       </View>  
                         : 
                       <View style={{flexDirection: 'row'}}>
                       <PenIcon fill={'#757575'} height={26} width={26} />
-                      <Text style={{fontFamily: 'OpenSans-Regular', fontSize: 15, color: '#757575'}}>Reviews</Text>
+                      <Text style={{fontFamily: 'OpenSans-Regular', fontSize: 15, color: '#757575'}}> Reviews</Text>
                       </View>}
                     </View>
                   </TouchableOpacity></View>
@@ -158,17 +156,13 @@ const style = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     padding: 5,
-    //backgroundColor: '#808000',
     borderRadius: 10,
-    // height: 40,
-    // width: 60
+   
   },
   tab: {
     padding: 5,
     backgroundColor: '#fff',
     borderRadius: 7,
-    // width: 60,
-    // height: 40
   },
   recommendationList: {
 

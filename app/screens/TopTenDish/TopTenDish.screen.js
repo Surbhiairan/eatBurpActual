@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 import {
-    Platform,
     StyleSheet,
     Text,
     View,
-    ScrollView,
     TouchableOpacity,
-    ActivityIndicator
+    ActivityIndicator,
+    Alert
 } from 'react-native';
 
 import DishList from '../../components/DishList/DishList';
@@ -43,9 +42,27 @@ class TopTenDish extends Component {
     }
 
     recommendButtonPressHandler = dish => {
-        // console.log("recommend", dish);
+        let alreadyRecommended = false;
         //dispatch action to increase recommendation count, pass dish_restaurant_mapping id
-        this.props.recommendDishDispatch(dish._id);
+        console.log(" user recommendations",this.props.recommendations)
+        for(let i=0; i< this.props.recommendations.length; i++) {
+            if(this.props.recommendations[i].dish_id[0] === dish.dish_id[0]) {
+                console.log("you have already recommended this dish");
+                alreadyRecommended = true;
+                Alert.alert(
+                    '',
+                    'you have already recommended this dish',
+                    [
+                        { text: 'OK', onPress: () => console.log('OK Pressed') },
+                    ],
+                    { cancelable: false }
+                )
+                break;
+            } 
+        }
+        if(alreadyRecommended === false) {
+            this.props.recommendDishDispatch(dish._id);
+        }
     }
 
     reviewButtonPressHandler = dish => {
@@ -56,7 +73,6 @@ class TopTenDish extends Component {
                 selectedDish: dish
             }
         });
-        //this.props.reviewDishDispatch(dish.item._id);        
     }
 
     searchBarPressHandler = () => {
@@ -64,10 +80,6 @@ class TopTenDish extends Component {
         console.log("pressed search bar");
         this.props.navigator.push({
             screen: "SearchSuggestionScreen",
-            // title: dish.item.dish_name,
-            // passProps: {
-            //   selectedDish: dish.item
-            // }
         });
     }
 
@@ -75,12 +87,14 @@ class TopTenDish extends Component {
         this.props.navigator.pop();
     }
 
-    restaurantPressedHandler = (restaurantId) => {
-        this.props.fetchSelectedRestaurant(restaurantId);
+    restaurantPressedHandler = (dish) => {
+        console.log("here------------", dish)
+        this.props.fetchSelectedRestaurant(dish.restaurant_id[0]);
         this.props.navigator.push({
             screen: "RestaurantDetailScreen",
+            title: dish.restaurant_name,
             passProps: {
-                id: restaurantId
+                id: dish.restaurant_id[0]
             }
         });
     }
@@ -99,18 +113,17 @@ class TopTenDish extends Component {
                     </View >
                 </View>
                 <View>
-                <Text style={style.topTen}>Top Ten Dishes{this.props.topDishesError}</Text>
+                    <Text style={style.topTen}>Top Ten Dishes{this.props.topDishesError}</Text>
                 </View>
                 <View style={style.container}>
                     {
-                        this.props.topDishesLoading? <ActivityIndicator/>:
-                        (<DishList
-                        dishes={this.props.topDishes}
-                        onRecommendButtonPressed={this.recommendButtonPressHandler}
-                        onReviewButtonPressed={this.reviewButtonPressHandler}
-                        onRestaurantPressed={this.restaurantPressedHandler}
-                    />)
-
+                        this.props.topDishesLoading ? <ActivityIndicator /> :
+                            (<DishList
+                                dishes={this.props.topDishes}
+                                onRecommendButtonPressed={this.recommendButtonPressHandler}
+                                onReviewButtonPressed={this.reviewButtonPressHandler}
+                                onRestaurantPressed={this.restaurantPressedHandler}
+                            />)
                     }
                 </View>
             </View>
@@ -157,7 +170,13 @@ const mapStateToProps = state => {
     return {
         topDishes: state.dish.topDishes,
         topDishesLoading: state.dish.topDishesLoading,
-        topDishesError: state.dish.topDishesError
+        topDishesError: state.dish.topDishesError,
+        reviews: state.reviews.reviews,
+        reviewsError: state.reviews.reviewsError,
+        reviewsLoading: state.reviews.reviewsLoading,
+        recommendations: state.reviews.recommendations,
+        recommendationsError: state.reviews.recommendationsError,
+        recommendationsLoading: state.reviews.recommendationsLoading
     };
 };
 

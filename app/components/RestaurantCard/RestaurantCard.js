@@ -21,9 +21,7 @@ const CustomImage = (props) => {
                     imageStyle={{ borderRadius: 10 }}
                     style={styles.imageBackgroundStyle}
                     source={{ uri: props.restaurantImage[0] }} >
-                    <View style={styles.textOnImageContainer}>
-                        <Text style={styles.textOnImage}>{props.restaurantRating}</Text>
-                    </View>
+                    <Rating restaurantRating={props.restaurantRating} />
                 </ImageBackground>
             </View>
         )
@@ -36,13 +34,32 @@ const CustomImage = (props) => {
                     imageStyle={{ borderRadius: 10 }}
                     source={DEFAULT_IMAGE}
                     style={styles.imageBackgroundStyle} >
-                    <View elevation={10} style={styles.textOnImageContainer}>
-                        <Text style={styles.textOnImage}>{props.restaurantRating}</Text>
-                    </View>
+                    <Rating restaurantRating = {props.restaurantRating} />
                 </ImageBackground>
             </View>
         )
 }
+
+const Rating = (props) => {
+    if (props.restaurantRating > 0) {
+        return (
+            <View style={styles.textOnImageContainer}>
+                <Text style={styles.textOnImage}>{props.restaurantRating}</Text>
+            </View>
+        )
+    }
+    else {
+        return (
+            <View style={styles.textOnImageContainer}>
+                <Text style={{
+                    fontSize: 18,
+                    color: '#fff',
+                    fontFamily: 'OpenSans-Regular'
+                }}>New</Text>
+            </View>
+        )
+    }
+} 
 
 const RestaurantCard = (props) => (
     <View elevation={5} style={styles.container}>

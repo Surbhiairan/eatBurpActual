@@ -9,7 +9,11 @@ import {
 } from 'react-native';
 import { connect } from 'react-redux';
 import Geocoder from 'react-native-geocoder';
+
 import { fetchTopDishes, fetchCitySpecial, fetchMeal } from '../../actions/dish.action';
+import { fetchUser } from '../../actions/user.action';
+import { fetchReviews } from '../../actions/reviews.action';
+import { fetchRecommendations } from '../../actions/reviews.action'
 import MealIcon from '../../components/SvgIcons/clock.icon';
 import CitySpecialIcon from '../../components/SvgIcons/citySpecial.icon';
 import DonutIcon from '../../components/SvgIcons/donut.icon';
@@ -44,6 +48,8 @@ class Home extends Component {
   };  
 
   componentDidMount() {
+    this.props.fetchReviews();
+    this.props.fetchRecommendations();
     navigator.geolocation.getCurrentPosition(
       (position) => {
         this.setState({
@@ -57,9 +63,6 @@ class Home extends Component {
       { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 },
     );
   }
-  /* state = {
-      dishes: dishes
-  } */
 
   getAddress = () => {
     let position = {
@@ -199,7 +202,6 @@ class Home extends Component {
 const styles = StyleSheet.create({
   mainContainer:{
     flex:1,
-    //backgroundColor:'#000',
     flexDirection:'column'
   },
   donutTextView: {
@@ -209,18 +211,12 @@ const styles = StyleSheet.create({
   donutView: {
     justifyContent:'flex-start',
     alignItems:'flex-start',
-
-    //paddingRight:5,
-    //marginRight:10
-    //flex:3,
     marginLeft: '30%',
     position: 'absolute'
   },
   textView: {
-    //marginTop: 170,
     marginTop:'45%',
     marginLeft: '8%',
-    //flexDirection: 'column',
   },
   textStyle:{
     fontFamily: 'OpenSans-ExtraBold',
@@ -232,20 +228,16 @@ const styles = StyleSheet.create({
     borderColor: 'transparent',
     borderWidth: 1,
     marginLeft: '8%',    
-    //marginTop: 55,
-    //marginLeft: 35,
     marginRight: '8%',
   },
   mainIconsView: {
     flex:1, 
-    //marginTop: 25,
     paddingTop:'8%',
     flexDirection: 'row',
     justifyContent: 'space-evenly'
   },
   topTenIconView: {
     alignItems:'center',
-    //marginLeft: 60,
   },
   topTenTextView: {
     fontFamily: "OpenSans-Bold",
@@ -253,8 +245,6 @@ const styles = StyleSheet.create({
     color: "#757575",
     marginTop: 4,
     textAlign: 'center',
-    //backgroundColor: 'blue'
-    //marginLeft: 54,
   },
   citySpecialView: {
     alignItems:'center',    
@@ -297,7 +287,10 @@ const mapDispatchToProps = dispatch => {
   return {
     fetchTopDishes: () => dispatch(fetchTopDishes()),
     fetchCitySpecial: () => dispatch(fetchCitySpecial()),
-    fetchMeal: (selectedMeal) => dispatch(fetchMeal(selectedMeal))
+    fetchMeal: (selectedMeal) => dispatch(fetchMeal(selectedMeal)),
+    fetchUser: () => dispatch(fetchUser()),
+    fetchReviews: () => dispatch(fetchReviews()),
+    fetchRecommendations: () => dispatch(fetchRecommendations())
   };
 };
 

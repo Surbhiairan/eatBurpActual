@@ -9,7 +9,6 @@ class ButtonComponent extends React.PureComponent {
 
     render() {
         const { selected, dish, id } = this.props;
-        //const textColor = selected === id ? "red" : "black";
         if(selected === id)
         return(
             <TouchableOpacity onPress={this._onPress}>
@@ -42,13 +41,6 @@ export default class DishList extends Component {
         };
     }
 
-    //state = {selected: (new Map(): Map<string, boolean>)};
-
-    // componentWillReceiveProps(nextProps) {
-    //     console.log(nextProps, "nextProps");
-    //     this.setState({ selectedDish: nextProps.dishes[0] })
-
-    // }
 
     renderDishNames = (dish) => {
     
@@ -100,7 +92,7 @@ export default class DishList extends Component {
                                 locality={this.state.selectedDish.locality}
                                 onRecommendButtonPressed={() => this.props.onRecommendButtonPressed(this.state.selectedDish)}
                                 onReviewButtonPressed={() => this.props.onReviewButtonPressed(this.state.selectedDish)}
-                                onRestaurantPressed={() => this.props.onRestaurantPressed(this.state.selectedDish.restaurant_id[0])}
+                                onRestaurantPressed={() => this.props.onRestaurantPressed(this.state.selectedDish)}
                             />
                         }
                     </View>

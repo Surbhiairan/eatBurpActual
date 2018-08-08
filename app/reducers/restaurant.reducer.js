@@ -7,7 +7,10 @@ import {
   FETCH_TOP_DISH_RESTAURANT_SUCCESS,
   FETCH_SELECTED_RESTAURANT,
   FETCH_SELECTED_RESTAURANT_FAILURE,
-  FETCH_SELECTED_RESTAURANT_SUCCESS
+  FETCH_SELECTED_RESTAURANT_SUCCESS,
+  RECOMMEND_RESTAURANT,
+  RECOMMEND_RESTAURANT_FAILURE,
+  RECOMMEND_RESTAURANT_SUCCESS
 } from '../actions/restaurant.action';
 
 const initialState = {
@@ -21,6 +24,9 @@ const initialState = {
   topDishRestaurants: [],
   topDishRestaurantsLoading: false,
   topDishRestaurantsError: null,
+  recommended: null,
+  recommendedError: null,
+  recommendedLoading: false
 };
 
 const reducer = (state = initialState, action) => {
@@ -44,7 +50,14 @@ const reducer = (state = initialState, action) => {
       return { ...state, topDishRestaurants: [], topDishRestaurantsError: action.payload.error, topDishRestaurantsLoading: false };
     case FETCH_TOP_DISH_RESTAURANT_SUCCESS:
       return { ...state, topDishRestaurants: action.payload.topDishRestaurants, topDishRestaurantsError: null, topDishRestaurantsLoading: false };
-    default:
+    case RECOMMEND_RESTAURANT:
+      return { ...state, recommendedError: null, recommendedLoading: true };
+    case RECOMMEND_RESTAURANT_FAILURE:
+      return { ...state, recommended: [], recommendedError: action.payload.error, recommendedLoading: false };
+    case RECOMMEND_RESTAURANT_SUCCESS:
+      return { ...state, recommended: action.payload.recommendedRestaurant, recommendedError: null, recommendedLoading: false };
+
+      default:
       return state;
   }
 };

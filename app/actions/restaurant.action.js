@@ -11,6 +11,67 @@ export const FETCH_SELECTED_RESTAURANT = 'FETCH_SELECTED_RESTAURANT';
 export const FETCH_SELECTED_RESTAURANT_SUCCESS = 'FETCH_SELECTED_RESTAURANT_SUCCESS';
 export const FETCH_SELECTED_RESTAURANT_FAILURE = 'FETCH_SELECTED_RESTAURANT_FAILURE';
 
+export const RECOMMEND_RESTAURANT = 'RECOMMEND_RESTAURANT';
+export const RECOMMEND_RESTAURANT_SUCCESS = 'RECOMMEND_RESTAURANT_SUCCESS';
+export const RECOMMEND_RESTAURANT_FAILURE = 'RECOMMEND_RESTAURANT_FAILURE';
+
+export function recommendRestaurantDispatch(restaurant_id) {
+    return (dispatch) => {
+        dispatch(recommendRestaurant());
+        dispatch(authGetToken())
+            .then(token => {
+                return (
+                    fetch(`${API_ROOT}/addRecommendedRestaurant`, {
+                        method: 'POST',
+                        headers: {
+                            'Accept': 'application/json',
+                            'Content-Type': 'application/json',
+                            'x-access-token': token
+                            //'Content-Type': 'multipart/form-data',
+                        },
+                        body: JSON.stringify({
+                            restaurant_id: restaurant_id,
+                            //userId: user_id,
+                        }),
+                    }
+                    )
+                )
+            })
+            .catch(() => {
+                alert("No token found");
+            })
+            .then(res => res.json())
+            .then(json => {
+
+                dispatch(recommendRestaurantSuccess(json.success));
+                console.log(json, "recommended Restaurant");
+                alert("You have recommended this Restaurant")
+                return json;
+            })
+            .catch(err => dispatch(recommendRestaurantFailure(err)))
+    }
+}
+
+export function recommendRestaurant() {
+    return {
+        type: RECOMMEND_RESTAURANT
+    }
+}
+
+export function recommendRestaurantSuccess(recommendedRestaurant) {
+    return {
+        type: RECOMMEND_RESTAURANT_SUCCESS,
+        payload: { recommendedRestaurant }
+    };
+}
+
+export function recommendRestaurantFailure(error) {
+    return {
+        type: RECOMMEND_RESTAURANT_FAILURE,
+        payload: { error }
+    };
+}
+
 export function fetchSelectedRestaurant(id) {
     return (dispatch) => {
         dispatch(getSelectedRestaurantResults());
