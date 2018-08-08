@@ -12,7 +12,7 @@ class ButtonComponent extends React.PureComponent {
         if(selected === id)
         return(
             <TouchableOpacity onPress={this._onPress}>
-                <View style={{backgroundColor:'#ffa000',borderRadius: 16, paddingLeft:10, paddingRight:10,paddingTop:8, paddingBottom:8, marginRight:10}}>
+                <View style={styles.selectedDishNameContainer}>
                     <Text style={{ color: '#fff', fontFamily:'OpenSans-SemiBold', fontSize:15 }}>
                         {this.props.title}
                     </Text>
@@ -21,7 +21,7 @@ class ButtonComponent extends React.PureComponent {
         )
         else return(
         <TouchableOpacity onPress={this._onPress}>
-        <View style={{backgroundColor:'#F9F9F9',borderRadius:16 ,paddingLeft:10, paddingRight:10,paddingTop:8, paddingBottom:8, marginRight:10}}>
+        <View style={styles.dishNameContainer}>
             <Text style={{ color: '#212121', fontFamily:'OpenSans-Bold', fontSize:13 }}>
                 {this.props.title}
             </Text>
@@ -41,9 +41,7 @@ export default class DishList extends Component {
         };
     }
 
-
     renderDishNames = (dish) => {
-    
         return (
             <ButtonComponent
                 id={dish.item._id}
@@ -57,14 +55,10 @@ export default class DishList extends Component {
     };
 
     _onPressItem = (dish) => {
-        console.log('dish =========>', dish);
         this.setState({ selected: dish._id, selectedDish: dish });
     };
 
     render() {
-
-        console.log(this.props.dishes[0], "props in render");
-
         return (
             <View style={{ flex: 1 }}>
             <View style={{marginTop:5}}>
@@ -103,40 +97,25 @@ export default class DishList extends Component {
 }
 
 const styles = StyleSheet.create({
-
-    dishCard: {
-    },
     dishListContainer: {
-        marginLeft: 10,
-        //marginTop:10,
-        //marginBottom:10
-    },
-    dishName: {
-        fontFamily: 'OpenSans-Bold',
-        fontSize: 13,
-        color: '#212121',
-        padding: 8
+        marginLeft: '5%',
     },
     dishNameContainer: {
-        borderRadius: 16,
-        alignItems: 'center',
-        justifyContent: 'center',
-        backgroundColor: '#fff',
-        elevation: 2,
-        marginLeft: 18,
+        backgroundColor:'#F9F9F9',
+        borderRadius:16,
+        paddingLeft:10, 
+        paddingRight:10,
+        paddingTop:8, 
+        paddingBottom:8, 
+        marginRight:10
     },
     selectedDishNameContainer: {
-        borderRadius: 16,
-        alignItems: 'center',
-        justifyContent: 'center',
-        backgroundColor: '#FFA000',
-        elevation: 2,
-        marginLeft: 18,
-    },
-    selectedDishName: {
-        fontFamily: 'OpenSans-SemiBold',
-        fontSize: 15,
-        color: '#fff',
-        padding: 8
+        backgroundColor:'#ffa000',
+        borderRadius: 16, 
+        paddingLeft:10, 
+        paddingRight:10,
+        paddingTop:8, 
+        paddingBottom:8, 
+        marginRight:10,
     }
 });

@@ -5,7 +5,8 @@ import {
   Text,
   View,
   TouchableOpacity,
-  ActivityIndicator
+  ActivityIndicator,
+  Dimensions
 } from 'react-native';
 import { connect } from 'react-redux';
 import Geocoder from 'react-native-geocoder';
@@ -17,6 +18,7 @@ import { fetchRecommendations } from '../../actions/reviews.action'
 import MealIcon from '../../components/SvgIcons/clock.icon';
 import CitySpecialIcon from '../../components/SvgIcons/citySpecial.icon';
 import DonutIcon from '../../components/SvgIcons/donut.icon';
+import DonutNewIcon from '../../components/SvgIcons/donutnew.icon';
 import TopTenIcon from '../../components/SvgIcons/topTen.icon';
 import LocationIcon from '../../components/SvgIcons/location.icon';
 import Icon from 'react-native-vector-icons/Ionicons';
@@ -136,7 +138,9 @@ class Home extends Component {
             </Text>
           </View>
           <View style={styles.donutView}>
-            <DonutIcon />
+            <DonutNewIcon 
+              height={Dimensions.get("window").height * 0.4} 
+              width={Dimensions.get("window").width * 0.55}/>
           </View>
         </View>
       <View style={{flex:1/3}}>
@@ -205,18 +209,28 @@ const styles = StyleSheet.create({
     flexDirection:'column'
   },
   donutTextView: {
+    //backgroundColor:'green',
     flex:3,
-    flexDirection: 'row',
+    //flexDirection: 'row',
   },
   donutView: {
+    //backgroundColor: 'red',
     justifyContent:'flex-start',
-    alignItems:'flex-start',
-    marginLeft: '30%',
-    position: 'absolute'
+    alignSelf:'flex-end'
+    //paddingRight:5,
+    //marginRight:10
+    //flex:3,
+    //marginLeft: '30%',
+    //position: 'absolute'
   },
   textView: {
     marginTop:'45%',
-    marginLeft: '8%',
+    marginLeft: '6%',
+    //backgroundColor:'blue',
+    alignSelf:'flex-start',
+    paddingLeft:'20%',
+    position:'absolute'
+    //flexDirection: 'column',
   },
   textStyle:{
     fontFamily: 'OpenSans-ExtraBold',

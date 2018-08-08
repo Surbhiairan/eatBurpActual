@@ -9,7 +9,7 @@ const donut = (props) => {
     return (
         <View>
             <Svg height="250.99"
-                width="306.7" viewBox="0 0 427.58 522.81">
+                width="306.7" viewBox="0 0 427.58 522.81" >
                 <G >
                     <G fillOpacity="0.9">
                         <G fillOpacity = "0.2">

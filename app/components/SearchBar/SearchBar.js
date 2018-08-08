@@ -29,6 +29,7 @@ const searchBar = (props) => {
 
 const styles = StyleSheet.create({
   container: {
+    //backgroundColor:'red',
     flexDirection: 'row',
     alignItems: 'center',
     // borderColor: '#BDBDBD',
@@ -43,17 +44,19 @@ const styles = StyleSheet.create({
     borderBottomRightRadius:15, */
   },
   searchIcon:{
-    //paddingLeft: 22,
+    paddingLeft: '5%',
   },
   textBox: {
-    width: 240,
+    flex:1,
+    //backgroundColor:'blue',    
+    //width: 240,
     height: 37, 
     alignItems: 'center',
     fontSize: 15,
     textAlign: 'auto',
     fontFamily: 'OpenSans-Regular',
     color: '#757575',
-    marginLeft: 9.5,
+    //marginLeft: 9.5,
   },
 });
 

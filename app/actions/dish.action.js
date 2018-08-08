@@ -1,5 +1,6 @@
 import { API_ROOT } from '../../api-config';
 import {authGetToken} from './auth.action';
+import { fetchRecommendations } from './reviews.action'
 
 export const FETCH_ALL_DISHES = 'FETCH_ALL_DISHES';
 export const FETCH_ALL_DISHES_SUCCESS = 'FETCH_ALL_DISHES_SUCCESS';
@@ -201,8 +202,8 @@ export function recommendDishDispatch(dish_rest_mapping_id) {
         })
         .then(res => res.json())
         .then(json => {
-
             dispatch(recommendDishSuccess(json.success));
+            dispatch(fetchRecommendations());
             console.log(json,"recommended dish");
             alert("You have recommended this dish")
             return json;

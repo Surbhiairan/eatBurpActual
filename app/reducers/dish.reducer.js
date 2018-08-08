@@ -70,13 +70,13 @@ const reducer = (state = initialState, action) => {
     case FETCH_MEAL_SUCCESS:
       return { ...state, meal: action.payload.meals, mealLoading: false };
     case FETCH_MEAL_FAILURE:
-      return { ...state, meal: action.payload.error, mealLoading: false };      
+      return { ...state, mealError: action.payload.error, mealLoading: false };      
     case FETCH_CITY_SPECIAL: 
       return { ...state, citySpecial: null, citySpecialLoading: true};
     case FETCH_CITY_SPECIAL_SUCCESS:
       return { ...state, citySpecial: action.payload.citySpecial, citySpecialLoading: false};
     case FETCH_CITY_SPECIAL_FAILURE: 
-      return { ...state, citySpecial: action.payload.error, citySpecialLoading: false};
+      return { ...state, citySpecialError: action.payload.error, citySpecialLoading: false};
     case FETCH_DISH_SEARCH_RESULTS:
       return { ...state,  dishSearchResults: null, dishSearchResultsLoading: true }; 
     case FETCH_DISH_SEARCH_RESULTS_SUCCESS:
