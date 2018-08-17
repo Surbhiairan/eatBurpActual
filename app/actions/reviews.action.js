@@ -102,14 +102,19 @@ export function fetchRecommendationsFailure(error) {
 }
 
 export function addReview(data) {
-  //console.log("review data=== ", data)  
+    let url = `${API_ROOT}/addDishReview`;
+  console.log("review data=== ", data)
+    console.log("review data===>>> ", data._parts[0][1])  
+    if (data._parts[0][1] === undefined) {
+        url = `${API_ROOT}/addRestaurantReview`
+    }
   return (dispatch) => {
     dispatch(saveReview());
     dispatch(authGetToken())
     .then(token =>{
         console.log("review data ", data)
         return( 
-            fetch(`${API_ROOT}/addReview`, {
+            fetch(url, {
                 method: 'POST',
                 headers: {
                 'Accept': 'application/json',

@@ -1,5 +1,6 @@
 import { API_ROOT } from '../../api-config';
 import {authGetToken} from './auth.action';
+import { fetchRecommendations } from './reviews.action'
 
 export const FETCH_ALL_DISHES = 'FETCH_ALL_DISHES';
 export const FETCH_ALL_DISHES_SUCCESS = 'FETCH_ALL_DISHES_SUCCESS';
@@ -201,13 +202,16 @@ export function recommendDishDispatch(dish_rest_mapping_id) {
         })
         .then(res => res.json())
         .then(json => {
-
             dispatch(recommendDishSuccess(json.success));
+            dispatch(fetchRecommendations());
             console.log(json,"recommended dish");
-            alert("You have recommended this dish")
+            alert("You recommended this dish")
             return json;
         })  
-        .catch(err => dispatch(recommendDishFailure(err)))
+        .catch(err => {
+            dispatch(recommendDishFailure(err));
+            alert("Something is wrong please try again.");
+        })
     }
 }
      
@@ -235,21 +239,6 @@ export function recommendDishFailure(error) {
 export function fetchTopDishes() {
     return dispatch => {
 
-
-       /*  dispatch(getTopDishes());
-           return (fetch(`${API_ROOT}/getTopDishes`)
-        ) 
-        .then(res => res.json())
-        .then(json => {
-            console.log(json.success,"jsonnnnnnnnnnnnnn");
-            
-            dispatch(fetchTopDishesSuccess(json.success));
-            return json.success;
-        })  
-        .catch(err => 
-            {console.log(err,"err");
-            dispatch(fetchTopDishesFailure(err))}) */
-
         dispatch(getTopDishes());
         dispatch(authGetToken())
         .then(token => {
@@ -257,7 +246,7 @@ export function fetchTopDishes() {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
-                    'x-access-token': "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1YjM0OTFmZTYxMjI3MTVmZDQyNWViZWUiLCJpYXQiOjE1MzIwNzc0NzN9.kDPfSIplPEa-6-CwoIMqkd_336UxlmZSoLkhpMM2PdE"
+                    'x-access-token': token
                 }
             })
         })
@@ -270,7 +259,10 @@ export function fetchTopDishes() {
             console.log(json.success,"jsonnnnnnnnnnnnnn");
             return json.success;
         })  
-        .catch(err => dispatch(fetchTopDishesFailure(err)))
+        .catch(err => {
+                dispatch(fetchTopDishesFailure(err))
+                alert("Something is wrong please wait")
+        } )
     }
 }
      

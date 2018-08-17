@@ -1,14 +1,13 @@
 import React, { Component } from "react";
 import {
   View,
-  Image,
   Text,
-  Button,
   StyleSheet,
   TouchableOpacity,
   FlatList,
   ScrollView,
-  ActivityIndicator
+  ActivityIndicator,
+  Alert
 } from "react-native";
 import { connect } from "react-redux";
 import { fetchUser } from '../../actions/user.action';
@@ -93,12 +92,12 @@ class UserProfile extends Component {
                       {this.state.recommendations ? 
                       <View style={{flexDirection: 'row'}}>
                       <LikeFilledIcon fill={'#ffa000'} height={26} width={26} />
-                      <Text style={{fontFamily: 'OpenSans-Regular', fontSize: 15, color: '#ffa000',}}>Recommendations</Text>
+                      <Text style={{fontFamily: 'OpenSans-Regular', fontSize: 15, color: '#ffa000',}}> Recommendations</Text>
                       </View> 
                         : 
                       <View style={{flexDirection: 'row'}}>
                       <LikeIcon fill={'#757575'} height={26} width={26} />
-                      <Text style={{fontFamily: 'OpenSans-Regular', fontSize: 15, color: '#757575'}}>Recommendations</Text>
+                      <Text style={{fontFamily: 'OpenSans-Regular', fontSize: 15, color: '#757575'}}> Recommendations</Text>
                       </View> 
                       }
                     </View>
@@ -115,36 +114,56 @@ class UserProfile extends Component {
                       {this.state.reviews ? 
                       <View style={{flexDirection: 'row'}}>
                       <PenIcon fill={'#ffa000'} height={26} width={26} />
-                      <Text style={{fontFamily: 'OpenSans-Regular', fontSize: 15, color: '#ffa000'}}>Reviews</Text>
+                      <Text style={{fontFamily: 'OpenSans-Regular', fontSize: 15, color: '#ffa000'}}> Reviews</Text>
                       </View>  
                         : 
                       <View style={{flexDirection: 'row'}}>
                       <PenIcon fill={'#757575'} height={26} width={26} />
-                      <Text style={{fontFamily: 'OpenSans-Regular', fontSize: 15, color: '#757575'}}>Reviews</Text>
+                      <Text style={{fontFamily: 'OpenSans-Regular', fontSize: 15, color: '#757575'}}> Reviews</Text>
                       </View>}
                     </View>
                   </TouchableOpacity></View>
 
                 </View>
-
-                <View>
+                {this.props.reviewsError? 
+                  (Alert.alert(
+                    'Oops!',
+                    'Please refresh!',
+                    [
+                      {text: 'OK', onPress: () => console.log('OK Pressed')},
+                    ],
+                    { cancelable: false }
+                  )
+                  ):
+                (<View>
                   {(this.state.reviews) && (this.props.reviewsLoading ? <ActivityIndicator /> :
                     <FlatList
                       data={this.props.reviews}
                       renderItem={this.renderReview}
                       keyExtractor={(item, index) => index.toString()}
-                    />)}
-
+                    />)}</View>)}
+                  
+                  {this.props.recommendationsError? 
+                  (Alert.alert(
+                    'Oops!',
+                    'Please refresh!',
+                    [
+                      {text: 'OK', onPress: () => console.log('OK Pressed')},
+                    ],
+                    { cancelable: false }
+                  )
+                  ):
+                  ( <View style={{backgroundColor:'blue',flex:1,alignContent:'center'}}>
                   {(this.state.recommendations) && (this.props.recommendationsLoading ? <ActivityIndicator /> :
-                      <FlatList
+                   
+                    <FlatList
                         numColumns={3}
-                        style={style.recommendationList}
                         keyExtractor={(item, index) => index.toString()}
                         data={this.props.recommendations}
                         renderItem={this.renderRecommendation} />
                   )
                   }
-                </View>
+                </View>)}
               </View>
             </View>}
         </ScrollView>
@@ -158,21 +177,14 @@ const style = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     padding: 5,
-    //backgroundColor: '#808000',
     borderRadius: 10,
-    // height: 40,
-    // width: 60
+   
   },
   tab: {
     padding: 5,
     backgroundColor: '#fff',
     borderRadius: 7,
-    // width: 60,
-    // height: 40
   },
-  recommendationList: {
-
-  }
 })
 
 const mapStateToProps = state => {

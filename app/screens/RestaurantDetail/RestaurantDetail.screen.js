@@ -2,21 +2,18 @@ import React, { Component } from 'react';
 import {
   Platform,
   StyleSheet,
-  Text,
   View,
   FlatList,
-  ImageBackground,
   ScrollView,
-  ActivityIndicator
+  ActivityIndicator,
+  Alert
 } from 'react-native';
 
 import { connect } from 'react-redux';
 import { fetchMenu } from '../../actions/menu.action';
-import RestaurantInfo from '../../components/RestaurantInfo/RestaurantInfo';
+import { recommendRestaurantDispatch} from '../../actions/restaurant.action';
 import RestaurantMenu from '../../components/RestaurantMenu/RestaurantMenu';
 import RestaurantCard from '../../components/RestaurantCard/RestaurantCard';
-
-
 
 class RestaurantDetail extends Component {
 
@@ -25,10 +22,6 @@ class RestaurantDetail extends Component {
     let restaurantId = this.props.id || this.props.searchedRestaurant._id;
     this.props.dispatch(fetchMenu(restaurantId));        
   }
-
-  /* static navigatorStyle = {
-    navBarHidden: true
-  }; */
 
   renderRestaurantMenuCategory = (item) => (
     <RestaurantMenu 
@@ -48,6 +41,21 @@ class RestaurantDetail extends Component {
     })
   }
 
+  recommendButtonPressedHandler = (detail) => {
+    console.log("details--------", detail);
+    this.props.dispatch(recommendRestaurantDispatch(detail._id));
+  }
+
+  reviewButtonPressedHandler = (restaurant) => {
+    this.props.navigator.push({
+      screen: "ReviewDishScreen",
+      title: 'Add Review',
+      passProps: {
+        selectedRestaurant: restaurant
+      }
+    });
+  }
+
   render() {
     console.log("props---------", this.props)
     let menuList = <FlatList
@@ -61,7 +69,17 @@ class RestaurantDetail extends Component {
     return(
       <View>
         <ScrollView>
-          <View>
+        {this.props.selectedRestaurantError ? 
+                (Alert.alert(
+                  'Oops!',
+                  'Please refresh!',
+                  [
+                    {text: 'OK', onPress: () => console.log('OK Pressed')},
+                  ],
+                  { cancelable: false }
+                )
+                ):
+          (<View>
             {
               (this.props.selectedRestaurantLoading) ? <ActivityIndicator/> : (
                 <RestaurantCard
@@ -78,14 +96,26 @@ class RestaurantDetail extends Component {
                   restaurantImage={restaurantDetail.images}
                   restaurantRating={restaurantDetail.average_rating}
                   restaurantContact={restaurantDetail.phone_number}
+                  onRecommendButtonPressed={() => this.recommendButtonPressedHandler(restaurantDetail)}
+                  onReviewButtonPressed={() => this.reviewButtonPressedHandler(restaurantDetail)}
                 />
               )
             }
           
-          </View>
-          <View elevation={5} style={styles.menuContainer}>
+          </View>)}
+          {this.props.menuError ? 
+                (Alert.alert(
+                  'Oops!',
+                  'Please refresh!',
+                  [
+                    {text: 'OK', onPress: () => console.log('OK Pressed')},
+                  ],
+                  { cancelable: false }
+                )
+                ):
+          (<View elevation={5} style={styles.menuContainer}>
             {menuList}
-          </View>
+          </View>)}
         </ScrollView>
       </View> 
     );
@@ -108,8 +138,8 @@ const mapStateToProps = (state) => ({
     menuError: state.menu.menuError,
     isLoading: state.ui.isLoading,
     selectedRestaurant: state.restaurant.selectedRestaurant,
-  selectedRestaurantLoading: state.restaurant.selectedRestaurantLoading,
-  selectedRestaurantError: state.restaurant.selectedRestaurantError
+    selectedRestaurantLoading: state.restaurant.selectedRestaurantLoading,
+    selectedRestaurantError: state.restaurant.selectedRestaurantError
 })
 
 export default connect(mapStateToProps)(RestaurantDetail) ;

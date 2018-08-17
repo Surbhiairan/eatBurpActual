@@ -78,7 +78,7 @@ const Reviews = (props) => {
   if(props.reviews.length > 0) {
     return (
       <View>
-      <Text style={{ color: '#212121', fontFamily: 'OpenSans-Bold', fontSize: 18, marginLeft: 10, marginTop: 5, marginBottom: 2 }}>
+        <Text style={{ color: '#757575', fontFamily: 'OpenSans-Bold', fontSize: 18, marginLeft: 10, marginTop: 5, marginBottom: 2 }}>
         Reviews
       </Text>
       <FlatList
@@ -91,20 +91,20 @@ const Reviews = (props) => {
                 <Text style={{ color: '#212121', fontFamily: 'OpenSans-Bold', fontSize: 15, paddingLeft: 4 }}>{item.item.user.first_name}</Text>
                 <Text style={{ color: '#212121', fontFamily: 'OpenSans-Bold', fontSize: 15, paddingLeft: 4 }}>{item.item.user.last_name}</Text>
               </View>
-              <Text style={{ color: '#ffa000', fontFamily: 'OpenSans-SemiBold', fontSize: 14, marginLeft:4, paddingLeft: 4}}>Rating {item.item.rating}</Text>
+              <Text style={{ color: '#ffa000', fontFamily: 'OpenSans-Bold', fontSize: 14, marginLeft:4, paddingLeft: 4}}>Rating {item.item.rating}</Text>
               <Text style={{ color: '#212121', fontFamily: 'OpenSans-Regular', fontSize: 14, padding: 4, margin: 4 }}>{item.item.review}</Text>
+              <View style={{flex:1,alignItems:'center'}}>
               <FlatList
                 keyExtractor={(item, index) => index.toString()}
-                style={styles.imageStyle}
                 numColumns={3}
                 data={item.item.images}
-                renderItem={({ item }) =>
+                renderItem={({ item }) =>                       
                   <Image
                     source={{ uri: item }}
-                    style={{ width: 100, height: 100 }}
+                    style={{ margin:5,width: 100, height: 100 }}
                   />
                 }
-              />
+              /></View>
             </View>
           )
         }}

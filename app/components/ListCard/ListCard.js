@@ -7,58 +7,90 @@ import {
     ScrollView,
     Image,
     TouchableOpacity,
-    TouchableHighlight
+    TouchableHighlight,
+    Alert
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
-//import Menu, { MenuDivider } from 'react-native-material-menu';
-
+import { connect } from "react-redux";
+import { recommendDishDispatch } from '../../actions/dish.action';
 import MenuItem from '../MoreMenu/MoreMenuItem';
 import Menu from '../MoreMenu/MoreMenu';
 import LikeIcon from '../SvgIcons/like.icon';
 import PenIcon from '../SvgIcons/pen.icon';
 
-_menu = null;
 
-setMenuRef = ref => {
-    this._menu = ref;
-};
+ class ListCard extends Component {
 
-hideMenu = () => {
-    this._menu.hide();
-};
+    constructor(props){
+        super(props);
+    }
+     _menu = null;
 
-showMenu = (event, dish) => {
-    this._menu.show((event.nativeEvent.pageX - event.nativeEvent.locationX), (event.nativeEvent.pageY - event.nativeEvent.locationY), dish);
-};
+     setMenuRef = ref => {
+         this._menu = ref;
+     };
 
-const ListCard = (props) =>{
-    if(props.dish_rating===0){
+     hideMenu = () => {
+         this._menu.hide();
+     };
+
+     showMenu = (event, dish) => {
+         this._menu.show((event.nativeEvent.pageX - event.nativeEvent.locationX), (event.nativeEvent.pageY - event.nativeEvent.locationY), dish);
+     };
+
+     onPressLike = (dish) => {
+         let alreadyRecommended = false;
+         //dispatch action to increase recommendation count, pass dish_restaurant_mapping id
+         console.log(" user recommendations", this.props.recommendations)
+         for (let i = 0; i < this.props.recommendations.length; i++) {
+             if (this.props.recommendations[i].dish_id[0] === dish.dish_id[0]) {
+                 console.log("you have already recommended this dish");
+                 alreadyRecommended = true;
+                 Alert.alert(
+                     '',
+                     'you have already recommended this dish',
+                     [
+                         { text: 'OK', onPress: () => console.log('OK Pressed') },
+                     ],
+                     { cancelable: false }
+                 )
+                 break;
+             }
+         }
+         if (alreadyRecommended === false) {
+             this.props.recommendDishDispatch(dish._id);
+         }
+         this._menu.hide();
+     }
+
+    render() {
+        if(this.props.dish_rating===0){
         rating='New'
     }else{
-        rating=props.dish_rating;
+        rating=this.props.dish_rating;
     }
-    if (props.type === 'dishRestaurantMapping') { 
+    if (this.props.type === 'dishRestaurantMapping') { 
     return(
-        <TouchableOpacity onPress={props.onPress}>
+        <TouchableOpacity onPress={this.props.onPress}>
         <View style={{flexDirection:'column'}}>
             <View style={style.restaurantContainer}>
                 <View style={style.image}>
                     <Image
-                        source={{ uri: props.image[0] }}
+                        source={{ uri: this.props.image[0] }}
                         style={{flex:1,height: undefined, width: undefined }}
                         //resizeMode="contain"
                     />
                 </View>
                 <View style={style.info}>
-                    <Text style={{ fontFamily: 'OpenSans-SemiBold', color: '#474040', fontSize: 16 }}>{props.restaurant_name}</Text>
-                    <Text style={{ fontFamily: 'OpenSans-Regular', color: '#474040', fontSize: 13 }}>{props.locality}</Text>
+                    <Text style={{ fontFamily: 'OpenSans-SemiBold', color: '#474040', fontSize: 16 }}>{this.props.restaurant_name}</Text>
+                    <Text style={{ fontFamily: 'OpenSans-Regular', color: '#474040', fontSize: 13 }}>{this.props.locality}</Text>
                     <View style={{flexDirection:'row'}}> 
                     <View style={{flex:3}}>
-                        <Text style={{ fontFamily: 'OpenSans-Bold', color: '#474040', fontSize: 13 }}>{props.dish_name}</Text></View>
-                        <View style={{flex:1,alignItems:'flex-end'}}><Text style={{ fontFamily: 'OpenSans-SemiBold', color: '#474040', fontSize: 13, paddingLeft:5 }}>{props.price}/-</Text></View>
+                        <Text style={{ fontFamily: 'OpenSans-Bold', color: '#474040', fontSize: 13 }}>{this.props.dish_name}</Text></View>
+                        <View style={{flex:1,alignItems:'flex-end'}}><Text style={{ fontFamily: 'OpenSans-SemiBold', color: '#474040', fontSize: 13, paddingLeft:5 }}>{this.props.price}/-</Text></View>
                     </View>
                     <View style={{ marginTop: 5,   alignItems: 'flex-start' }}>
-                        <Text style={{ justifyContent: 'center', textAlign:'center',alignContent:'center',width:45,borderRadius: 6,backgroundColor: '#ffa000',fontFamily: 'OpenSans-Bold', color: '#fff', fontSize: 14, paddingTop:2, paddingBottom:2, paddingLeft:5, paddingRight:5 }}>{this.rating}</Text>
+                        <Text style={{ justifyContent: 'center', textAlign:'center',alignContent:'center',width:45,borderRadius: 6,backgroundColor: '#ffa000',fontFamily: 'OpenSans-Bold', color: '#fff', fontSize: 14, paddingTop:2, paddingBottom:2, paddingLeft:5, paddingRight:5 }}>{rating}</Text>
                     </View>
                 </View>
                 <View style={style.moreMenu}>
@@ -66,7 +98,7 @@ const ListCard = (props) =>{
                         ref={this.setMenuRef}
                         button={
                         <View >
-                        <TouchableOpacity onPress={(evt) => this.showMenu(evt, props.dish)} 
+                        <TouchableOpacity onPress={(evt) => this.showMenu(evt, this.props.dish)} 
                         style={{
                             paddingLeft: 8,
                             paddingRight: 8,
@@ -76,7 +108,7 @@ const ListCard = (props) =>{
                         </TouchableOpacity></View>}
                         style={style.popUpStyle}
                         onPressLike={this.onPressLike}
-                        onPressReview={props.onPressReview}
+                        onPressReview={this.props.onPressReview}
                     > 
                     </Menu>
                 </View>
@@ -91,28 +123,25 @@ const ListCard = (props) =>{
     )
   } else 
      return (
-         <TouchableOpacity onPress={props.onPress}>
+         <TouchableOpacity onPress={this.props.onPress}>
              <View elevation={5} style={style.dishContainer}>
                  <View style={style.dishImage}>
                      <Image
-                         source={{ uri: props.image[0] }}
+                         source={{ uri: this.props.image[0] }}
                          style={{ width: 150, height: 150, paddingBottom: 5, paddingTop: 5 }}
                      />
                  </View>
                  <View style={style.dishInfo}>
                      <View style={{flex:1,flexWrap: 'wrap'}}>
-                         <Text style={style.dishTextStyle}>{props.dish_name}</Text>
+                         <Text style={style.dishTextStyle}>{this.props.dish_name}</Text>
                      </View>
                  </View>  
              </View>
          </TouchableOpacity>
      )
+    }
 }
 
-onPressLike = (dish) => {
-    alert("you have recommended this dish");
-    this._menu.hide();
-}
 
 const style = StyleSheet.create({
     restaurantContainer: {
@@ -167,4 +196,22 @@ const style = StyleSheet.create({
     
 })
 
-export default ListCard;
+const mapStateToProps = state => {
+    return {
+        reviews: state.reviews.reviews,
+        reviewsError: state.reviews.reviewsError,
+        reviewsLoading: state.reviews.reviewsLoading,
+        recommendations: state.reviews.recommendations,
+        recommendationsError: state.reviews.recommendationsError,
+        recommendationsLoading: state.reviews.recommendationsLoading
+    };
+};
+
+const mapDispatchToProps = dispatch => {
+    return {
+        recommendDishDispatch: (dish_id) => dispatch(recommendDishDispatch(dish_id)),
+    };
+};
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(ListCard);

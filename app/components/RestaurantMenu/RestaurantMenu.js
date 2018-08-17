@@ -53,7 +53,7 @@ constructor(props) {
     }
     return (
       <View>
-        <TouchableHighlight onPress={() => this.props.onDishPressed(category.item)}>
+        <TouchableOpacity onPress={() => this.props.onDishPressed(category.item)}>
         <View style={{marginLeft: 6,marginTop: 4,}}>
           {CustomImage}
           <View style={styles.dishNameStyle}>
@@ -65,7 +65,7 @@ constructor(props) {
            Rs. {category.item.price}
           </Text>
         </View>
-        </TouchableHighlight>
+        </TouchableOpacity>
       </View>
     )
 };
