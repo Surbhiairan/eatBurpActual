@@ -15,6 +15,7 @@ import SearchBar from '../../components/SearchBar/SearchBar';
 import { recommendDishDispatch } from '../../actions/dish.action';
 import DishCard from '../../components/DishCard/DishCard';
 import Icon from 'react-native-vector-icons/Ionicons';
+import { fetchSelectedRestaurant } from '../../actions/restaurant.action';
 
 //import Icon from "react-native-vector-icons/Ionicons";
 //import { deletePlace } from "../../store/actions/index";
@@ -37,6 +38,18 @@ class DishDetail extends Component {
     //navigate to search suggestion screen
     this.props.navigator.push({
       screen: "SearchSuggestionScreen",
+    });
+  }
+
+  restaurantPressedHandler = (dish) => {
+    console.log("here------------", dish)
+    this.props.fetchSelectedRestaurant(dish.restaurant_id[0]);
+    this.props.navigator.push({
+        screen: "RestaurantDetailScreen",
+        title: dish.restaurant_name,
+        passProps: {
+            id: dish.restaurant_id[0]
+        }
     });
   }
 
@@ -101,6 +114,7 @@ class DishDetail extends Component {
               average_rating={this.props.selectedDish.average_rating}
               onRecommendButtonPressed={() => this.recommendButtonPressHandler(this.props.selectedDish)}
               onReviewButtonPressed={() => this.reviewDishHandler(this.props.selectedDish)}
+              onRestaurantPressed={() => this.restaurantPressedHandler(this.props.selectedDish)}
             />
           </View>
         </ScrollView>
@@ -162,6 +176,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     recommendDishDispatch: (dish_id) => dispatch(recommendDishDispatch(dish_id)),
+    fetchSelectedRestaurant: (restaurantId) => dispatch(fetchSelectedRestaurant(restaurantId))    
   };
 };
 

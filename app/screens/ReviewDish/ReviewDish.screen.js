@@ -9,7 +9,8 @@ import {
   NativeModules,
   TouchableOpacity,
   ScrollView,
-  Image
+  Image,
+  Alert
 } from 'react-native';
 
 import { connect } from 'react-redux';
@@ -73,6 +74,34 @@ class ReviewDish extends Component {
     var photo = [];
     var i=0;
     var item;
+    if(this.state.selectedDishId === null){
+      Alert.alert(
+        'Oops!',
+        'Please select a dish!',
+        [
+          {text: 'OK', onPress: () => console.log('OK Pressed')},
+        ],
+        { cancelable: false }
+      )
+    }else if(this.state.selectedRestaurantId === null){
+      Alert.alert(
+        'Oops!',
+        'Please select a restaurant!',
+        [
+          {text: 'OK', onPress: () => console.log('OK Pressed')},
+        ],
+        { cancelable: false }
+      )
+    }else if(this.state.review==='' || this.state.rating===null){
+      Alert.alert(
+        'Oops!',
+        'Please write rewiew or rating!',
+        [
+          {text: 'OK', onPress: () => console.log('OK Pressed')},
+        ],
+        { cancelable: false }
+      )
+    }else{
     formData.append('mapping_id', this.state.selectedDishId);
     formData.append('restaurant_id', this.state.selectedRestaurantId);
     formData.append('review', this.state.review);
@@ -94,6 +123,7 @@ class ReviewDish extends Component {
       });
     }
     this.props.addReview(formData);
+  }
   }
 
   handleReview = (text)=> {

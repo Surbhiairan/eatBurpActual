@@ -205,7 +205,7 @@ export function recommendDishDispatch(dish_rest_mapping_id) {
             dispatch(recommendDishSuccess(json.success));
             dispatch(fetchRecommendations());
             console.log(json,"recommended dish");
-            alert("You have recommended this dish")
+            alert("You recommended this dish")
             return json;
         })  
         .catch(err => {

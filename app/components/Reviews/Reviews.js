@@ -18,17 +18,18 @@ const reviews = (props) => {
       </View>
       <Text style={{color:"#757575", fontFamily: "OpenSans-Regular", fontSize: 13}}>Your Rating {props.review.review.rating}</Text>
       <Text style={{color:"#212121", fontFamily: "OpenSans-Regular", fontSize: 14}}>{props.review.review.review}</Text>
-      <FlatList
+      <View style={{flex:1,alignItems:'center'}}>
+      <FlatList 
         keyExtractor={(item, index) => index.toString()}
         numColumns = {3}
         data={props.review.review.images}
         renderItem = {({item})=>
          <Image 
           source={{uri: item}}
-          style={{width: 100, height: 100}}
+          style={{margin:5,width: 100, height: 100}}
           />
         }
-      />
+      /></View>
     </View>
     );
 };

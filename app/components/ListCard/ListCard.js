@@ -60,7 +60,6 @@ import PenIcon from '../SvgIcons/pen.icon';
          if (alreadyRecommended === false) {
              this.props.recommendDishDispatch(dish._id);
          }
-         //alert("you have recommended this dish");
          this._menu.hide();
      }
 

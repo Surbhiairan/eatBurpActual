@@ -15,6 +15,14 @@ class SideDrawer extends Component {
     this.props.navigator.toggleDrawer();
   }
 
+  navigateToAddReview = () => {
+    this.props.navigator.push({
+      screen: "ReviewDishScreen",
+      title: "Write a Review"
+    });
+    this.props.navigator.toggleDrawer();
+  }
+
   render() {
     return (
       <View
@@ -43,6 +51,17 @@ class SideDrawer extends Component {
               style={styles.drawerItemIcon}
             />
             <Text>User Profile</Text>
+          </View>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={this.navigateToAddReview}>
+          <View style={styles.drawerItem}>
+            <Icon
+              name={Platform.OS === "android" ? "md-book" : "ios-book"}
+              size={30}
+              color="#aaa"
+              style={styles.drawerItemIcon}
+            />
+            <Text>Write a Review</Text>
           </View>
         </TouchableOpacity>
       </View>

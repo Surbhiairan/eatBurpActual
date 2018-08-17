@@ -93,18 +93,18 @@ const Reviews = (props) => {
               </View>
               <Text style={{ color: '#ffa000', fontFamily: 'OpenSans-Bold', fontSize: 14, marginLeft:4, paddingLeft: 4}}>Rating {item.item.rating}</Text>
               <Text style={{ color: '#212121', fontFamily: 'OpenSans-Regular', fontSize: 14, padding: 4, margin: 4 }}>{item.item.review}</Text>
+              <View style={{flex:1,alignItems:'center'}}>
               <FlatList
                 keyExtractor={(item, index) => index.toString()}
-                style={styles.imageStyle}
                 numColumns={3}
                 data={item.item.images}
-                renderItem={({ item }) =>
+                renderItem={({ item }) =>                       
                   <Image
                     source={{ uri: item }}
-                    style={{ width: 100, height: 100 }}
+                    style={{ margin:5,width: 100, height: 100 }}
                   />
                 }
-              />
+              /></View>
             </View>
           )
         }}

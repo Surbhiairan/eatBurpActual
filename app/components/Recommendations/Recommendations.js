@@ -33,16 +33,17 @@ const recommendations = (props) => {
 return(
   <View>
   <TouchableOpacity onPress={props.onDishPressed}>
-  <View style={{marginLeft: 6,marginTop: 4,}}>
+  <View style={{backgroundColor:'red',marginLeft: 6,marginTop: 4,}}>
       {CustomImage}
     <View style={styles.dishNameStyle}>
       <Text style={styles.dishNameText}> 
         {props.recommendation.dish_name}
       </Text>
     </View>
-    <Text style={styles.priceText}>
+    <View style={styles.restaurantNameStyle}>
+    <Text style={styles.restaurantNameText}>
      {props.recommendation.restaurant_name}
-    </Text>
+    </Text></View>
   </View>
   </TouchableOpacity>
 </View>
@@ -68,14 +69,17 @@ var styles = StyleSheet.create({
   dishNameStyle: { 
     alignSelf: 'flex-start', 
     width: 100,
-    
   },
   dishNameText: {
     fontFamily: 'OpenSans-SemiBold',
     fontSize: 14,
     color: '#463D3D'
   },
-  priceText: {
+  restaurantNameStyle: {
+    alignSelf: 'flex-start', 
+    width: 100,
+  },
+  restaurantNameText: {
     fontFamily: 'OpenSans-Regular',
     fontSize: 12,
     color: '#463D3D'

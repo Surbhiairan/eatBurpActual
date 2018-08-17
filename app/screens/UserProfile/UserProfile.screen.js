@@ -6,7 +6,8 @@ import {
   TouchableOpacity,
   FlatList,
   ScrollView,
-  ActivityIndicator
+  ActivityIndicator,
+  Alert
 } from "react-native";
 import { connect } from "react-redux";
 import { fetchUser } from '../../actions/user.action';
@@ -124,25 +125,45 @@ class UserProfile extends Component {
                   </TouchableOpacity></View>
 
                 </View>
-
-                <View>
+                {this.props.reviewsError? 
+                  (Alert.alert(
+                    'Oops!',
+                    'Please refresh!',
+                    [
+                      {text: 'OK', onPress: () => console.log('OK Pressed')},
+                    ],
+                    { cancelable: false }
+                  )
+                  ):
+                (<View>
                   {(this.state.reviews) && (this.props.reviewsLoading ? <ActivityIndicator /> :
                     <FlatList
                       data={this.props.reviews}
                       renderItem={this.renderReview}
                       keyExtractor={(item, index) => index.toString()}
-                    />)}
-
+                    />)}</View>)}
+                  
+                  {this.props.recommendationsError? 
+                  (Alert.alert(
+                    'Oops!',
+                    'Please refresh!',
+                    [
+                      {text: 'OK', onPress: () => console.log('OK Pressed')},
+                    ],
+                    { cancelable: false }
+                  )
+                  ):
+                  ( <View style={{backgroundColor:'blue',flex:1,alignContent:'center'}}>
                   {(this.state.recommendations) && (this.props.recommendationsLoading ? <ActivityIndicator /> :
-                      <FlatList
+                   
+                    <FlatList
                         numColumns={3}
-                        style={style.recommendationList}
                         keyExtractor={(item, index) => index.toString()}
                         data={this.props.recommendations}
                         renderItem={this.renderRecommendation} />
                   )
                   }
-                </View>
+                </View>)}
               </View>
             </View>}
         </ScrollView>
@@ -164,9 +185,6 @@ const style = StyleSheet.create({
     backgroundColor: '#fff',
     borderRadius: 7,
   },
-  recommendationList: {
-
-  }
 })
 
 const mapStateToProps = state => {

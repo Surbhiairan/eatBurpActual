@@ -5,7 +5,8 @@ import {
   View,
   FlatList,
   ScrollView,
-  ActivityIndicator
+  ActivityIndicator,
+  Alert
 } from 'react-native';
 
 import { connect } from 'react-redux';
@@ -68,7 +69,17 @@ class RestaurantDetail extends Component {
     return(
       <View>
         <ScrollView>
-          <View>
+        {this.props.selectedRestaurantError ? 
+                (Alert.alert(
+                  'Oops!',
+                  'Please refresh!',
+                  [
+                    {text: 'OK', onPress: () => console.log('OK Pressed')},
+                  ],
+                  { cancelable: false }
+                )
+                ):
+          (<View>
             {
               (this.props.selectedRestaurantLoading) ? <ActivityIndicator/> : (
                 <RestaurantCard
@@ -91,10 +102,20 @@ class RestaurantDetail extends Component {
               )
             }
           
-          </View>
-          <View elevation={5} style={styles.menuContainer}>
+          </View>)}
+          {this.props.menuError ? 
+                (Alert.alert(
+                  'Oops!',
+                  'Please refresh!',
+                  [
+                    {text: 'OK', onPress: () => console.log('OK Pressed')},
+                  ],
+                  { cancelable: false }
+                )
+                ):
+          (<View elevation={5} style={styles.menuContainer}>
             {menuList}
-          </View>
+          </View>)}
         </ScrollView>
       </View> 
     );
